@@ -24,7 +24,7 @@
             <div class="hotel-cards">
                 <el-card class="hotel-card">
                     <img src="../assets//img/hotel-img/grand-hyatt-taipei.jpg"></img>
-                    <el-card-body class="hotel-card-body">
+                    <div class="hotel-card-body">
                         <h3 class="title">Grand HYATT TAIPEI</h3>
                         <div class="star-section">
                             <img v-for="item in 5" class="star" src="../assets/img/Star12Filled.svg" alt="">
@@ -37,11 +37,11 @@
                         </div>
                         <nuxt-link to="/hotel1" class="view-more-btn">View more</nuxt-link>
 
-                    </el-card-body>
+                    </div>
                 </el-card>
                 <el-card class="hotel-card">
                     <img src="../assets//img/hotel-img/pacific-business.jpg"></img>
-                    <el-card-body class="hotel-card-body">
+                    <div class="hotel-card-body">
                         <h3 class="title">PACIFIC BUSSINESS HOTEL</h3>
                         <div class="star-section">
                             <img v-for="item in 4" class="star" src="../assets/img/Star12Filled.svg" alt="">
@@ -52,11 +52,11 @@
                             <p><img src="../assets/img/money.svg" alt="">TWD $3800 up / Night</p>
                         </div>
                         <nuxt-link to="/hotel2" class="view-more-btn">View more</nuxt-link>
-                    </el-card-body>
+                    </div>
                 </el-card>
                 <el-card class="hotel-card">
                     <img src="../assets//img/hotel-img/check-inn.jpg"></img>
-                    <el-card-body class="hotel-card-body">
+                    <div class="hotel-card-body">
                         <h3 class="title">CHECK INN</h3>
                         <div class="star-section">
                             <img v-for="item in 3" class="star" src="../assets/img/Star12Filled.svg" alt="">
@@ -69,7 +69,7 @@
                         </div>
                         <nuxt-link to="/hotel3" class="view-more-btn">View more</nuxt-link>
 
-                    </el-card-body>
+                    </div>
                 </el-card>
             </div>
 

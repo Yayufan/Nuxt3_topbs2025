@@ -12,7 +12,7 @@
                     <img :src="'/img/' + item.icon" alt="">
                     {{ item.title }}
                     <img v-if="item.submenu" class="arrow" :class="{ 'is-active': item.isActive }"
-                        src="@/public/img/chevron-down.svg" alt="">
+                        src="/img/chevron-down.svg" alt="">
                 </li>
                 <div class="submenu" :class="{ 'is-open': item.isActive }">
                     <nuxt-link v-for="submenu in item.submenu" :to="submenu.link" @click="closeMenu">{{ submenu.title }}</nuxt-link>
