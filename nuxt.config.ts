@@ -72,7 +72,7 @@ export default defineNuxtConfig({
     server: {
       proxy: {
         '/dev-api': {
-          target: process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : '', // 後端伺服器位址
+          target: process.env.NUXT_PUBLIC_DOMAIN, // 後端伺服器位址
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/dev-api/, '')
         },

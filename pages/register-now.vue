@@ -12,9 +12,9 @@
                 <el-form-item class="member-title required" label="Title" prop="title" labelPosition="left"
                     labelWidth="auto">
                     <el-radio-group v-model="formData.title">
-                        <el-radio value="Prof">Prof.</el-radio>
-                        <el-radio value="Dr">Dr.</el-radio>
-                        <el-radio value="Mr">Mr.</el-radio>
+                        <el-radio value="Prof.">Prof.</el-radio>
+                        <el-radio value="Dr.">Dr.</el-radio>
+                        <el-radio value="Mr.">Mr.</el-radio>
                         <el-radio value="Ms.">Ms.</el-radio>
                     </el-radio-group>
                 </el-form-item>
@@ -49,12 +49,12 @@
                     </div>
                     <div class="right-section">
                         <el-form-item class="required" label="Country" prop="country">
-                            <el-select v-model="formData.country" placeholder="Select a Country or Location" filterable>
+                            <el-select v-model="formData.country" placeholder="Select a Country or Location" filterable @change="cleanRemitAccount">
                                 <el-option v-for="item in countries" :key="item" :label="item"
                                     :value="item"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item v-if="formData.country === 'Taiwan'" label="Remit Account Last 5Num"
+                        <el-form-item v-if="formData.country === 'Taiwan'" label="Remit Account Last 5 Number"
                             prop="remitAccountLast5">
                             <el-input v-model="formData.remitAccountLast5"></el-input>
                         </el-form-item>
@@ -98,9 +98,27 @@ import countriesJson from '@/assets/data/countries.json'
 
 const countries = reactive(countriesJson);
 
+/**-------------------------------匯款帳號末5碼校驗----------------------------- */
+
+
+const validateRemitAccount = (rule: any, value: string, callback: any) => {
+    if (formData.country === 'Taiwan' && !value) {
+        callback(new Error('Please input your remit account last 5 number'))
+    } else if (formData.country === 'Taiwan' && value.length !== 5) {
+        callback(new Error('Please input 5 numbers'))
+    } 
+    else {
+        callback()
+    }
+}
+
+const cleanRemitAccount = () => {
+    formData.remitAccountLast5 = ''
+}
 
 
 
+/**-------------------------------表單區塊----------------------------- */
 interface formData {
     title: string,
     firstName: string,
@@ -137,11 +155,13 @@ const formData = reactive<formData>({
     category: 1,
 })
 
+
+
 const formRules = reactive<FormRules>({
     title: [{ required: true, message: 'Please select a title', trigger: 'change' }],
     firstName: [{ required: true, message: 'Please input your first name', trigger: 'blur' }],
     lastName: [{ required: true, message: 'Please input your last name', trigger: 'blur' }],
-    email: [{ required: true, message: 'Please input your email', trigger: 'blur' }],
+    email: [{ required: true, message: 'Please input your email', trigger: 'blur' }, { type: 'email', message: 'Please input correct email', trigger: 'blur' }],
     password: [{ required: true, message: 'Please input your password', trigger: 'blur' }],
     confirmPassword: [{ required: true, message: 'Please input your password again', trigger: 'blur' }],
     affiliation: [{ required: true, message: 'Please input your affiliation', trigger: 'blur' }],
@@ -150,7 +170,9 @@ const formRules = reactive<FormRules>({
     countryCode: [{ required: true, message: 'Please input your country code', trigger: 'blur' }],
     phoneNum: [{ required: true, message: 'Please input your phone number', trigger: 'blur' }],
     category: [{ required: true, message: 'Please select a category', trigger: 'change' }],
+    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }] 
 })
+
 
 const submit = (formEl: FormInstance | undefined) => {
     if (!formEl) return;
