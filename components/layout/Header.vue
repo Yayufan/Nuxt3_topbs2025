@@ -14,7 +14,7 @@
             <nuxt-link to="/"><img src="/img/logo.png" alt="" @click="closeMenu"></nuxt-link>
         </div> -->
         <div class="user-icon">
-            <img src="@/public/img/user.svg" alt="">
+            <img src="/img/user.svg" alt="">
         </div>
     </header>
 </template>
