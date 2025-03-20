@@ -106,7 +106,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
         }
 
         .hint {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-top: 1rem;
             word-spacing: 0.3rem;
         }
@@ -119,13 +119,27 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #DD6777;
+        // background-color: #DD6777;
         border-radius: 20px 20px 0 0;
-        width: 35%;
+        // width: 35%;
         height: 4rem;
         text-wrap: nowrap;
 
-        &::after {
+        
+
+        .title {
+            color: white;
+            background-color: #DD6777;
+            padding: 0.5rem;
+            display: flex;
+            position: relative;
+            border-radius: 20px 20px 0 0;
+            font-size: 2.2rem;
+            letter-spacing: 0.1rem;
+            align-items: center;
+            justify-content: center;
+
+            &::after {
             content: '';
             position: absolute;
             width: 63vw;
@@ -144,11 +158,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
             left: 0;
             bottom: 0;
         }
-
-        .title {
-            color: white;
-            font-size: 2.2rem;
-            letter-spacing: 0.1rem;
+            
         }
     }
 

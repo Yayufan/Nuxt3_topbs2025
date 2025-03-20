@@ -44,7 +44,7 @@
                 <nuxt-link to="/registration-guidelines"> <el-menu-item index="4-1">Registration
                         Guidelines</el-menu-item>
                 </nuxt-link>
-                <nuxt-link to="/register-now"> <el-menu-item index="4-2">Register Now</el-menu-item>
+                <nuxt-link to="/demo-register"> <el-menu-item index="4-2">Register Now</el-menu-item>
                 </nuxt-link>
             </el-sub-menu>
             <el-sub-menu index="6">

@@ -15,12 +15,14 @@
 
             <div class="main-section">
                 <div class="img-box">
-                    <div v-if="currentIndex" class="image-item" border >
+                    <div v-if="currentIndex" class="image-item" border>
                         <img v-if="currentIndex === 1" src="../assets/img/hotel-img/PACIFIC-BUSINESS.jpg" alt="">
                         <img v-if="currentIndex === 2" src="../assets/img/hotel-img/pacific-bussiness2.jpg" alt="">
                         <img v-if="currentIndex === 3" src="../assets/img/hotel-img/pacific-bussiness3.jpg" alt="">
                         <div class="carousel-indicator">
-                            <div v-for="(index, item ) in 3" class="indicator" :class="{'active' : currentIndex === index}" :key="index" @click="toggleImage(index)"  @mouseover="setHoveredIndex(index)"></div>
+                            <div v-for="(index, item) in 3" class="indicator"
+                                :class="{ 'active': currentIndex === index }" :key="index" @click="toggleImage(index)"
+                                @mouseover="setHoveredIndex(index)"></div>
                         </div>
                     </div>
                 </div>
@@ -70,13 +72,15 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 const router = useRouter()
 
 const currentIndex = ref(1)
-    const toggleImage = (index: number) => {
-        currentIndex.value = index
-    }
-    const setHoveredIndex = (index: number) => {
-        currentIndex.value = index
-    }
-
+const toggleImage = (index: number) => {
+    currentIndex.value = index
+}
+const setHoveredIndex = (index: number) => {
+    currentIndex.value = index
+}
+onMounted(() => {
+    router.push("/accommodation")
+})
 </script>
 <style lang="scss" scoped>
 .common-section {
@@ -136,8 +140,8 @@ const currentIndex = ref(1)
             .image-item {
                 margin-top: 1.5rem;
                 position: relative;
-                
-                
+
+
                 &::after {
                     content: '';
                     position: absolute;
@@ -148,12 +152,12 @@ const currentIndex = ref(1)
                     top: -6px;
                     z-index: -1;
                 }
-                
+
                 img {
                     width: 100%;
                     max-width: 95%;
                     box-shadow: 7px 6px 4px 0px rgba(0, 0, 0, 0.3);
-                    
+
                 }
 
                 .carousel-indicator {
@@ -164,7 +168,7 @@ const currentIndex = ref(1)
                     padding: 0.5rem 0;
                     font-size: 1.5rem;
                     font-weight: 600;
-                    
+
                     .indicator {
                         width: 0.7rem;
                         height: 0.7rem;
@@ -177,9 +181,9 @@ const currentIndex = ref(1)
                     }
                 }
             }
-            
-            
-            
+
+
+
         }
 
         .info-box {

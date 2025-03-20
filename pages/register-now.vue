@@ -98,6 +98,8 @@ import countriesJson from '@/assets/data/countries.json'
 
 const countries = reactive(countriesJson);
 
+const router = useRouter()
+
 /**-------------------------------匯款帳號末5碼校驗----------------------------- */
 
 
@@ -139,7 +141,7 @@ interface formData {
 const form = ref<FormInstance>()
 
 const formData = reactive<formData>({
-    title: 'Prof',
+    title: 'Prof.',
     firstName: '',
     lastName: '',
     email: '',
@@ -155,6 +157,17 @@ const formData = reactive<formData>({
     category: 1,
 })
 
+const vaildConfirmPassword = (rule: any, value: string, callback: any) => {
+    
+    if(!value){
+        callback(new Error('Please input your password again'))
+    } else if (value !== formData.password) {
+        callback(new Error('The two passwords do not match'))
+    } else {
+        callback()
+    }
+}
+
 
 
 const formRules = reactive<FormRules>({
@@ -163,7 +176,7 @@ const formRules = reactive<FormRules>({
     lastName: [{ required: true, message: 'Please input your last name', trigger: 'blur' }],
     email: [{ required: true, message: 'Please input your email', trigger: 'blur' }, { type: 'email', message: 'Please input correct email', trigger: 'blur' }],
     password: [{ required: true, message: 'Please input your password', trigger: 'blur' }],
-    confirmPassword: [{ required: true, message: 'Please input your password again', trigger: 'blur' }],
+    confirmPassword: [{ validator: vaildConfirmPassword, trigger: 'blur' }],
     affiliation: [{ required: true, message: 'Please input your affiliation', trigger: 'blur' }],
     jobTitle: [{ required: true, message: 'Please input your job title', trigger: 'blur' }],
     country: [{ required: true, message: 'Please select a country', trigger: 'change' }],
@@ -174,15 +187,20 @@ const formRules = reactive<FormRules>({
 })
 
 
-const submit = (formEl: FormInstance | undefined) => {
+const submit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
-    formEl.validate((valid) => {
+    formEl.validate(async (valid) => {
         if (valid) {
             console.log('submit!')
             formData.phone = formData.countryCode + '-' + formData.phoneNum
-            let res = CSRrequest.post('/member', {
+            let res = await CSRrequest.post('/member', {
                 body: formData
             })
+
+            if (res.data.isLogin) {
+                localStorage.setItem(res.data.tokenName,'Bearer '+ res.data.tokenValue);
+                router.push('/member-ship')
+            }
 
             formEl.resetFields()
         } else {
@@ -191,6 +209,11 @@ const submit = (formEl: FormInstance | undefined) => {
         }
     })
 }
+
+/**---------------------- */
+onMounted(() => {
+    // router.push('/demo-register')
+})
 </script>
 <style lang="scss" scoped>
 .common-section {

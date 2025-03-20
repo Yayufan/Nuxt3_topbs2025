@@ -29,6 +29,7 @@
 </template>
 <script lang="ts" setup>
 
+
 const emits = defineEmits(['closeMenu']);
 
 const closeMenu = () => {
@@ -60,7 +61,7 @@ const menu = reactive([
     {
         title: 'Registration', icon: 'calendar.svg', isActive: false, submenu: [
             { title: 'Registration Guidelines', link: '/registration-guidelines' },
-            { title: 'Register Now', link: '/register-now' },
+            { title: 'Register Now', link: '/demo-register' },
 
         ]
     },
