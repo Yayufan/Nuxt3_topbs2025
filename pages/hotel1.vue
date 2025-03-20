@@ -82,6 +82,10 @@ const router = useRouter()
     const setHoveredIndex = (index: number) => {
         currentIndex.value = index
     }
+
+    onMounted(() => {
+        router.push("/accommodation")
+    })
 </script>
 <style lang="scss" scoped>
 .common-section {

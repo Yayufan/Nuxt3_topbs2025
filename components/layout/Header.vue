@@ -58,12 +58,11 @@ const emits = defineEmits(['openMenu']);
             width: 100%;
         }
     }
-
-
+    
     .hamburger-icon {
         position: absolute;
         left: 0;
-        top: 1.5vw;
+        top: 0.8vw;
         display: none;
         padding: 20px;
         z-index: 9999;

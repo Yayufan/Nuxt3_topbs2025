@@ -43,10 +43,10 @@ const calculateCountdown = () => {
         const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-        countdown.value = `<div> ${days} <span class="countdown-word">Days</span></div>
-                            <div>${hours}  <span class="countdown-word">Hours</span> </div>
-                            <div>${minutes}  <span class="countdown-word">Minutes</span></div>
-                            <div> ${seconds}  <span class="countdown-word">Seconds</span></div>`;
+        countdown.value = `<div class="countdown-div"> <span class="countdown-time">${days}</span> <span class="countdown-word">Days</span></div>
+                            <div class="countdown-div"><span class="countdown-time">${hours}</span>  <span class="countdown-word">Hours</span> </div>
+                            <div class="countdown-div"><span class="countdown-time">${minutes}</span>  <span class="countdown-word">Minutes</span></div>
+                            <div class="countdown-div"> <span class="countdown-time">${seconds}</span>  <span class="countdown-word">Seconds</span></div>`;
     } else {
         countdown.value = 'Countdown expired';
     }
@@ -61,15 +61,16 @@ onMounted(() => {
 <style lang="scss" scoped>
 .common-section {
     font-family: $common-section-font-family;
-
+    
     .el-carousel {
+        // margin-top: 2rem;
         height: 27vw;
         max-width: 100%;
         width: 100;
         margin: 1vw auto 0 auto;
 
         @media screen and (max-width: 850px) {
-            margin: 13vw auto 0 auto;
+            margin: 6rem auto 0 auto;
 
         }
 
@@ -173,56 +174,41 @@ onMounted(() => {
     }
 
     .countdown-timer-section {
-        // width: $common-section-width;
-
-        height: 10vw;
+        height: 10rem;
         width: 100%;
-        margin: 0 auto 0 auto;
-
-        // background-color: rgba($color: #000000, $alpha: 0.9);
         background-image: url('/img/bg01.webp');
-
-        color: black;
-        font-size: 3.5rem;
-        font-weight: bold;
-        letter-spacing: 0.1rem;
-        text-align: center;
-        line-height: 10vw;
-        box-sizing: border-box;
+        display: flex;
+        align-items: center;
 
         .countdown-timer {
+            width: $common-section-width;
+            margin: $common-section-margin;
             display: flex;
-            justify-content: center;
-            margin: 0 auto;
-            align-items: center;
-            box-sizing: border-box;
-            div {
-                width: calc(100%/4);
+
+            :deep(.countdown-div) {
+                flex: 1;
+                text-align: center;
+                font-size: 2rem;
+
+                @media screen and (max-width: 920px) {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 1.5rem;
+                }
+
+                @media screen and (max-width: 600px) {
+                    font-size: 1.2rem;
+                }
+            }
+
+            :deep(.countdown-time) {
+                font-size: 2.5rem;
+                font-weight: bold;
             }
         }
 
-        :deep(.countdown-word) {
-            font-size: 2.5rem;
-            font-weight: normal;
-            letter-spacing: 0rem;
-            margin: 0 2.5rem 0 0;
-        }
 
-        @media screen and (max-width: 900px) {
-            // font-size: 1.5rem;
-            // line-height: 6vw;
-            justify-content: space-around;
-            div {
-                // width: calc(100%/4);
-                // margin: auto;
-            }
 
-            :deep(.countdown-word) {
-                font-size: 1rem;
-                margin: 0 0.5rem 0 0;
-            }
-
-        }
     }
 
     .video-banner {
