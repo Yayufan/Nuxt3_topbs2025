@@ -36,7 +36,7 @@
                             {{ memberInfo.remitAccountLast5 }}    
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0" class="not-pay">
+                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0 && memberInfo.groupRole != 'slave'" class="not-pay">
                             <span @click="getOrders(item.ordersId)">Pay now</span>
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'&& item.status === 2" class="completed">
