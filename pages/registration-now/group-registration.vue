@@ -9,9 +9,16 @@
             <el-form :model="returnData" class="form" ref="form" :rules="formRules" labelPosition="top"
                 require-asterisk-position="right" :show-message="true" :scroll-to-error="true">
                 <div class="member-list" v-for="(item, index) in returnData.groupMembers" :key="index">
-                    <h1>Member {{ index+1 }} :</h1>
-                    <el-form-item class="member-title required" label="Title" :prop="'groupMembers.' +index+'.title'" :rules="formRules.title" labelPosition="left"
-                        labelWidth="auto">
+                    <div class="top-section">
+                        <h1>Member {{ index + 1 }} : <span v-if="index === 0" class="tips">*The first on the list must
+                                be a main member</span></h1>
+                        <el-button class="option-btn" v-if="returnData.groupMembers.length > 5"
+                            @click="removeMember(index)">
+                            Remove
+                        </el-button>
+                    </div>
+                    <el-form-item class="member-title required" label="Title" :prop="'groupMembers.' + index + '.title'"
+                        :rules="formRules.title" labelPosition="left" labelWidth="auto">
                         <el-radio-group v-model="item.title">
                             <el-radio value="Prof.">Prof.</el-radio>
                             <el-radio value="Dr.">Dr.</el-radio>
@@ -64,10 +71,6 @@
                                         :value="item"></el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item v-if="item.country === 'Taiwan'" label="Remit Account Last 5 Number"
-                                prop="remitAccountLast5">
-                                <el-input v-model="item.remitAccountLast5"></el-input>
-                            </el-form-item>
                             <div class="member-phone required">
                                 <el-form-item class="country-code" label="Mobile Phone"
                                     :prop="'groupMembers.' + index + '.countryCode'" :rules="formRules.countryCode">
@@ -95,13 +98,15 @@
                     <el-divider></el-divider>
 
                 </div>
-                <el-button @click="addNewMember"><el-icon>
-                        <ElIconCirclePlus />
-                    </el-icon></el-button>
+                <el-button @click="addNewMember" class="option-btn">
+                    Add new
+                </el-button>
                 <el-form-item class="captcha" label="" prop="captcha">
                     <el-input v-model="returnData.verificationCode" placeholder="Captcha"></el-input>
                     <img :src="captchaData.image" alt="captcha">
-                </el-form-item>
+                    <el-button class="refresh-btn" @click="getCaptcha"><el-icon>
+                            <ElIconRefreshRight />
+                        </el-icon></el-button> </el-form-item>
                 <el-form-item class="submit-btn">
                     <el-button type="primary" @click="submit(form)">Submit</el-button>
                 </el-form-item>
@@ -113,7 +118,7 @@
 
 <script lang="ts" setup>
 
-import { formEmits, type FormInstance, type FormRules } from 'element-plus'
+import { type FormInstance, type FormRules } from 'element-plus'
 import { Lock, Message } from '@element-plus/icons-vue'
 
 import Banner from '@/components/layout/Banner.vue';
@@ -217,12 +222,16 @@ const returnData = reactive<any>({
 })
 
 const initMember = () => {
-    returnData.groupMembers = 
-    Array.from({ length: 5 }, () => ({ ...formData }))
+    returnData.groupMembers =
+        Array.from({ length: 5 }, () => ({ ...formData }))
 }
 
 const addNewMember = () => {
     returnData.groupMembers.push({ ...formData })
+}
+
+const removeMember = (index: number) => {
+    returnData.groupMembers.splice(index, 1)
 }
 
 watch(() => attendeeType, (value) => {
@@ -341,6 +350,26 @@ onMounted(() => {
         margin: 1rem auto;
         font-weight: 600;
 
+        .option-btn {
+            color: #DD6777;
+            border: 1px solid #DD6777;
+            border-radius: 5px;
+
+            &:hover {
+                color: white;
+                background-color: #DD6777;
+            }
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+
+            .tips {
+                color: red;
+            }
+        }
+
         .member-title {
             display: flex;
             align-items: center;
@@ -434,9 +463,11 @@ onMounted(() => {
                             width: 43%;
                         }
                     }
+
                 }
 
             }
+
         }
 
         .captcha {
@@ -455,6 +486,18 @@ onMounted(() => {
             :deep(.el-input) {
                 width: 15vw;
 
+            }
+
+            .refresh-btn {
+                border: none;
+                background-color: white;
+                font-size: 1.5rem;
+                color: #D86C7C;
+
+                &:hover {
+                    background-color: white;
+                    color: #D86C7C;
+                }
             }
 
             img {

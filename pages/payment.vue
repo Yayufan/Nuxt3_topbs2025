@@ -2,23 +2,9 @@
     <main class="common-section">
         <Banner />
         <Breadcrumbs :first-route="'Member Center'" :secound-route="'Payment'" />
-
-        <!-- <div class="table-section">
-            <el-table :data="orderList" ref="orderListRef" style="width: 80%;" :header-row-style="tableHeaderStyle" :row-style="tableCellStyle">
-                <el-table-column prop="itemsSummary" label="Item"></el-table-column>
-                <el-table-column prop="totalAmount" label="Payment Amount"></el-table-column>
-                <el-table-column prop="status" label="Payment Status"></el-table-column>
-                <el-table-column>
-                    <template #default="scope">
-                        <el-button @click="getOrders(scope.row.ordersId)">付款</el-button>
-                    </template>
-</el-table-column>
-
-
-</el-table>
-</div> -->
         <div class="table-section">
             <div class="table-box">
+                <span class="info">*The group registration fee must be paid by the main registration member.</span>
                 <table class="orders-table" :class="isTaiwan(memberInfo.country)">
                     <tr class="header-row">
                         <th>Item</th>
@@ -36,8 +22,8 @@
                             {{ memberInfo.remitAccountLast5 }}    
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0" class="not-pay">
-                            <span @click="getOrders(item.ordersId)">Pay now</span>
+                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0"  class="not-pay" :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') ? 'disabled' : ''">
+                            <span @click="getOrders(item.ordersId, (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee'))">Pay now</span>
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'&& item.status === 2" class="completed">
                             <span><el-icon >
@@ -92,6 +78,7 @@ let orderList = reactive<Order[]>([])
 const getOrderListForOwner = async () => {
     let res = await CSRrequest.get('/orders/owner')
     Object.assign(orderList, res.data)
+    console.log(orderList)
 }
 
 const enums = {
@@ -114,8 +101,12 @@ const formRef = ref<any>()
 
 const form = ref<any>()
 
-const getOrders = async (ordersId: number) => {
-    console.log(ordersId)
+const getOrders = async (ordersId: number, isPayable: boolean) => {
+    console.log(!isPayable)
+    if (!isPayable) {
+        // ElMessage.error('You are not allowed to pay for this item')
+        return
+    }
     let res = await CSRrequest.get(`/orders/owner/${ordersId}`)
     console.log(res.data)
     res = await CSRrequest.get(`/orders/payment`, {
@@ -138,7 +129,6 @@ const getOrders = async (ordersId: number) => {
 
 /**---------------------------------------- */
 const isEvenOrOdd = (index: number) => {
-    console.log(index)
     return index % 2 === 0 ? 'even' : 'odd'
 }
 
@@ -171,10 +161,17 @@ onMounted(() => {
         .table-box {
             // width: 80%;
             display: flex;
+            flex-direction: column;
             background-color: white;
             border-radius: 15px;
             padding: 1rem;
             justify-content: center;
+
+            .info {
+                font-size: 1rem;
+                color: red;
+                // margin-bottom: 1rem;
+            }
 
             .taiwan {
                 td {
@@ -308,8 +305,14 @@ onMounted(() => {
                     background-color: #26AE07 !important;
                     color: white !important;
                     border-radius: 5px;
-                    width: 10%;
+                    width: 13%;
                     cursor: pointer;
+
+                    &.disabled {
+                        background-color: #26AE07 !important;
+                        opacity: 0.5;
+                        cursor: not-allowed;
+                    }
                 }
 
             }

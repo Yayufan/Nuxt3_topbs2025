@@ -82,6 +82,9 @@
                 <el-form-item class="captcha" label="" prop="captcha">
                     <el-input v-model="formData.verificationCode" placeholder="Captcha"></el-input>
                     <img :src="captchaData.image" alt="captcha">
+                    <el-button class="refresh-btn" @click="getCaptcha"><el-icon>
+                            <ElIconRefreshRight />
+                        </el-icon></el-button>
                 </el-form-item>
                 <el-form-item class="submit-btn">
                     <el-button type="primary" @click="submit(form)">Submit</el-button>
@@ -415,6 +418,19 @@ onMounted(() => {
                 width: 15vw;
 
             }
+
+            .refresh-btn {
+                border: none;
+                background-color: white;
+                font-size: 1.5rem;
+                color: #D86C7C;
+
+                &:hover {
+                    background-color: white;
+                    color: #D86C7C;
+                }
+            }
+
 
             img {
                 width: 15vw;
