@@ -21,10 +21,7 @@
 <style lang="scss" scoped>
 .footer-section {
     background-color: #F0F0F0;
-    border-top: 8px $main-color solid;
     padding:25px 15px;
-    margin-top: 1rem;
-    // z-index: 99;
     .footer-box {
         max-width: 1200px;
         margin: 0 auto;
