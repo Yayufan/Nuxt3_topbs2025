@@ -13,13 +13,15 @@
         <!-- <div class="logo-section">
             <nuxt-link to="/"><img src="/img/logo.png" alt="" @click="closeMenu"></nuxt-link>
         </div> -->
-        <div class="user-icon">
-            <img src="/img/user.svg" alt="">
+        <div class="user-icon" @click="headToMemberCenter">
+            <img src="/img/user.svg" alt="" >
         </div>
     </header>
 </template>
 <script lang="ts" setup>
 
+
+const router = useRouter();
 
 const isActive = ref(false);
 const props = defineProps<{
@@ -42,6 +44,11 @@ const closeMenu = () => {
 }
 
 const emits = defineEmits(['openMenu']);
+
+const headToMemberCenter = () => {
+    console.log('headToMemberCenter');
+    router.push('/member-center');
+}
 
 
 </script>
@@ -110,6 +117,7 @@ const emits = defineEmits(['openMenu']);
         display: none;
         right: 4rem;
         top: 2.1rem;
+        z-index: 10;
 
         img {
             width: 100%;

@@ -19,9 +19,10 @@
                 </div>
             </div>
             <div>
-                <li>
+                <li @click="headToLogin">
                     <img src="/img/book.svg" alt="">
-                    Login
+                    <span v-if="!isLogin">Login</span>
+                    <span v-else @click="logout">Logout</span>
                 </li>
             </div>
         </ol>
@@ -88,6 +89,41 @@ const menu = reactive([
         ]
     }
 ])
+
+
+const router = useRouter()
+const headToLogin = () => {
+    closeMenu();
+    let url = isLogin.value ? '/member-center' : '/login';
+    router.push(url);
+}
+
+const isLogin = ref(false);
+const validateLogin = () => {
+    let res = localStorage.getItem('Authorization-member');
+    if (res) {
+        isLogin.value = true;
+    }
+}
+
+router.beforeEach(async (to, from, next) => {
+    validateLogin();
+    next();
+});
+
+const logout = async () => {
+    let res = await CSRrequest.post('/member/logout');
+    if (res.code === 200) {
+        localStorage.removeItem('Authorization-member');
+        isLogin.value = false;
+        router.push('/login');
+    }
+}
+
+onMounted(() => {
+    validateLogin();
+})
+
 </script>
 <style lang="scss" scoped>
 .mobile-menu {
@@ -99,6 +135,7 @@ const menu = reactive([
         list-style: none;
         padding: 0;
         margin-left: 6vw;
+        margin-top: 3rem;
 
         li {
             padding: 1rem;
