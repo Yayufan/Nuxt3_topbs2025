@@ -36,7 +36,7 @@
                             {{ memberInfo.remitAccountLast5 }}    
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0 && memberInfo.groupRole != 'slave'" class="not-pay">
+                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0 && (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee')" class="not-pay">
                             <span @click="getOrders(item.ordersId)">Pay now</span>
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'&& item.status === 2" class="completed">
@@ -92,6 +92,7 @@ let orderList = reactive<Order[]>([])
 const getOrderListForOwner = async () => {
     let res = await CSRrequest.get('/orders/owner')
     Object.assign(orderList, res.data)
+    console.log(orderList)
 }
 
 const enums = {
@@ -138,7 +139,6 @@ const getOrders = async (ordersId: number) => {
 
 /**---------------------------------------- */
 const isEvenOrOdd = (index: number) => {
-    console.log(index)
     return index % 2 === 0 ? 'even' : 'odd'
 }
 
@@ -308,7 +308,7 @@ onMounted(() => {
                     background-color: #26AE07 !important;
                     color: white !important;
                     border-radius: 5px;
-                    width: 10%;
+                    width: 13%;
                     cursor: pointer;
                 }
 
