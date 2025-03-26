@@ -110,7 +110,7 @@ function handleScroll() {
 
   li {
     border: 1px solid #CCCCCC;
-    padding: 0 1rem !important;
+    padding: 0 0.5rem !important;
     font-weight: bold;
     height: auto !important;
     // margin: 0 10px !important;

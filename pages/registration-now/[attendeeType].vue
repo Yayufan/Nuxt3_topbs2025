@@ -1,9 +1,8 @@
 <template>
     <div>
         <main class="common-section">
-            <div class="banner-box">
-                <img src="../assets//img/banner.png" alt="">
-            </div>
+            <Banner />
+
             <div class="title-section">
                 <h1 class="title">Registration Now</h1>
             </div>
@@ -49,7 +48,8 @@
                     </div>
                     <div class="right-section">
                         <el-form-item class="required" label="Country" prop="country">
-                            <el-select " v-model="formData.country" placeholder="Select a Country or Location" filterable @change="cleanRemitAccount">
+                            <el-select :disabled="attendeeType === '2'" v-model="formData.country"
+                                placeholder="Select a Country or Location" filterable @change="cleanRemitAccount">
                                 <el-option v-for="item in countries" :key="item" :label="item"
                                     :value="item"></el-option>
                             </el-select>
@@ -61,7 +61,8 @@
                         <div class="member-phone required">
                             <el-form-item class="country-code" label="Mobile Phone" prop="countryCode">
                                 <div class="country-code-inner">
-                                    <el-input v-model="formData.countryCode" placeholder="Country Code"></el-input>
+                                    <el-input :disabled="attendeeType === '2'" v-model="formData.countryCode"
+                                        placeholder="Country Code"></el-input>
                                     <span>-</span>
                                 </div>
                             </el-form-item>
@@ -71,15 +72,17 @@
                         </div>
                         <el-form-item class="category required" label="Category" prop="category">
                             <el-radio-group v-model="formData.category">
-                                <el-radio :value="1">TOPBS board member</el-radio>
-                                <el-radio :value="3">IOPBS board member</el-radio>
-                                <el-radio :value="2">TOPBS Participant</el-radio>
-                                <el-radio :value="4">IOPBS Participant</el-radio>
-                                <el-radio :value="5">Others</el-radio>
+                                <el-radio :value="1">Non-member</el-radio>
+                                <el-radio :value="2">Member</el-radio>
+                                <el-radio :value="3">Others(Trainee/Nurse/Reasearcher)</el-radio>
                             </el-radio-group>
                         </el-form-item>
                     </div>
                 </div>
+                <el-form-item class="captcha" label="" prop="captcha">
+                    <el-input v-model="formData.verificationCode" placeholder="Captcha"></el-input>
+                    <img :src="captchaData.image" alt="captcha">
+                </el-form-item>
                 <el-form-item class="submit-btn">
                     <el-button type="primary" @click="submit(form)">Submit</el-button>
                 </el-form-item>
@@ -94,11 +97,16 @@
 import type { FormInstance, FormRules } from 'element-plus'
 import { Lock, Message } from '@element-plus/icons-vue'
 
+import Banner from '@/components/layout/Banner.vue';
+
 import countriesJson from '@/assets/data/countries.json'
 
 const countries = reactive(countriesJson);
 
+
 const router = useRouter()
+
+const attendeeType = useRoute().params.attendeeType
 
 /**-------------------------------匯款帳號末5碼校驗----------------------------- */
 
@@ -108,7 +116,7 @@ const validateRemitAccount = (rule: any, value: string, callback: any) => {
         callback(new Error('Please input your remit account last 5 number'))
     } else if (formData.country === 'Taiwan' && value.length !== 5) {
         callback(new Error('Please input 5 numbers'))
-    } 
+    }
     else {
         callback()
     }
@@ -117,6 +125,26 @@ const validateRemitAccount = (rule: any, value: string, callback: any) => {
 const cleanRemitAccount = () => {
     formData.remitAccountLast5 = ''
 }
+
+
+
+/**-------------------------------取得驗證碼----------------------------- */
+
+const captcha = ref('')
+const captchaData = reactive({
+    image: '',
+    key: ''
+})
+
+
+const getCaptcha = async () => {
+    console.log('getCaptcha')
+    let res = await CSRrequest.get('/member/captcha')
+    console.log(res)
+    Object.assign(captchaData, res.data)
+    formData.verificationKey = captchaData.key
+}
+
 
 
 
@@ -136,6 +164,8 @@ interface formData {
     countryCode: string,
     phoneNum: string,
     category: number,
+    verificationCode: string,
+    verificationKey: string
 }
 
 const form = ref<FormInstance>()
@@ -155,11 +185,20 @@ const formData = reactive<formData>({
     countryCode: '',
     phoneNum: '',
     category: 1,
+    verificationCode: '',
+    verificationKey: ''
 })
 
+watch(() => attendeeType, (value) => {
+    if (value === '2') {
+        formData.country = 'Taiwan';
+        formData.countryCode = '886';
+    }
+}, { immediate: true })
+
 const vaildConfirmPassword = (rule: any, value: string, callback: any) => {
-    
-    if(!value){
+
+    if (!value) {
         callback(new Error('Please input your password again'))
     } else if (value !== formData.password) {
         callback(new Error('The two passwords do not match'))
@@ -183,22 +222,29 @@ const formRules = reactive<FormRules>({
     countryCode: [{ required: true, message: 'Please input your country code', trigger: 'blur' }],
     phoneNum: [{ required: true, message: 'Please input your phone number', trigger: 'blur' }],
     category: [{ required: true, message: 'Please select a category', trigger: 'change' }],
-    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }] 
+    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }]
 })
+
 
 
 const submit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate(async (valid) => {
         if (valid) {
-            console.log('submit!')
             formData.phone = formData.countryCode + '-' + formData.phoneNum
             let res = await CSRrequest.post('/member', {
                 body: formData
             })
 
+            console.log(res)
+            if (res.code === 500) {
+                getCaptcha()
+                formData.verificationCode = ''
+                ElMessage.error(res.msg)
+            }
+
             if (res.data.isLogin) {
-                localStorage.setItem(res.data.tokenName,'Bearer '+ res.data.tokenValue);
+                localStorage.setItem(res.data.tokenName, 'Bearer ' + res.data.tokenValue);
                 router.push('/member-center')
             }
 
@@ -213,6 +259,7 @@ const submit = async (formEl: FormInstance | undefined) => {
 /**---------------------- */
 onMounted(() => {
     // router.push('/demo-register')
+    getCaptcha()
 })
 </script>
 <style lang="scss" scoped>
@@ -348,6 +395,30 @@ onMounted(() => {
                     }
                 }
 
+            }
+        }
+
+        .captcha {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            :deep(.el-form-item__content) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            :deep(.el-input) {
+                width: 15vw;
+
+            }
+
+            img {
+                width: 15vw;
+                // height: 40px;
             }
         }
 

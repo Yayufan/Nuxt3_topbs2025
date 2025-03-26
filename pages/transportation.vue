@@ -5,9 +5,6 @@
                 <img src="../assets//img/banner.png" alt="">
             </div>
             <div class="title-section">
-                <!-- <nuxt-link class="back-btn" @click="router.go(-1)"><el-icon>
-                        <ElIconArrowLeft />
-                    </el-icon>Back</nuxt-link> -->
                 <p class="title">
                     Transportation
                 </p>
