@@ -38,7 +38,7 @@ const getMemberInfo = async () => {
    if (res.code == 200) {
         console.log('getMemberInfo error', res);
          router.push('/member-center');
-         ElMessage.success('Already logged in');
+         ElMessage.success('Please log out before registering again');
          Object.assign(memberInfo, res.data);
          return;
     }
