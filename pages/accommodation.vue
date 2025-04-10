@@ -1,9 +1,7 @@
 <template>
     <div>
         <main class="common-section">
-            <div class="banner-box">
-                <img src="../assets//img/banner.png" alt="">
-            </div>
+           <Banner/>
             <div class="title-section">
                 <p class="title">
                     Accommodation
@@ -79,6 +77,7 @@
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+import Banner from '@/components/layout/Banner.vue';
 </script>
 <style lang="scss" scoped>
 .common-section {
@@ -177,6 +176,13 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
         width: 90%;
 
         margin: 2% auto;
+        
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            
+        }
 
         .hotel-card {
             width: 32%;
@@ -184,6 +190,11 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
             border-color: #DD6777;
             border-width: 0 1px 1px 1px;
             box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.5);
+
+            @media screen and (max-width: 1024px) {
+                width: 70%;
+                
+            }
 
             img {
                 width: 100%;
