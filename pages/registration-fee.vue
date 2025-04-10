@@ -3,9 +3,9 @@
         <main class="common-section">
             <Banner />
 
-            <Breadcrumbs firstRoute="Registration" secoundRoute="Registration Guidelines"></Breadcrumbs>
+            <Breadcrumbs firstRoute="Registration" secoundRoute="Registration Fee"></Breadcrumbs>
 
-           <Title :title="'Registration Fee'"></Title>
+            <Title :title="'Registration Fee'"></Title>
             <table class="personal-registration-table">
                 <tr class="personal-row-1">
                     <th class="category-col" :rowspan="2" :colspan="2">Category</th>
@@ -28,25 +28,28 @@
                         <p class="category-item">Company</p>
                     </td>
                     <td>Non-member</td>
-                    <td>USD 400(TWD12800)</td>
-                    <td>USD 500(TWD16000)</td>
+                    <td>USD 400</td>
+                    <td>USD 500</td>
                 </tr>
                 <tr class="personal-row-4">
                     <td>Member</td>
-                    <td>USD 300(TWD9600)</td>
-                    <td>USD 400(TWD12800)</td>
+                    <td>USD 300</td>
+                    <td>USD 400</td>
                 </tr>
                 <tr class="personal-row-5">
                     <td :colspan="2">
                         <p class="category-item">Trainee/Nurse/Researcher</p>
                     </td>
-                    <td>USD 150(TWD4800)</td>
-                    <td>USD 200(TWD6400)</td>
+                    <td>USD 150</td>
+                    <td>USD 200</td>
 
                 </tr>
             </table>
-            <p class="tips">*The exchange rate is caculated based on USD 32</p>
-            <div class="btn-section"> <nuxt-link class="register-btn" to="/online-registration">Register Now !</nuxt-link>
+            <p class="tips">*The prices are listed in USD. According to the financial regulations in Taiwan, the actual
+                credit card payment will be charged in TWD or your local currency. It may be a little different from the
+                price listed above. </p>
+            <div class="btn-section"> <nuxt-link class="register-btn" to="/online-registration">Register Now
+                    !</nuxt-link>
             </div>
             <div class="shadow-divider"></div>
 
@@ -85,10 +88,49 @@
                     </td>
                 </tr>
             </table>
+            <table class="mobile-group-registration-table">
+                <tr>
+                    <td>
+                        <p>Minimum Number of Persons</p>
+                        <p>Required for Group Registration</p>
+                        <p>(Foreigners ONLY: Professor, Physician and Company)</p>
+                    </td>
+                    <td>
+                        <p>5 persons</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Benefit</p>
+                    </td>
+                    <td>
+                        <p>10% Discount</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Payment</p>
+                        <p>Method</p>
+                    </td>
+                    <td>
+                        <p>Credit card</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Deadline</p>
+                    </td>
+                    <td>
+                        <p>9/30</p>
+                    </td>
+                </tr>
+            </table>
+
             <p class="tips">*Please fill in the form completely</p>
             <p class="tips">*The credit card transaction page will be given through email to the sender.</p>
             <p class="tips">*Payment for group registration must be paid at once by one person.</p>
-                <div class="btn-section"> <nuxt-link class="group-register-btn" to="/registration-now/group-registration">Group Registration Form</nuxt-link>
+            <div class="btn-section"> <nuxt-link class="group-register-btn"
+                    to="/registration-now/group-registration">Group Registration Form</nuxt-link>
 
             </div>
         </main>
@@ -130,6 +172,14 @@ import Title from '@/components/layout/Title.vue';
         font-size: 1.5rem;
         font-weight: 600;
         color: #383A51;
+
+        @media screen and (max-width: 768px) {
+            font-size: 1rem;
+        }
+
+        @media screen and (max-width: 425px) {
+            font-size: 10px;
+        }
 
         th {
             color: white;
@@ -201,6 +251,10 @@ import Title from '@/components/layout/Title.vue';
         font-size: 1.5rem;
         font-weight: 600;
 
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+
         th {
             padding: 1rem;
             border: 1px solid #EEE2DC;
@@ -215,6 +269,7 @@ import Title from '@/components/layout/Title.vue';
             padding: 1rem;
             border: 1px solid #EEE2DC;
             color: #7A2D67;
+
             &:not(:first-child) {
                 text-align: center;
             }
@@ -223,6 +278,34 @@ import Title from '@/components/layout/Title.vue';
         .group-row-1 {
             background: linear-gradient(to right, #E28A90, #A4557D);
             color: white;
+        }
+    }
+
+    .mobile-group-registration-table {
+        display: none;
+        width: 90vw;
+        margin: 1rem auto;
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        @media screen and (max-width: 768px) {
+            display: block;
+        }
+
+        td {
+            padding: 1rem;
+            border: 1px solid #EEE2DC;
+           &:first-child {
+                background: linear-gradient(to right, #E28A90, #A4557D);
+                color: white;
+                width: 60%;
+            }
+
+            &:not(:first-child) {
+                background-color: #FEECE8;
+                color: #7A2D67;
+                text-align: center;
+            }
         }
     }
 }

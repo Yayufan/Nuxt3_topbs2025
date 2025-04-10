@@ -7,31 +7,57 @@
         </div>
 
         <div class="select-section">
-            <div class="select-box">
+            <nuxt-link class="select-box" to="/abstract">
                 <img src="../assets/img/abstract-icon.png" alt="">
                 <div class="label-box">
                     <span>Abstract</span>
                 </div>
-            </div>
+            </nuxt-link>
             <nuxt-link class="select-box" :to="'/payment'">
                 <img src="../assets/img/payment-icon.png" alt="">
                 <div class="label-box">
                     <span>Payment</span>
                 </div>
             </nuxt-link>
-            <div class="select-box">
+            <nuxt-link class="select-box" :to="'/accommodation'">
                 <img src="../assets/img/accommodation-icon.png" alt="">
                 <div class="label-box">
                     <p>Accommodation </p>
-                    <p>Offers</p>
+                    <!-- <p>Offers</p> -->
                 </div>
-            </div>
+            </nuxt-link>
         </div>
     </main>
 </template>
 <script lang="ts" setup>
 import Banner from '@/components/layout/Banner.vue';
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
+import Accommodation from './accommodation.vue';
+
+const router = useRouter();
+const vueApp = useNuxtApp();
+
+const memberInfo = reactive({});
+const getMemberInfo = async () => {
+   let res = await CSRrequest.get('/member/getMemberInfo')
+    if (res.code !== 200) {
+         router.push('/login');
+         return;
+    }
+   Object.assign(memberInfo, res.data);
+}
+
+onMounted(() => {
+    getMemberInfo();
+    if (vueApp.$root) { // vueApp.$root 只存在於客戶端。
+        // const memberInfo = localStorage.getItem('Authorization-member');
+        // if (!memberInfo) {
+        //     router.push('/login');
+        // }
+    }
+});
+
+
 </script>
 <style lang="scss" scoped>
 .common-section {
@@ -51,28 +77,28 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
 
     .select-section {
         background: url('assets/img/topbs_background-image.jpg') no-repeat center center;
-        // width: 100vw;
         display: flex;
         justify-content: center;
         align-items: center;
-        // padding: 1.5rem;
+        padding: 1rem 6rem;
+        gap:5rem;
+        @media screen and (max-width: 920px) {
+            gap: 1rem;
+            padding: 1rem;
+            
+        }
 
         .select-box {
-            min-width: 18vw;
-            min-height: 18vw;
-            max-width: 18vw;
-            max-height: 18vw;
+            flex: 1;
+            aspect-ratio: 1/1;
             border: 2px solid #ccc;
             background-color: white;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             border-radius: 15px;
-            margin: 1rem;
-            padding: 1.5rem;
             font-weight: 600;
-            font-size: 1.3rem;
-            text-align: center;
 
             @media screen and (max-width: 920px) {
                 font-size: 1rem;
@@ -83,7 +109,6 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
             }
 
             img {
-                margin-top: 1rem;
                 margin-bottom: 5%;
                 width: 60%;
             }
@@ -93,7 +118,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
                 justify-content: flex-start;
                 align-items: center;
                 flex-direction: column;
-                margin-bottom: 5%;
+                // margin-bottom: 5%;
 
                 p {
                     text-wrap: wrap;

@@ -4,11 +4,12 @@
         <Breadcrumbs :first-route="'Member Center'" :secound-route="'Payment'" />
         <div class="table-section">
             <div class="table-box">
-                <span class="info">*The group registration fee must be paid by the main registration member.</span>
+                <span class="info" v-if="memberInfo.groupRole == 'slave'">*The group registration fee must be paid by
+                    the main registration member.</span>
                 <table class="orders-table" :class="isTaiwan(memberInfo.country)">
                     <tr class="header-row">
                         <th>Item</th>
-                        <th>Payment Amount</th>
+                        <th>Payment Amount (TWD)</th>
                         <th>Payment Status</th>
                         <th v-if="memberInfo.country === 'Taiwan'">Last 5 digits of account number</th>
                     </tr>
@@ -17,21 +18,27 @@
                         <td>{{ item.totalAmount }}</td>
                         <td :class="memberInfo.country === 'Taiwan' ? 'none' : 'last-col'">{{
                             enums.payMentStatus[item.status]
-                        }}</td>
+                            }}</td>
                         <td v-if="memberInfo.country === 'Taiwan'" class="last-col">
-                            {{ memberInfo.remitAccountLast5 }}    
+                            {{ memberInfo.remitAccountLast5 }}
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0"  class="not-pay" :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') ? 'disabled' : ''">
-                            <span @click="getOrders(item.ordersId, (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee'))">Pay now</span>
+                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0" class="not-pay"
+                            :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') ? 'disabled' : ''"
+                            @click="getOrders(item.ordersId, (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee'))">
+                            <span>Pay now</span>
                         </td>
-                        <td v-if="memberInfo.country !== 'Taiwan'&& item.status === 2" class="completed">
-                            <span><el-icon >
-                                <ElIconCircleCheckFilled />
-                            </el-icon></span>
+                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 2" class="completed">
+                            <span><el-icon>
+                                    <ElIconCircleCheckFilled />
+                                </el-icon></span>
                         </td>
                     </tr>
                 </table>
+            </div>
+            <div class="payment-info">
+                <p>*戶名 : 台灣乳房腫瘤手術暨重建學會</p>
+                <p>*合作金庫銀行 : 長庚分行 帳號:3638871000153</p>
             </div>
         </div>
         <!-- Bearer 7bedca56-c711-4559-af47-afd6d4224da8 -->
@@ -154,6 +161,7 @@ onMounted(() => {
         margin-top: 1rem;
         padding: 2rem;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         background: url('assets/img/topbs_background-image.jpg') no-repeat center center;
@@ -177,23 +185,25 @@ onMounted(() => {
                 td {
                     border-right: 1px white solid;
                 }
+
                 .odd {
-                   td {
-                    &:not(:last-child) {
-                        position: relative;
-                        &::after{
-                           position: absolute;
-                            top: 0px;
-                            right: -1px;
-                            content: '';
-                            display: block;
-                            width: 1px;
-                            height: 100%;
-                            background-color: #E8979E;
-                            z-index: 10;
-                       }
+                    td {
+                        &:not(:last-child) {
+                            position: relative;
+
+                            &::after {
+                                position: absolute;
+                                top: 0px;
+                                right: -1px;
+                                content: '';
+                                display: block;
+                                width: 1px;
+                                height: 100%;
+                                background-color: #E8979E;
+                                z-index: 10;
+                            }
+                        }
                     }
-                   }
                 }
             }
 
@@ -202,7 +212,7 @@ onMounted(() => {
                 background-color: white;
                 font-size: 1.3rem;
                 border-collapse: separate;
-                border-spacing: 0 0.3rem ;
+                border-spacing: 0 0.3rem;
                 width: 70vw;
 
                 @media screen and (max-width: 1048px) {
@@ -220,9 +230,10 @@ onMounted(() => {
                 }
 
                 .header-row {
-                    position:relative;
+                    position: relative;
+
                     &::after {
-                        position:absolute;
+                        position: absolute;
                         bottom: 5px;
                         right: 0;
                         content: '';
@@ -244,7 +255,7 @@ onMounted(() => {
                     border: none !important;
                 }
 
-               
+
 
                 .even {
                     td {
@@ -261,7 +272,7 @@ onMounted(() => {
                         font-weight: bold;
                     }
 
-                   
+
                 }
 
                 .btn-col {
@@ -270,7 +281,7 @@ onMounted(() => {
                     border-radius: 5px;
                 }
 
-               
+
                 .pay-btn {
                     background-color: #26AE07;
                     color: white;
@@ -283,23 +294,23 @@ onMounted(() => {
                     width: 40%;
                 }
 
-                
+
                 .completed {
                     background-color: #D77102 !important;
                     color: white;
                     text-align: center;
                     border-radius: 5px;
                     cursor: default;
-                    
+
                 }
-                
+
                 .temp-col {
                     background-color: white !important;
                     width: 0.1rem;
                     padding: 0;
                     border: none !important;
                 }
-                
+
                 .not-pay {
                     text-align: center;
                     background-color: #26AE07 !important;
@@ -316,8 +327,20 @@ onMounted(() => {
                 }
 
             }
+
         }
 
+        .payment-info {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: start;
+            border-radius: 15px;
+            width: 70vw;
+
+            @media screen and (max-width: 1048px) {
+                font-size: 1rem;
+            }
+        }
     }
 
 

@@ -7,8 +7,9 @@
         <div class="main-section">
             <el-form class="retrieve-form" ref="formRef" :model="retrieveInfo" :rules="formRules">
                 <p class="tips">
-                    Enter the email associated with your accouunt and we'll send an email with instructions to reset
-                    your password.
+                    <span>Enter the email associated with your accouunt </span>
+                    <span>and we'll send an email with instructions </span>
+                    <span>to reset your password.</span>
                 </p>
                 <el-form-item>
                     <el-input v-model="retrieveInfo.email" placeholder="Email" type="email">
@@ -74,13 +75,12 @@ const submit = async (formEl: FormInstance | undefined) => {
 
     .main-section {
         background: url('assets/img/topbs_background-image.jpg') no-repeat center center;
-        padding: 1rem 0;
+        padding: 1rem 5rem;
         display: flex;
         justify-content: center;
         align-items: center;
 
         .retrieve-form {
-            width: 30%;
             padding: 1rem 3rem 2rem 3rem;
             display: flex;
             flex-direction: column;
@@ -88,9 +88,20 @@ const submit = async (formEl: FormInstance | undefined) => {
             background-color: white;
             box-shadow: 8px 10px 10px 0 rgba(0, 0, 0, 0.4);
 
+            @media screen and (max-width: 768px) {
+                padding: 1rem;
+                
+            }
+
             .tips {
                 padding: 1rem;
                 font-size: 1.2rem;
+                display: flex;
+                flex-direction: column;
+
+               span {
+                text-wrap: nowrap;
+               }
             }
 
             :deep(.el-input__wrapper) {
@@ -105,7 +116,7 @@ const submit = async (formEl: FormInstance | undefined) => {
             }
 
             :deep(.el-input__prefix) {
-                width: 8%;
+                width: 2rem;
 
                 img {
                     width: 100%;
@@ -120,7 +131,7 @@ const submit = async (formEl: FormInstance | undefined) => {
                 .send-btn {
                     background-color: #DE6A75;
                     color: white;
-                    border-radius: 10;
+                    border-radius: 10px;
                 }
             }
         }

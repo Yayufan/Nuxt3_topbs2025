@@ -38,6 +38,9 @@
                                     <el-input v-model="item.lastName"></el-input>
                                 </el-form-item>
                             </div>
+                            <el-form-item label="ChineseName" prop="chineseName">
+                            <el-input v-model="formData.chineseName"></el-input>
+                        </el-form-item>
                             <el-form-item class="email required" label="ID: Primary E-mail"
                                 :prop="'groupMembers.' + index + '.email'" :rules="formRules.email">
                                 <el-input v-model="item.email" placeholder="E-mail" :prefixIcon="Message"></el-input>
@@ -63,6 +66,10 @@
 
                         </div>
                         <div class="right-section">
+                            <el-form-item label="Passport Number" :prop="'groupMembers.' + index + '.idCard'"
+                                :rules="formRules.idCard">
+                                <el-input v-model="item.idCard" placeholder="Passport Number"></el-input>
+                            </el-form-item>
                             <el-form-item class="required" label="Country" :prop="'groupMembers.' + index + '.country'"
                                 :rules="formRules.country">
                                 <el-select :disabled="attendeeType === '2'" v-model="item.country"
@@ -101,12 +108,15 @@
                 <el-button @click="addNewMember" class="option-btn">
                     Add new
                 </el-button>
-                <el-form-item class="captcha" label="" prop="captcha">
-                    <el-input v-model="returnData.verificationCode" placeholder="Captcha"></el-input>
-                    <img :src="captchaData.image" alt="captcha">
-                    <el-button class="refresh-btn" @click="getCaptcha"><el-icon>
-                            <ElIconRefreshRight />
-                        </el-icon></el-button> </el-form-item>
+                <el-form-item class="captcha"  prop="captcha">
+                    <el-input v-model="formData.verificationCode" placeholder="Captcha"></el-input>
+                    <div class="captcha-img">
+                        <img :src="captchaData.image" alt="captcha">
+                        <el-button class="refresh-btn" @click="getCaptcha"><el-icon>
+                                <ElIconRefreshRight />
+                            </el-icon></el-button>
+                    </div>
+                </el-form-item>
                 <el-form-item class="submit-btn">
                     <el-button type="primary" @click="submit(form)">Submit</el-button>
                 </el-form-item>
@@ -179,12 +189,14 @@ interface formData {
     title: string,
     firstName: string,
     lastName: string,
+    chineseName: string,
     email: string,
     password: string,
     confirmPassword: string,
     affiliation: string,
     jobTitle: string,
     country: string,
+    idCard: string,
     remitAccountLast5: string,
     phone: string,
     countryCode: string,
@@ -200,11 +212,13 @@ const formData = reactive<formData>({
     title: 'Prof.',
     firstName: '',
     lastName: '',
+    chineseName: '',
     email: '',
     password: '',
     confirmPassword: '',
     affiliation: '',
     jobTitle: '',
+    idCard: '',
     country: '',
     remitAccountLast5: '',
     phone: '',
@@ -264,6 +278,7 @@ const formRules = reactive<FormRules>({
     firstName: [{ required: true, message: 'Please input your first name', trigger: 'blur' }],
     lastName: [{ required: true, message: 'Please input your last name', trigger: 'blur' }],
     email: [{ required: true, message: 'Please input your email', trigger: 'blur' }, { type: 'email', message: 'Please input correct email', trigger: 'blur' }],
+    idCard: [{ required: true, message: 'Please input your passport number', trigger: 'blur' }],
     password: [{ required: true, message: 'Please input your password', trigger: 'blur' }],
     confirmPassword: [{ validator: vaildConfirmPassword, trigger: 'blur' }],
     affiliation: [{ required: true, message: 'Please input your affiliation', trigger: 'blur' }],
@@ -306,10 +321,25 @@ const submit = async (formEl: FormInstance | undefined) => {
     })
 }
 
+const memberInfo = reactive({})
+
+const getMemberInfo = async () => {
+   let res = await CSRrequest.get('/member/getMemberInfo')
+   if (res.code == 200) {
+        console.log('getMemberInfo error', res);
+         router.push('/member-center');
+         ElMessage.success('Already logged in');
+         Object.assign(memberInfo, res.data);
+         return;
+    }
+}
+
+
 /**---------------------- */
 onMounted(() => {
     getCaptcha()
     initMember()
+    getMemberInfo();
 })
 </script>
 <style lang="scss" scoped>
@@ -385,6 +415,12 @@ onMounted(() => {
             gap: 5rem;
             text-wrap: nowrap;
 
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+                gap: 2rem;
+
+            }
+
 
             .left-seciton {
                 flex: 1;
@@ -452,18 +488,13 @@ onMounted(() => {
                 }
 
                 .category {
-                    display: flex;
-                    width: 100%;
-                    flex-direction: column;
 
                     :deep(.el-radio-group) {
+                        flex-direction: column;
                         display: flex;
-
-                        .el-radio {
-                            width: 43%;
-                        }
+                        justify-content: flex-start;
+                        align-items: flex-start;
                     }
-
                 }
 
             }
@@ -473,37 +504,53 @@ onMounted(() => {
         .captcha {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
+            margin: 0 auto;
+            width: 80%;
 
             :deep(.el-form-item__content) {
                 display: flex;
-                align-items: center;
                 justify-content: center;
                 gap: 1rem;
-                width: 100%;
-            }
-
-            :deep(.el-input) {
-                width: 15vw;
-
-            }
-
-            .refresh-btn {
-                border: none;
-                background-color: white;
-                font-size: 1.5rem;
-                color: #D86C7C;
-
-                &:hover {
-                    background-color: white;
-                    color: #D86C7C;
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                    gap: 1rem;
+                    
                 }
             }
 
-            img {
-                width: 15vw;
-                // height: 40px;
+            :deep(.el-input) {
+                width: 10rem;
             }
+
+            .captcha-img {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                    gap: 1rem;
+                    
+                }
+                .refresh-btn {
+                    border: none;
+                    background-color: white;
+                    font-size: 1.5rem;
+                    color: #D86C7C;
+    
+                    &:hover {
+                        background-color: white;
+                        color: #D86C7C;
+                    }
+                }
+    
+    
+                img {
+                    width: 10rem;
+                }
+            }
+
         }
 
         .submit-btn {
@@ -513,7 +560,6 @@ onMounted(() => {
             margin-top: 2rem;
 
             .el-button {
-                width: 10%;
                 margin: 0 auto;
                 background-color: #DD6777;
                 border: none;
