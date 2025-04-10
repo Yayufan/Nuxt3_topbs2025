@@ -2,7 +2,7 @@
     <div>
         <main class="common-section">
             <h1 class="title">Submission Guidelines</h1>
-            <Breadcrumbs firstRoute="Call for Abstracts" secoundRoute="Submission Guidelines"></Breadcrumbs>
+            <Breadcrumbs firstRoute="Abstracts" secoundRoute="Submission Guidelines"></Breadcrumbs>
             <div class="content">
                 <h1 class="">Page Under Construction</h1>
             </div>

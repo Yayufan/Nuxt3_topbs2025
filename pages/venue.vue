@@ -2,7 +2,7 @@
     <div>
         <main class="common-section">
             <h1 class="title">Venue</h1>
-            <Breadcrumbs firstRoute="General Information" secoundRoute="Venue"></Breadcrumbs>
+            <Breadcrumbs firstRoute="TOPBS & IOPBS" secoundRoute="Venue"></Breadcrumbs>
             <div class="content">
                 <h1 class="">Page Under Construction</h1>
             </div>

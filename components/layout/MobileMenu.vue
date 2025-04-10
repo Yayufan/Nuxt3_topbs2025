@@ -62,7 +62,7 @@ const menu = reactive([
     {
         title: 'Registration', icon: 'calendar.svg', isActive: false, submenu: [
             { title: 'Registration Fee', link: '/registration-fee' },
-            { title: 'Register Now', link: '/demo-register' },
+            { title: 'Online Registration', link: '/online-registration' },
 
         ]
     },

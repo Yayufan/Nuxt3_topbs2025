@@ -1,9 +1,7 @@
 <template>
     <div>
         <main class="common-section">
-            <div class="banner-box">
-                <img src="../assets//img/banner.png" alt="">
-            </div>
+            <Banner></Banner>
             <div class="title-section">
                 <p class="title">
                     Transportation
@@ -82,19 +80,19 @@
                             <p class="transportation">iBus(1960)</p>
                             <span class="small-font transportation-hint">Bus location</span>
                             <div class="small-font transportation-hint">
-                            <div>Terminal 1:</div>
-                            <div>
-                                <div>Passenger bus</div>
-                                <div>waiting area on Floor B1</div>
-                            </div>
+                                <div>Terminal 1:</div>
+                                <div>
+                                    <div>Passenger bus</div>
+                                    <div>waiting area on Floor B1</div>
+                                </div>
                             </div>
                             <div class="small-font transportation-hint">
-                            <div>Terminal 2:</div>
-                            <div>
-                                <div>Passenger bus</div>
-                                <div>waiting area on the 1st
-                                    floor</div>
-                            </div>
+                                <div>Terminal 2:</div>
+                                <div>
+                                    <div>Passenger bus</div>
+                                    <div>waiting area on the 1st
+                                        floor</div>
+                                </div>
                             </div>
                         </td>
                         <td>
@@ -129,6 +127,180 @@
                 </table>
             </div>
 
+            <div class="mobile-table-section">
+                <p class="transport-title">Taoyuan Airport MRT</p>
+                <table class="transport-mobile-table">
+                    <tr>
+                        <th>
+                            Line/Timetable
+                        </th>
+                        <th>
+                            Travel Time
+                        </th>
+                        <th>
+                            Fare
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="tayouan-airport-mrt-line">
+                            <span>
+                                Terminal 1: <span class="line-number">A12</span>
+                                <el-icon>
+                                    <ElIconRight />
+                                </el-icon>
+                                <span class="line-number">A1</span>
+                            </span>
+                            <span>
+                                Terminal 2:
+                                <span class="line-number">A13</span>
+
+                                <el-icon>
+                                    <ElIconRight />
+                                </el-icon>
+                                <span class="line-number">A1</span>
+                            </span>
+                        </td>
+                        <td>50 mins</td>
+                        <td>NTD $160</td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+                <div class="shadow-divider"></div>
+                <p class="transport-title">Taipei Songshan Airport MRT</p>
+                <table class="transport-mobile-table">
+                    <tr>
+                        <th>
+                            Line/Timetable
+                        </th>
+                        <th>
+                            Travel Time
+                        </th>
+                        <th>
+                            Fare
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="taipei-songshan-airport-mrt">
+                            <span>
+                                Songshan Airport:
+                            </span>
+                            <span>
+                                <span class="line-number">BR13</span> <el-icon>
+                                    <ElIconRight />
+                                </el-icon> <span class="line-number">R03</span>
+                            </span>
+                        </td>
+                        <td>17 mins</td>
+                        <td>NTD $25</td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+                <div class="shadow-divider"></div>
+                <p class="transport-title">MRT</p>
+                <table class="transport-mobile-table">
+                    <tr>
+                        <th>
+                            Line/Timetable
+                        </th>
+                        <th>
+                            Travel Time
+                        </th>
+                        <th>
+                            Fare
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="mrt">
+                            <div>Taipei Main Station</div>
+                            <div class="line-section">
+                                <div class="line-box">
+                                    <span class="line-number bl12">BL12</span>
+                                    <span class="line-number">R10</span>
+                                </div>
+                                <el-icon class="arrow">
+                                    <ElIconRight />
+                                </el-icon>
+                                <div class="line-box">
+                                    <span class="line-number br09"> BR09</span>
+                                    <span class="line-number"> R05</span>
+                                </div>
+                                <el-icon class="arrow">
+                                    <ElIconRight />
+                                </el-icon>
+                                <div class="line-box">
+                                    <span class="line-number">R03</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>15 mins</td>
+                        <td>NTD $25</td>
+                    </tr>
+                </table>
+                <div class="shadow-divider"></div>
+                <p class="transport-title">iBus(1960)</p>
+                <div class="ibus-location">
+                    <p>Bus location:</p>
+                    <p>
+                        Terminal 1: Passenger bus waiting area on Floor B1
+                    </p>
+                    <p>
+                        Terminal 2: Passenger bus waiting area on the 1st floor
+                    </p>
+                </div>
+                <table class="transport-mobile-table">
+                    <tr>
+                        <th>Line/Timetable</th>
+                        <th>Travel Time</th>
+                        <th>Fare</th>
+                    </tr>
+                    <tr>
+                        <td class="ibus">
+                            <div class="line-name">
+                                <span>Terminal 1/2</span>
+                                <el-icon class="arrow">
+                                    <ElIconRight />
+                                </el-icon>
+                                <span>Grand Hyatt Taipei</span>
+                            </div>
+                            <div class="time-table">
+                                <span class="title">Timetable:</span>
+                                <span>00:15、12:40、06:50、07:30、09:00、10:20、
+                                11:20、12:40、14:00、15:00、15:40、17:40、
+                               19:10、21:10、22:40</span>
+                            </div>
+                        </td>
+                        <td>90 mins</td>
+                        <td>NTD $190</td>
+                    </tr>
+                </table>
+                <div class="shadow-divider"></div>
+                <p class="transport-title">Taxi</p>
+                <table class="transport-mobile-table">
+                    <tr>
+                        <th>Line/Timetable</th>
+                        <th>Travel Time</th>
+                        <th>Fare</th>
+                    </tr>
+                    <tr class="taxi">
+                        <td class="no-radius">Taiyuan Airport -> TICC</td>
+                        <td>1-1.5 hr</td>
+                        <td class="no-radius">NTD $1310</td>
+                    </tr>
+                    <tr>
+                        <td>Taipei Songshan Airport MRT -> TICC</td>
+                        <td>10-30 mins</td>
+                        <td>NTD $225</td>
+                    </tr>
+                </table>
+                <p class="tips">*MRT (Taiwan Mass Rapid Transit)</p>
+            </div>
+
             <div class="paragraph">Taoyuan Airport MRT</div>
             <div class="mrt-img-box">
                 <img src="../assets/img/mrt_en.jpg" alt="">
@@ -139,22 +311,23 @@
             </div>
 
             <div class="back-to-top" @click="backToTop">
-            <img src="../assets/img/top.png" alt="">
-        </div>
+                <img src="../assets/img/top.png" alt="">
+            </div>
         </main>
 
-      
+
 
     </div>
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+import Banner from '@/components/layout/Banner.vue';
 
 const backToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 </script>
 <style lang="scss" scoped>
@@ -293,9 +466,15 @@ const backToTop = () => {
     }
 
     .transport-table {
-        width: 85%;
+        width: 90%;
         margin: 1rem auto;
         font-family: "思源黑體", "Arial", sans-serif;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+
+
         p {
             display: inline-block !important;
         }
@@ -325,10 +504,16 @@ const backToTop = () => {
                 font-size: 1.3rem;
                 border: 1px solid black;
 
+                @media screen and (max-width: 1023px) {
+                    font-size: 1rem;
+                    padding: 1rem 0.1rem 1rem 0.5rem;
+
+                }
+
             }
 
             .transportation {
-                padding: 0.2rem 2rem;
+                // padding: 0.2rem 2rem;
                 font-size: 1.5rem;
                 text-wrap: nowrap;
                 color: #D36672;
@@ -482,7 +667,220 @@ const backToTop = () => {
         }
     }
 
-   
+    /**================Mobile===================== */
+    .mobile-table-section {
+        width: 95%;
+        margin: 1rem auto;
+
+        @media screen and (min-width: 1025px) {
+            display: none;
+
+        }
+
+        .transport-title {
+            color: #D36672;
+            font-size: 2rem;
+            width: 90%;
+            margin: 0.3rem auto;
+        }
+
+        .transport-mobile-table {
+            border: 1px solid black;
+            border-radius: 15px;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+
+            th {
+                padding: 1rem;
+                font-size: 1.3rem;
+                background-color: #D36672;
+                border: 1px solid black;
+
+                color: white;
+                text-align: center;
+
+
+                &:first-of-type {
+                    border-top-left-radius: 15px;
+                    width: 60%;
+                }
+
+                &:last-of-type {
+                    border-top-right-radius: 15px;
+                }
+            }
+
+            td {
+                padding: 1rem 1rem 1rem 1rem;
+                font-size: 1.3rem;
+                border: 1px solid black;
+                text-align: center;
+
+                &:first-of-type {
+                    border-bottom-left-radius: 15px;
+                }
+
+                &:last-of-type {
+                    border-bottom-right-radius: 15px;
+                }
+
+                @media screen and (max-width: 576px) {
+                    padding: 1rem 0.1rem;
+
+                }
+            }
+
+        }
+
+    }
+
+    .tayouan-airport-mrt-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .line-number {
+            background-color: #70448E;
+            color: white;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    .taipei-songshan-airport-mrt {
+        gap: 1rem;
+
+        @media screen and (max-width: 576px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .line-number {
+            color: white;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+
+            &:first-of-type {
+                background-color: #B78537;
+            }
+
+            &:last-of-type {
+                background-color: #C7182D;
+            }
+        }
+    }
+
+    .mrt {
+        gap: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        .line-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+
+            @media screen and (max-width: 576px) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .arrow {
+                    transform: rotate(90deg);
+                }
+
+            }
+
+            .line-box {
+                display: flex;
+                gap: 0.1rem;
+
+                .line-number {
+                    color: white;
+                    background-color: #C7182D;
+                    border-radius: 8px;
+                    padding: 0.5rem 1rem;
+
+                    &.bl12 {
+                        background-color: #1165A6;
+                    }
+
+                    &.br09 {
+                        background-color: #B78537;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .ibus-location {
+        width: 90%;
+        margin: 0.5rem auto;
+        text-align: start;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .ibus {
+        gap: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .line-name {
+            text-align: center;
+            display: flex;
+            align-items: center;
+
+            @media screen and (max-width: 576px) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .arrow {
+                    transform: rotate(90deg);
+                }
+
+            }
+        }
+
+        .time-table {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            background-color: #D36672;
+            color: white;
+            border-radius: 10px;
+            padding: 0.5rem 0.5rem;
+        }
+    }
+
+    .taxi {
+        .no-radius {
+            border-radius: 0 !important;
+        }
+    }
+
+    .tips {
+        font-size: 1rem;
+        padding-left: 1rem;
+        margin: 1rem 0;
+
+    }
+
+
 
 }
 </style>

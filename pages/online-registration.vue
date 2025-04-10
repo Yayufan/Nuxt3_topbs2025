@@ -27,7 +27,28 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
 
+const router = useRouter();
+
 let attendeeType = ref('1');
+
+const memberInfo = reactive({})
+
+const getMemberInfo = async () => {
+   let res = await CSRrequest.get('/member/getMemberInfo')
+   if (res.code == 200) {
+        console.log('getMemberInfo error', res);
+         router.push('/member-center');
+         ElMessage.success('Please log out before registering again');
+         Object.assign(memberInfo, res.data);
+         return;
+    }
+}
+
+onMounted(() => {
+    getMemberInfo();
+});
+
+
 </script>
 <style lang="scss" scoped>
 .common-section {
@@ -47,7 +68,7 @@ let attendeeType = ref('1');
 
     .select-section {
         background: url('assets/img/topbs_background-image.jpg') no-repeat center center;
-        width: 100vw;
+        // width: 100vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -65,14 +86,14 @@ let attendeeType = ref('1');
             padding: 1.5rem ;
 
             .radio-group {
-                display: flex;
                 justify-content: center;
                 padding: 1rem;
+                gap: 1rem;
 
                 .radio-item {
+                    min-width: 18rem;
                     margin: 0 1rem;
                     padding: 2.5rem 2rem;
-                    min-width: 15rem;
                     text-align: center;
                     display: flex;
                     justify-content: center;

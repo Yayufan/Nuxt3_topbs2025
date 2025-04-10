@@ -2,11 +2,9 @@
     <div>
         <main class="common-section">
             <h1 class="title">Contact Us</h1>
-            <Breadcrumbs firstRoute="General Information" secoundRoute="List of Sponsors"></Breadcrumbs>
+            <Breadcrumbs firstRoute="General Information" secoundRoute="Contact US"></Breadcrumbs>
         </main>
-        <div class="content">
-                <h1 class="">Page Under Construction</h1>
-            </div>
+        
     </div>
 </template>
 <script setup lang="ts">

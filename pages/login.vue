@@ -4,7 +4,7 @@
         <Breadcrumbs :first-route="'Member'" :secound-route="'Member login'" />
         <Title :title="'Member Login'" />
         <div class="main-section">
-            <el-form class="login-form" ref="formRef" :model="loginInfo" :rules="formRule">
+            <el-form class="login-form" ref="formRef" :model="loginInfo" :rules="formRule" :label-position="setFormLabelPosotion()">
                 <el-form-item class="login-input" prop="email">
                     <el-input v-model="loginInfo.email" placeholder="Email">
                         <template #prefix>
@@ -35,7 +35,7 @@
                 </el-form-item>
                 <div class="btn-section">
                     <nuxt-link :to="'retrieve-password'">Retrieve password</nuxt-link>
-                    <span>/</span>
+                    <span>&nbsp /</span>
                     <nuxt-link :to="'registration-fee'">Sign up</nuxt-link>
                 </div>
             </el-form>
@@ -82,6 +82,15 @@ const formRule = reactive<FormRules>({
 });
 
 
+const setFormLabelPosotion = () => {
+    if (window.innerWidth < 1024) {
+        return 'top';
+    } else {
+        return 'left';
+    }
+}
+
+
 const login = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     formEl.validate(async (valid) => {
@@ -94,8 +103,8 @@ const login = async (formEl: FormInstance | undefined) => {
                 getCaptcha();
             }
             if (res.data.isLogin) {
-                localStorage.setItem(res.data.tokenName, 'Bearer ' + res.data.tokenValue);
                 router.push('/member-center')
+                localStorage.setItem(res.data.tokenName, 'Bearer ' + res.data.tokenValue);
                 formEl.resetFields();
             }
         } else {
@@ -124,7 +133,6 @@ onMounted(() => {
         padding: 1rem 0;
 
         .login-form {
-            width: 30%;
             padding: 1rem 3rem;
             display: flex;
             flex-direction: column;
@@ -154,7 +162,7 @@ onMounted(() => {
                 }
 
                 :deep(.el-input__prefix) {
-                    width: 8%;
+                    width: 2rem;
 
                     img {
                         width: 100%;
@@ -168,6 +176,7 @@ onMounted(() => {
                 justify-content: center;
                 align-items: center;
                 margin: 1rem 0;
+
 
                 @media screen and (max-width: 1024px) {
                     flex-direction: column;
