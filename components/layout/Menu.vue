@@ -31,12 +31,8 @@
                 <template #title>Program</template>
                 <nuxt-link to="/program-at-a-glance"> <el-menu-item index="4-1">Program at a Glance</el-menu-item>
                 </nuxt-link>
-                <!-- <nuxt-link to="/scientific-program"> <el-menu-item index="3-2">Scientific Progrem</el-menu-item>
-                </nuxt-link> -->
                 <nuxt-link to="/invited-speakers"> <el-menu-item index="4-3">Invited Speakers</el-menu-item>
                 </nuxt-link>
-                <!-- <nuxt-link to="/social-program"> <el-menu-item index="3-4">Social Program</el-menu-item>
-                </nuxt-link> -->
                 <nuxt-link to="/program-book-download"> <el-menu-item index="4-5">Program Book Download</el-menu-item>
                 </nuxt-link>
             </el-sub-menu>
@@ -45,8 +41,10 @@
                 <nuxt-link to="/registration-fee"> <el-menu-item index="5-1">Registration
                         Fee</el-menu-item>
                 </nuxt-link>
-                <nuxt-link to="/demo-register"> <el-menu-item index="5-2">Register Now</el-menu-item>
+                <nuxt-link to="/online-registration"> <el-menu-item index="5-2">Online Registration</el-menu-item>
                 </nuxt-link>
+                <!-- <nuxt-link to="register-now"> <el-menu-item index="5-2">Online Registration</el-menu-item>
+                </nuxt-link> -->
             </el-sub-menu>
             <el-sub-menu index="6">
                 <template #title>Abstracts</template>
@@ -76,7 +74,7 @@
                 <nuxt-link to="/contact-us"> <el-menu-item index="8-6">Contact Us</el-menu-item>
                 </nuxt-link>
             </el-sub-menu>
-            <el-sub-menu index="9" :class="!isLogin ? 'popper' : ''" @click="headToLogin">
+            <el-sub-menu index="9" :class="!isLogin ? 'popper' : 'none'" @click="headToLogin">
                 <template #title>
                     <nuxt-link v-if="!isLogin" to="/login">Login</nuxt-link>
                     <nuxt-link  v-else to="/member-center">Member</nuxt-link>
@@ -95,6 +93,17 @@ const headToLogin = () => {
     router.push(url);
 }
 
+const getInfoFromBackEnd = async () => {
+    let res = await CSRrequest.get('/member/getMemberInfo');
+    console.log(res);
+    // if (res.code === 10002) {
+    //     localStorage.removeItem('Authorization-member');
+    //     isLogin.value = false;
+    // } else {
+    //     isLogin.value = true;
+    // }
+}
+
 const isLogin = ref(false);
 const validateLogin = () => {
     let res = localStorage.getItem('Authorization-member');
@@ -104,8 +113,8 @@ const validateLogin = () => {
 }
 
 router.beforeEach(async (to, from, next) => {
-    validateLogin();
     next();
+    validateLogin();
 });
 
 const logout = async () => {
@@ -118,7 +127,7 @@ const logout = async () => {
 }
 
 onMounted(() => {
-    validateLogin();
+    getInfoFromBackEnd();
 })
 
 
