@@ -42,6 +42,7 @@ const getMemberInfo = async () => {
    let res = await CSRrequest.get('/member/getMemberInfo')
     if (res.code !== 200) {
          router.push('/login');
+         localStorage.removeItem('Authorization-member');
          return;
     }
    Object.assign(memberInfo, res.data);
