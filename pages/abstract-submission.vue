@@ -3,7 +3,7 @@
         <Breadcrumbs firstRoute="Abstracts" secoundRoute="Abstract Submission"></Breadcrumbs>
         <Title title="Abstract Submission"></Title>
 
-        <el-form class="form" ref="formRef" :model="data" :rules="formRules">
+        <!-- <el-form class="form" ref="formRef" :model="data" :rules="formRules">
             <el-form-item label="Abstract Type" prop="type">
                 <el-select v-model="data.absType" placeholder="Type"></el-select>
             </el-form-item>
@@ -52,7 +52,7 @@
             <el-form-item>
                 <el-button type="primary" @click="submit">Submit</el-button>
             </el-form-item>
-        </el-form>
+        </el-form> -->
     </main>
 </template>
 
@@ -185,7 +185,7 @@ const submit = async () => {
 
 
 onMounted(() => {
-    getMemberInfo();
+    // getMemberInfo();
 })
 
 </script>

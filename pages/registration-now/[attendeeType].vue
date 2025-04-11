@@ -27,7 +27,7 @@
                                 <el-input v-model="formData.lastName"></el-input>
                             </el-form-item>
                         </div>
-                        <el-form-item :label="formLabel.chineseName" prop="chineseName">
+                        <el-form-item :label="formLabel.chineseName" :prop="attendeeType === '2' ? 'chineseName' : ''">
                             <el-input v-model="formData.chineseName"></el-input>
                         </el-form-item>
                         <el-form-item class="email required" :label="formLabel.email" prop="email">
@@ -260,6 +260,7 @@ const formLabel = reactive({
     titleValidate: 'Please select a title',
     firstNameValidate: 'Please input your first name',
     lastNameValidate: 'Please input your last name',
+    chineseNameValidate: 'Please input your Chinese name',
     emailValidate: 'Please input your email',
     emailValidate2: 'Please input correct email',
     passwordValidate: 'Please input your password',
@@ -300,6 +301,7 @@ watch(() => attendeeType, (value) => {
         formLabel.titleValidate = '請選擇稱謂'
         formLabel.firstNameValidate = '請輸入英文名'
         formLabel.lastNameValidate = '請輸入英文姓氏'
+        formLabel.chineseNameValidate = '請輸入中文姓名'
         formLabel.emailValidate = '請輸入電子信箱'
         formLabel.emailValidate2 = '請輸入正確格式的電子信箱'
         formLabel.passwordValidate = '請輸入密碼'
@@ -314,9 +316,9 @@ watch(() => attendeeType, (value) => {
         formLabel.phoneNumValidate = '請輸入手機號碼'
         formLabel.categoryValidate = '請選擇類別'
         formLabel.remitAccountLast5Validate = '請輸入匯款帳號末五碼'
-        formLabel.category1 = '非會員'
-        formLabel.category2 = '會員'
-        formLabel.category3 = '其他(實習醫師/護理人員/研究人員)'
+        // formLabel.category1 = '非會員'
+        // formLabel.category2 = '會員'
+        // formLabel.category3 = '其他(實習醫師/護理人員/研究人員)'
     }
 }, { immediate: true })
 
@@ -394,7 +396,7 @@ const formRules = reactive<FormRules>({
     lastName: [{ required: true, message: formLabel.lastNameValidate, trigger: 'blur' }],
     email: [{ required: true, message: formLabel.emailValidate, trigger: 'blur' }, { type: 'email', message: formLabel.emailValidate2, trigger: 'blur' }],
     password: [{ required: true, message: formLabel.passwordValidate, trigger: 'blur' }],
-    chineseName: [{ validator: validateChineseName, trigger: 'blur' }],
+    chineseName: [{ required: true, message: formLabel.chineseNameValidate, trigger: 'blur' }],
     confirmPassword: [{ validator: vaildConfirmPassword, trigger: 'blur' }],
     affiliation: [{ required: true, message: formLabel.affiliationValidate, trigger: 'blur' }],
     jobTitle: [{ required: true, message: formLabel.jobTitleValidate, trigger: 'blur' }],
