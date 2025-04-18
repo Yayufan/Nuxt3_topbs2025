@@ -36,7 +36,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="payment-info">
+            <div class="payment-info" v-if="memberInfo.country === 'Taiwan'">
                 <p>*戶名 : 台灣乳房腫瘤手術暨重建學會</p>
                 <p>*合作金庫銀行 : 長庚分行 帳號:3638871000153</p>
             </div>
@@ -90,7 +90,7 @@ const getOrderListForOwner = async () => {
 
 const enums = {
     payMentStatus: {
-        0: 'Non-payment',
+        0: 'Unpaid',
         1: 'Comfirming',
         2: 'Payment completed',
         3: 'Payment failed',

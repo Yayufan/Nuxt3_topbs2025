@@ -13,7 +13,12 @@
             <div class="select-box">
                 <el-radio-group v-model="attendeeType" class="radio-group">
                     <el-radio class="radio-item" value="1" border>Oversea Attendee</el-radio>
-                    <el-radio class="radio-item" value="2" border>Domestic Attendee</el-radio>
+                    <el-radio class="radio-item" value="2" border>
+                        <div class="domestic-radio">
+                            <p>國內與會者</p>
+                            <p>Domestic Attendee</p>
+                        </div>
+                    </el-radio>
                 </el-radio-group>
                 <nuxt-link class="next-btn" :to="`/registration-now/${attendeeType}`">
                     Next
@@ -34,13 +39,13 @@ let attendeeType = ref('1');
 const memberInfo = reactive({})
 
 const getMemberInfo = async () => {
-   let res = await CSRrequest.get('/member/getMemberInfo')
-   if (res.code == 200) {
+    let res = await CSRrequest.get('/member/getMemberInfo')
+    if (res.code == 200) {
         console.log('getMemberInfo error', res);
-         router.push('/member-center');
-         ElMessage.success('Please log out before registering again');
-         Object.assign(memberInfo, res.data);
-         return;
+        router.push('/member-center');
+        ElMessage.success('Please log out before registering again');
+        Object.assign(memberInfo, res.data);
+        return;
     }
 }
 
@@ -72,7 +77,7 @@ onMounted(() => {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1.5rem ;
+        padding: 1.5rem;
 
 
         .select-box {
@@ -83,7 +88,7 @@ onMounted(() => {
             justify-content: center;
             align-items: center;
             box-shadow: 4px 3px 5px 1px rgba(0, 0, 0, 0.5);
-            padding: 1.5rem ;
+            padding: 1.5rem;
 
             .radio-group {
                 justify-content: center;
@@ -98,26 +103,35 @@ onMounted(() => {
                     display: flex;
                     justify-content: center;
                     border-radius: 15px;
+
+                    .domestic-radio {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        font-size: 1.3rem;
+                        font-weight: 600;
+                    }
                     font-weight: 600;
-                    
+
                     :deep(.el-radio__inner) {
                         border: #DE6A75 1px solid;
-                        
+
                         &::after {
                             background-color: #DE6A75;
                         }
                     }
+
                     :deep(.el-radio__label) {
                         font-size: 1.3rem;
                     }
-                    
+
                     &.is-checked {
                         border: 1px solid #DE6A75;
-                        
+
                         :deep(.el-radio__label) {
                             color: black;
                         }
-                        
+
                         :deep(.el-radio__inner) {
                             background-color: #DE6A75;
                             border: none;
