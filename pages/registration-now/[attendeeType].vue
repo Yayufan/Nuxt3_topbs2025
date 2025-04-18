@@ -19,6 +19,9 @@
                 </el-form-item>
                 <div class="main-form">
                     <div class="left-seciton">
+                        <el-form-item v-if="attendeeType === '2'" :label="formLabel.chineseName" :prop="'chineseName'">
+                            <el-input v-model="formData.chineseName"></el-input>
+                        </el-form-item>
                         <div class="member-name">
                             <el-form-item class="first-name required" :label="formLabel.firstName" prop="firstName">
                                 <el-input v-model="formData.firstName"></el-input>
@@ -27,19 +30,20 @@
                                 <el-input v-model="formData.lastName"></el-input>
                             </el-form-item>
                         </div>
-                        <el-form-item :label="formLabel.chineseName" :prop="attendeeType === '2' ? 'chineseName' : ''">
+                        <el-form-item v-if="attendeeType === '1'" :label="formLabel.chineseName" :prop="''">
                             <el-input v-model="formData.chineseName"></el-input>
                         </el-form-item>
                         <el-form-item class="email required" :label="formLabel.email" prop="email">
-                            <el-input v-model="formData.email" :placeholder="formLabel.email2" :prefixIcon="Message"></el-input>
+                            <el-input v-model="formData.email" :placeholder="formLabel.email2"
+                                :prefixIcon="Message"></el-input>
                         </el-form-item>
                         <el-form-item class="required" :label="formLabel.password" prop="password">
                             <el-input v-model="formData.password" :placeholder="formLabel.password" :prefixIcon="Lock"
                                 show-password></el-input>
                         </el-form-item>
                         <el-form-item class="required" :label="formLabel.confirmPassword" prop="confirmPassword">
-                            <el-input v-model="formData.confirmPassword" :placeholder="formLabel.confirmPassword" :prefixIcon="Lock"
-                                show-password></el-input>
+                            <el-input v-model="formData.confirmPassword" :placeholder="formLabel.confirmPassword"
+                                :prefixIcon="Lock" show-password></el-input>
                         </el-form-item>
                         <el-form-item class="required" :label="formLabel.affiliation" prop="affiliation">
                             <el-input v-model="formData.affiliation"></el-input>
@@ -60,10 +64,7 @@
                                     :value="item"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item v-if="formData.country === 'Taiwan'" :label="formLabel.remitAccountLast5"
-                            prop="remitAccountLast5">
-                            <el-input v-model="formData.remitAccountLast5"></el-input>
-                        </el-form-item>
+
                         <div class="member-phone required">
                             <el-form-item class="country-code" :label="formLabel.countryCode" prop="countryCode">
                                 <div class="country-code-inner">
@@ -72,13 +73,39 @@
                                     <span>-</span>
                                 </div>
                             </el-form-item>
-                            <el-form-item  :class="attendeeType === '1'? 'oversea-phone-num' : 'domestic-phone-num'" :label="formLabel.phoneNum" prop="phoneNum">
+                            <el-form-item :class="attendeeType === '1' ? 'oversea-phone-num' : 'domestic-phone-num'"
+                                :label="formLabel.phoneNum" prop="phoneNum">
                                 <el-input v-model="formData.phoneNum"></el-input>
                             </el-form-item>
                         </div>
+                        <el-form-item v-if="formData.country === 'Taiwan'" :label="formLabel.remitAccountLast5"
+                            prop="remitAccountLast5">
+                            <el-input v-model="formData.remitAccountLast5"></el-input>
+                        </el-form-item>
+                        <el-form-item v-if="formData.country === 'Taiwan'" :label="formLabel.receipt">
+                            <el-input v-model="formData.receipt"></el-input>
+                        </el-form-item>
+                        <el-form-item :label="formLabel.food">
+                            <el-radio-group v-model="formData.food">
+                                <el-radio value="葷">{{ formLabel.foodRadio1 }}</el-radio>
+                                <el-radio value="素">{{ formLabel.foodRadio2 }}</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item :label="formLabel.foodTaboo">
+                            <el-input v-model="formData.foodTaboo"></el-input>
+                        </el-form-item>
                         <el-form-item class="category required" :label="formLabel.category" prop="category">
-                            <el-radio-group v-model="formData.category">
-                                <el-radio :value="1">{{ formLabel.category1 }}</el-radio>
+                            <el-radio-group v-model="formData.category" @change="cleanCategoryExtra(formData)">
+                                <el-radio :value="1">
+                                    {{ formLabel.category1 }}
+                                </el-radio>
+                                <el-form-item v-if="formData.category === 1" prop="categoryExtra">
+                                    <el-select v-if="attendeeType === '1'" v-model="formData.categoryExtra"
+                                        class="category-select">
+                                        <el-option label="IOPBS" value="IOPBS"></el-option>
+                                        <el-option label="JOPBS" value="JOPBS"></el-option>
+                                    </el-select>
+                                </el-form-item>
                                 <el-radio :value="2">{{ formLabel.category2 }}</el-radio>
                                 <el-radio :value="3">{{ formLabel.category3 }}</el-radio>
                             </el-radio-group>
@@ -252,10 +279,15 @@ const formLabel = reactive({
     jobTitle: 'Job Title',
     country: 'Country',
     remitAccountLast5: 'Remit Account Last 5 Number',
-    countryCode: 'Country Code',
+    countryCode: 'Phone',
     idCard: 'Passport Number',
     phoneNum: 'Phone Number',
+    receipt: 'Receipt',
     category: 'Category',
+    food: 'Food Preference',
+    foodTaboo: 'Dietary restrictions',
+    foodRadio1: 'Non-Vegetarian',
+    foodRadio2: 'Vegetarian',
     verificationCode: 'Verification Code',
     titleValidate: 'Please select a title',
     firstNameValidate: 'Please input your first name',
@@ -271,13 +303,13 @@ const formLabel = reactive({
     idCardValidate: 'Please input your passport number',
     idCardValidate2: 'Please input correct passport number',
     countryValidate: 'Please select a country',
-    countryCodeValidate: 'Please input your country code',
+    countryCodeValidate: '',
     phoneNumValidate: 'Please input your phone number',
     categoryValidate: 'Please select a category',
     remitAccountLast5Validate: 'Please input your remit account last 5 number',
-    category1: 'Non-member',
-    category2: 'Member',
-    category3: 'Others(Trainee/Nurse/Reasearcher)'
+    category1: 'Member',
+    category2: 'Others(Trainee/Nurse/Reasearcher)',
+    category3: 'Non-member'
 })
 
 watch(() => attendeeType, (value) => {
@@ -295,9 +327,14 @@ watch(() => attendeeType, (value) => {
         formLabel.idCard = '身分證字號'
         formLabel.country = '國家'
         formLabel.remitAccountLast5 = '匯款帳號末五碼'
-        formLabel.countryCode = '國碼'
+        formLabel.countryCode = '聯絡電話'
         formLabel.phoneNum = '手機號碼'
+        formLabel.receipt = '發票抬頭'
         formLabel.category = '類別'
+        formLabel.food = '餐食偏好'
+        formLabel.foodTaboo = '餐食禁忌'
+        formLabel.foodRadio1 = '葷食'
+        formLabel.foodRadio2 = '素食'
         formLabel.titleValidate = '請選擇稱謂'
         formLabel.firstNameValidate = '請輸入英文名'
         formLabel.lastNameValidate = '請輸入英文姓氏'
@@ -316,9 +353,9 @@ watch(() => attendeeType, (value) => {
         formLabel.phoneNumValidate = '請輸入手機號碼'
         formLabel.categoryValidate = '請選擇類別'
         formLabel.remitAccountLast5Validate = '請輸入匯款帳號末五碼'
-        // formLabel.category1 = '非會員'
-        // formLabel.category2 = '會員'
-        // formLabel.category3 = '其他(實習醫師/護理人員/研究人員)'
+        formLabel.category1 = '會員(台灣乳房腫瘤手術暨重建醫學會)'
+        formLabel.category2 = '其他(包含護理人員、住院醫師、研究人員、學生... 等)'
+        formLabel.category3 = '非會員'
     }
 }, { immediate: true })
 
@@ -343,6 +380,10 @@ interface formData {
     countryCode: string,
     phoneNum: string,
     category: number,
+    receipt: string,
+    food: string,
+    foodTaboo: string,
+    categoryExtra: string,
     verificationCode: string,
     verificationKey: string
 }
@@ -365,10 +406,18 @@ const formData = reactive<formData>({
     phone: '',
     countryCode: '',
     phoneNum: '',
+    receipt: '',
     category: 1,
+    food: '葷',
+    foodTaboo: '',
+    categoryExtra: '',
     verificationCode: '',
     verificationKey: ''
 })
+
+const cleanCategoryExtra = (item: any) => {
+    item.categoryExtra = ''
+}
 
 watch(() => attendeeType, (value) => {
     if (value === '2') {
@@ -383,6 +432,15 @@ const vaildConfirmPassword = (rule: any, value: string, callback: any) => {
         callback(new Error(formLabel.confirmPasswordValidate))
     } else if (value !== formData.password) {
         callback(new Error(formLabel.confirmPasswordValidate2))
+    } else {
+        callback()
+    }
+}
+
+const validCategoryExtra = (rule: any, value: string, callback: any) => {
+    if (attendeeType == '2') callback()
+    if (formData.category === 1 && !value) {
+        callback(new Error('Please select a category'))
     } else {
         callback()
     }
@@ -405,7 +463,8 @@ const formRules = reactive<FormRules>({
     countryCode: [{ required: true, message: formLabel.countryCodeValidate, trigger: 'blur' }],
     phoneNum: [{ required: true, message: formLabel.phoneNumValidate, trigger: 'blur' }],
     category: [{ required: true, message: formLabel.categoryValidate, trigger: 'change' }],
-    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }]
+    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }],
+    categoryExtra: [{ validator: validCategoryExtra, trigger: 'change' }],
 })
 
 
@@ -574,6 +633,7 @@ onMounted(() => {
                             }
                         }
                     }
+
                     .domestic-phone-num {
                         flex: 2;
 
@@ -599,7 +659,23 @@ onMounted(() => {
                         display: flex;
                         justify-content: flex-start;
                         align-items: flex-start;
+
                     }
+
+                    :deep(.el-form-item__error) {
+                        // color: black;
+                        position: absolute;
+                        top: 0.5rem;
+                        left: 10rem;
+                        @media screen and (max-width: 768px) {
+                            left: 13rem;
+                        }
+                    }
+
+                    :deep(.el-select) {
+                        width: 150px;
+                    }
+
                 }
 
             }

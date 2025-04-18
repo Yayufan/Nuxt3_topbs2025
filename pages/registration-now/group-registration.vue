@@ -39,8 +39,8 @@
                                 </el-form-item>
                             </div>
                             <el-form-item label="ChineseName" prop="chineseName">
-                            <el-input v-model="formData.chineseName"></el-input>
-                        </el-form-item>
+                                <el-input v-model="item.chineseName"></el-input>
+                            </el-form-item>
                             <el-form-item class="email required" label="ID: Primary E-mail"
                                 :prop="'groupMembers.' + index + '.email'" :rules="formRules.email">
                                 <el-input v-model="item.email" placeholder="E-mail" :prefixIcon="Message"></el-input>
@@ -79,7 +79,7 @@
                                 </el-select>
                             </el-form-item>
                             <div class="member-phone required">
-                                <el-form-item class="country-code" label="Mobile Phone"
+                                <el-form-item class="country-code" label="Phone"
                                     :prop="'groupMembers.' + index + '.countryCode'" :rules="formRules.countryCode">
                                     <div class="country-code-inner">
                                         <el-input :disabled="attendeeType === '2'" v-model="item.countryCode"
@@ -92,12 +92,28 @@
                                     <el-input v-model="item.phoneNum"></el-input>
                                 </el-form-item>
                             </div>
+                            <el-form-item label="Food Preference">
+                                <el-radio-group v-model="item.food">
+                                    <el-radio value="葷">Non-Vegetarian</el-radio>
+                                    <el-radio value="素">Vegetarian</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            <el-form-item :label="'Dietary restrictions'">
+                                <el-input v-model="item.foodTaboo"></el-input>
+                            </el-form-item>
                             <el-form-item class="category required" label="Category"
                                 :prop="'groupMembers.' + index + '.category'" :rules="formRules.category">
-                                <el-radio-group v-model="item.category">
-                                    <el-radio :value="1">Non-member</el-radio>
-                                    <el-radio :value="2">Member</el-radio>
-                                    <el-radio :value="3">Others(Trainee/Nurse/Reasearcher)</el-radio>
+                                <el-radio-group v-model="item.category" @change="cleanCategoryExtra(item)">
+                                    <el-radio :value="1">Member</el-radio>
+                                    <el-form-item v-if="item.category === 1"  :prop="'groupMembers.' + index + '.categoryExtra'" :rules="formRules.categoryExtra">
+                                        <el-select  v-model="item.categoryExtra"
+                                            class="category-select">
+                                            <el-option label="IOPBS" value="IOPBS"></el-option>
+                                            <el-option label="JOPBS" value="JOPBS"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-radio :value="2">Others(Trainee/Nurse/Reasearcher)</el-radio>
+                                    <el-radio :value="3">Non-member</el-radio>
                                 </el-radio-group>
                             </el-form-item>
                         </div>
@@ -108,8 +124,8 @@
                 <el-button @click="addNewMember" class="option-btn">
                     Add new
                 </el-button>
-                <el-form-item class="captcha"  prop="captcha">
-                    <el-input v-model="formData.verificationCode" placeholder="Captcha"></el-input>
+                <el-form-item class="captcha" prop="captcha">
+                    <el-input v-model="returnData.verificationCode" placeholder="Captcha"></el-input>
                     <div class="captcha-img">
                         <img :src="captchaData.image" alt="captcha">
                         <el-button class="refresh-btn" @click="getCaptcha"><el-icon>
@@ -201,7 +217,10 @@ interface formData {
     phone: string,
     countryCode: string,
     phoneNum: string,
+    food: string,
+    foodTaboo: string,
     category: number,
+    categoryExtra: string,
     verificationCode: string,
     verificationKey: string
 }
@@ -224,10 +243,17 @@ const formData = reactive<formData>({
     phone: '',
     countryCode: '',
     phoneNum: '',
+    food: '葷',
+    foodTaboo: '',
     category: 1,
+    categoryExtra: '',
     verificationCode: '',
     verificationKey: ''
 })
+
+const cleanCategoryExtra = (item: any) => {
+    item.categoryExtra = ''
+}
 
 const returnData = reactive<any>({
     groupMembers: [],
@@ -271,6 +297,21 @@ const vaildConfirmPassword = (rule: any, value: string, callback: any) => {
     }
 }
 
+const validCategoryExtra = (rule: any, value: string, callback: any) => {
+    const match = rule.field.match(/^groupMembers\.(\d+)\.categoryExtra$/);
+    if (!match) {
+        return callback(new Error('Invalid field'));
+    }
+
+    const index = Number(match[1]); // Convert to numeric index
+    if (returnData.groupMembers[index].category === 1 && !value) {
+        callback(new Error('Please select a category'));
+    } else {
+        callback();
+    }
+    
+}
+
 
 
 const formRules = reactive<FormRules>({
@@ -287,7 +328,8 @@ const formRules = reactive<FormRules>({
     countryCode: [{ required: true, message: 'Please input your country code', trigger: 'blur' }],
     phoneNum: [{ required: true, message: 'Please input your phone number', trigger: 'blur' }],
     category: [{ required: true, message: 'Please select a category', trigger: 'change' }],
-    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }]
+    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }],
+    categoryExtra: [{ validator: validCategoryExtra, trigger: 'change' }],
 })
 
 
@@ -299,6 +341,7 @@ const submit = async (formEl: FormInstance | undefined) => {
             returnData.groupMembers.forEach((item: any) => {
                 item.phone = item.countryCode + '-' + item.phoneNum
             })
+            console.log(returnData)
             let res = await CSRrequest.post('/member/group', {
                 body: returnData
             })
@@ -311,9 +354,9 @@ const submit = async (formEl: FormInstance | undefined) => {
 
             if (res.code === 200) {
                 router.push('/login')
+                formEl.resetFields()
             }
 
-            formEl.resetFields()
         } else {
             console.log('error submit!!')
             return false;
@@ -324,13 +367,13 @@ const submit = async (formEl: FormInstance | undefined) => {
 const memberInfo = reactive({})
 
 const getMemberInfo = async () => {
-   let res = await CSRrequest.get('/member/getMemberInfo')
-   if (res.code == 200) {
+    let res = await CSRrequest.get('/member/getMemberInfo')
+    if (res.code == 200) {
         console.log('getMemberInfo error', res);
-         router.push('/member-center');
-         ElMessage.success('Please log out before registering again');
-         Object.assign(memberInfo, res.data);
-         return;
+        router.push('/member-center');
+        ElMessage.success('Please log out before registering again');
+        Object.assign(memberInfo, res.data);
+        return;
     }
 }
 
@@ -495,6 +538,20 @@ onMounted(() => {
                         justify-content: flex-start;
                         align-items: flex-start;
                     }
+
+                    :deep(.el-form-item__error) {
+                        // color: black;
+                        position: absolute;
+                        top: 0.5rem;
+                        left: 10rem;
+                        @media screen and (max-width: 768px) {
+                            left: 13rem;
+                        }
+                    }
+
+                    :deep(.el-select) {
+                        width: 150px;
+                    }
                 }
 
             }
@@ -513,10 +570,11 @@ onMounted(() => {
                 display: flex;
                 justify-content: center;
                 gap: 1rem;
+
                 @media screen and (max-width: 768px) {
                     flex-direction: column;
                     gap: 1rem;
-                    
+
                 }
             }
 
@@ -528,24 +586,26 @@ onMounted(() => {
                 display: flex;
                 align-items: center;
                 gap: 1rem;
+
                 @media screen and (max-width: 768px) {
                     flex-direction: column;
                     gap: 1rem;
-                    
+
                 }
+
                 .refresh-btn {
                     border: none;
                     background-color: white;
                     font-size: 1.5rem;
                     color: #D86C7C;
-    
+
                     &:hover {
                         background-color: white;
                         color: #D86C7C;
                     }
                 }
-    
-    
+
+
                 img {
                     width: 10rem;
                 }
