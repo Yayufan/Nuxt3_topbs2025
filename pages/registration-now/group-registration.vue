@@ -98,7 +98,7 @@
                                     <el-radio value="素">Vegetarian</el-radio>
                                 </el-radio-group>
                             </el-form-item>
-                            <el-form-item :label="'Food Taboo'">
+                            <el-form-item :label="'Dietary restrictions'">
                                 <el-input v-model="item.foodTaboo"></el-input>
                             </el-form-item>
                             <el-form-item class="category required" label="Category"

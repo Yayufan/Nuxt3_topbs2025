@@ -285,7 +285,7 @@ const formLabel = reactive({
     receipt: 'Receipt',
     category: 'Category',
     food: 'Food Preference',
-    foodTaboo: 'Food Taboo',
+    foodTaboo: 'Dietary restrictions',
     foodRadio1: 'Non-Vegetarian',
     foodRadio2: 'Vegetarian',
     verificationCode: 'Verification Code',
