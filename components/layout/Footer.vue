@@ -11,7 +11,7 @@
                     <span>Phone：(03)3281200 ext.3605
                     </span>
                     <span>
-                        E-Mail：topbs106@gmail.com</span>
+                        E-Mail：iopbs2025@gmail.com</span>
                 </p>
                 <p>Copyright Reserved By 2024</p>
             </div>
