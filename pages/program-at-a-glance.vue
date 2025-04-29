@@ -1,10 +1,18 @@
 <template>
     <div>
         <main class="common-section">
-            <h1 class="title">Program at a Glance</h1>
+            <!-- <h1 class="title">Program at a Glance</h1>
             <Breadcrumbs firstRoute="Program" secoundRoute="Program at a Glance"></Breadcrumbs>
             <div class="content">
                 <h1 class="">Page Under Construction</h1>
+            </div> -->
+            <Banner />
+            <Breadcrumbs firstRoute="Program" secoundRoute="Program at a Glance"></Breadcrumbs>
+            <Title title="Program at a Glance" class="title"></Title>
+
+            <div class="btn-section">
+                <el-button :class="selectedDay === 'day1'? 'active':''" @click="selectedDayFunction('day1')">Day1, Nov 15</el-button>
+                <el-button :class="selectedDay === 'day2'? 'active':''" @click="selectedDayFunction('day2')">Day1, Nov 16</el-button>
             </div>
         </main>
 
@@ -12,23 +20,62 @@
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+import Banner from '@/components/layout/Banner.vue';
+import Title from '@/components/layout/Title.vue';
+
+const selectedDay = ref('day1');
+const selectedDayFunction = (day: string) => {
+    selectedDay.value = day;
+    console.log(selectedDay.value);
+}
+
+
+
 </script>
 <style lang="scss" scoped>
 .common-section {
-    width: $common-section-width;
+    // width: $common-section-width;
     margin: $common-section-margin;
     font-family: $common-section-font-family;
 
-    .title {
-        margin-left: 7.4%;
-        font-size: 2.5rem;
-        color: $main-color;
-    }
     .content {
         margin: 1rem auto;
         text-align: center;
+
         h1 {
             font-size: 2rem;
+        }
+
+    }
+    .btn-section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 2rem;
+        
+        .el-button {
+            width: 20rem;
+            border: 1px solid #DD6777;
+            border-radius: 5px;
+            
+            &:hover {
+                border: 1px solid #DD6777;
+                background-color: #DD6777;
+                color: #fff;
+            }
+            
+            &:active {
+                border: 1px solid #DD6777;
+                background-color: #DD6777;
+                color: #fff;
+            }
+
+            &.active {
+                border: 1px solid #DD6777;
+                background-color: #DD6777;
+                color: #fff;
+            }
         }
     }
 }
