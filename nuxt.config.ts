@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     //可被客戶端公開訪問
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE,
-      domain: process.env.NUXT_PUBLIC_DOMAIN
+      domain: process.env.NUXT_PUBLIC_DOMAIN,
+      minio: process.env.NUXT_PUBLIC_MINIO,
     }
   },
 
@@ -30,7 +31,7 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',  //預設,不設置也行
       title: 'TOPBS & IOPBS 2025',
       meta: [
-        { name: 'keyword', content: "TOPBS、IOPBS" },
+        { name: 'keyword', content: "TOPBS2025、TOPBS 2025、TOPBS、IOPBS2025、IOPBS 2025、IOPBS、IOPBS 9th" },
         { name: 'description', content: "" }
       ],
       //引入第三方外部css可能會用到
@@ -67,6 +68,10 @@ export default defineNuxtConfig({
           additionalData: '@import "@/assets/styles/global.scss";',
         }
       }
+    },
+
+    esbuild: {
+      drop: ['console', 'debugger'], // 移除 console 和 debugger
     },
 
     server: {
