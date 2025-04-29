@@ -37,6 +37,10 @@
                             <el-input v-model="formData.email" :placeholder="formLabel.email2"
                                 :prefixIcon="Message"></el-input>
                         </el-form-item>
+                        <el-form-item class="email required" :label="formLabel.confirmEmail" prop="confirmEmail">
+                            <el-input v-model="formData.confirmEmail" :placeholder="formLabel.confirmEmail2"
+                                :prefixIcon="Message"></el-input>
+                        </el-form-item>
                         <el-form-item class="required" :label="formLabel.password" prop="password">
                             <el-input v-model="formData.password" :placeholder="formLabel.password" :prefixIcon="Lock"
                                 show-password></el-input>
@@ -102,8 +106,10 @@
                                 <el-form-item v-if="formData.category === 1" prop="categoryExtra">
                                     <el-select v-if="attendeeType === '1'" v-model="formData.categoryExtra"
                                         class="category-select">
-                                        <el-option label="IOPBS" value="IOPBS"></el-option>
+                                        <el-option label="JBCS" value="JBCS"></el-option>
                                         <el-option label="JOPBS" value="JOPBS"></el-option>
+                                        <el-option label="KBCS" value="KBCS"></el-option>
+                                        <el-option label="HKSBS " value="HKSBS "></el-option>
                                     </el-select>
                                 </el-form-item>
                                 <el-radio :value="2">{{ formLabel.category2 }}</el-radio>
@@ -272,6 +278,8 @@ const formLabel = reactive({
     lastName: 'Last Name',
     email: 'ID: Primary E-mail',
     email2: 'E-mail',
+    confirmEmail: 'ID: Confirm E-mail',
+    confirmEmail2: 'Confirm E-mail',
     password: 'Password',
     confirmPassword: 'Confirm Password',
     chineseName: 'Chinese Name',
@@ -298,6 +306,8 @@ const formLabel = reactive({
     passwordValidate: 'Please input your password',
     confirmPasswordValidate: 'Please input your password again',
     confirmPasswordValidate2: 'The two passwords do not match',
+    confirmEmailValidate: 'Please input your confirm email',
+    confirmEmailValidate2: 'The two emails do not match',
     affiliationValidate: 'Please input your affiliation',
     jobTitleValidate: 'Please input your job title',
     idCardValidate: 'Please input your passport number',
@@ -320,6 +330,8 @@ watch(() => attendeeType, (value) => {
         formLabel.chineseName = '中文姓名'
         formLabel.email = '電子信箱'
         formLabel.email2 = '電子信箱'
+        formLabel.confirmEmail = '確認電子信箱'
+        formLabel.confirmEmail2 = '確認電子信箱'
         formLabel.password = '密碼'
         formLabel.confirmPassword = '確認密碼'
         formLabel.affiliation = '所屬機構'
@@ -344,6 +356,8 @@ watch(() => attendeeType, (value) => {
         formLabel.passwordValidate = '請輸入密碼'
         formLabel.confirmPasswordValidate = '請再次輸入密碼'
         formLabel.confirmPasswordValidate2 = '兩次密碼不相符'
+        formLabel.confirmEmailValidate = '請輸入確認電子信箱'
+        formLabel.confirmEmailValidate2 = '與電子信箱不相符'
         formLabel.affiliationValidate = '請輸入所屬機構'
         formLabel.jobTitleValidate = '請輸入職稱'
         formLabel.idCardValidate = '請輸入身分證字號'
@@ -369,6 +383,7 @@ interface formData {
     lastName: string,
     chineseName: string,
     email: string,
+    confirmEmail:string,
     password: string,
     confirmPassword: string,
     affiliation: string,
@@ -396,6 +411,7 @@ const formData = reactive<formData>({
     lastName: '',
     chineseName: '',
     email: '',
+    confirmEmail: '',
     password: '',
     confirmPassword: '',
     affiliation: '',
@@ -437,6 +453,17 @@ const vaildConfirmPassword = (rule: any, value: string, callback: any) => {
     }
 }
 
+const vaildConfirmEmail = (rule: any, value: string, callback: any) => {
+
+    if (!value) {
+        callback(new Error(formLabel.confirmEmailValidate))
+    } else if (value !== formData.email) {
+        callback(new Error(formLabel.confirmEmailValidate2))
+    } else {
+        callback()
+    }
+}
+
 const validCategoryExtra = (rule: any, value: string, callback: any) => {
     if (attendeeType == '2') callback()
     if (formData.category === 1 && !value) {
@@ -453,9 +480,10 @@ const formRules = reactive<FormRules>({
     firstName: [{ required: true, message: formLabel.firstNameValidate, trigger: 'blur' }],
     lastName: [{ required: true, message: formLabel.lastNameValidate, trigger: 'blur' }],
     email: [{ required: true, message: formLabel.emailValidate, trigger: 'blur' }, { type: 'email', message: formLabel.emailValidate2, trigger: 'blur' }],
+    confirmEmail: [{ required: true, validator: vaildConfirmEmail, trigger: 'blur' }],
     password: [{ required: true, message: formLabel.passwordValidate, trigger: 'blur' }],
     chineseName: [{ required: true, message: formLabel.chineseNameValidate, trigger: 'blur' }],
-    confirmPassword: [{ validator: vaildConfirmPassword, trigger: 'blur' }],
+    confirmPassword: [{ required: true, validator: vaildConfirmPassword, trigger: 'blur' }],
     affiliation: [{ required: true, message: formLabel.affiliationValidate, trigger: 'blur' }],
     jobTitle: [{ required: true, message: formLabel.jobTitleValidate, trigger: 'blur' }],
     idCard: [{ required: true, validator: checkCkDigit, trigger: 'blur' }],
@@ -463,7 +491,7 @@ const formRules = reactive<FormRules>({
     countryCode: [{ required: true, message: formLabel.countryCodeValidate, trigger: 'blur' }],
     phoneNum: [{ required: true, message: formLabel.phoneNumValidate, trigger: 'blur' }],
     category: [{ required: true, message: formLabel.categoryValidate, trigger: 'change' }],
-    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }],
+    remitAccountLast5: [{ required: true, validator: validateRemitAccount, trigger: 'blur' }],
     categoryExtra: [{ validator: validCategoryExtra, trigger: 'change' }],
 })
 
@@ -667,6 +695,7 @@ onMounted(() => {
                         position: absolute;
                         top: 0.5rem;
                         left: 10rem;
+
                         @media screen and (max-width: 768px) {
                             left: 13rem;
                         }
@@ -723,8 +752,9 @@ onMounted(() => {
                     color: #D86C7C;
 
                     &:hover {
-                        background-color: white;
-                        color: #D86C7C;
+                        cursor: pointer;
+                        scale: 1.05;
+                        transition: all 0.3s ease-in-out;
                     }
                 }
 
@@ -748,6 +778,12 @@ onMounted(() => {
                 background-color: #DD6777;
                 border: none;
                 border-radius: 5px;
+
+                &:hover {
+                    cursor: pointer;
+                    scale: 1.05;
+                    transition: all 0.3s ease-in-out;
+                }
             }
         }
     }

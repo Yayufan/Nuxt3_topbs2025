@@ -18,7 +18,7 @@
                         <td>{{ item.totalAmount }}</td>
                         <td :class="memberInfo.country === 'Taiwan' ? 'none' : 'last-col'">{{
                             enums.payMentStatus[item.status]
-                            }}</td>
+                        }}</td>
                         <td v-if="memberInfo.country === 'Taiwan'" class="last-col">
                             {{ memberInfo.remitAccountLast5 }}
                         </td>
@@ -121,12 +121,14 @@ const getOrders = async (ordersId: number, isPayable: boolean) => {
             id: ordersId
         }
     })
+
+    console.log(res.data)
     form.value = res.data
 
     await nextTick();
     if (formRef.value) {
         const formItem = formRef.value.querySelector("form")
-        console.log(formItem)
+        // console.log(formItem)
         formItem.submit()
     }
 
@@ -319,10 +321,16 @@ onMounted(() => {
                     width: 13%;
                     cursor: pointer;
 
+                    &:hover {
+                        transform: scale(1.05);
+                        transition: all 0.3s ease-in-out;
+                    }   
+
                     &.disabled {
                         background-color: #26AE07 !important;
                         opacity: 0.5;
                         cursor: not-allowed;
+                     
                     }
                 }
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <main class="common-section">
-           <Banner/>
+            <Banner />
             <div class="title-section">
                 <p class="title">
                     Accommodation
@@ -87,7 +87,7 @@ import Banner from '@/components/layout/Banner.vue';
 
     .banner-box {
         margin-top: 1rem;
-        
+
         img {
             width: 100%;
             box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.5);
@@ -124,7 +124,7 @@ import Banner from '@/components/layout/Banner.vue';
         height: 4rem;
         text-wrap: nowrap;
 
-        
+
 
         .title {
             color: white;
@@ -139,25 +139,25 @@ import Banner from '@/components/layout/Banner.vue';
             justify-content: center;
 
             &::after {
-            content: '';
-            position: absolute;
-            width: 63vw;
-            height: 2px;
-            background-color: #DD6777;
-            right: 0;
-            bottom: 0;
-        }
+                content: '';
+                position: absolute;
+                width: 63vw;
+                height: 2px;
+                background-color: #DD6777;
+                right: 0;
+                bottom: 0;
+            }
 
-        &::before {
-            content: '';
-            position: absolute;
-            width: 63vw;
-            height: 2px;
-            background-color: #DD6777;
-            left: 0;
-            bottom: 0;
-        }
-            
+            &::before {
+                content: '';
+                position: absolute;
+                width: 63vw;
+                height: 2px;
+                background-color: #DD6777;
+                left: 0;
+                bottom: 0;
+            }
+
         }
     }
 
@@ -176,12 +176,12 @@ import Banner from '@/components/layout/Banner.vue';
         width: 90%;
 
         margin: 2% auto;
-        
+
         @media screen and (max-width: 1024px) {
             flex-direction: column;
             align-items: center;
             gap: 2rem;
-            
+
         }
 
         .hotel-card {
@@ -193,7 +193,7 @@ import Banner from '@/components/layout/Banner.vue';
 
             @media screen and (max-width: 1024px) {
                 width: 70%;
-                
+
             }
 
             img {
@@ -203,6 +203,7 @@ import Banner from '@/components/layout/Banner.vue';
             .hotel-card-body {
                 display: flex;
                 flex-direction: column;
+
                 .title {
                     font-size: 1.5rem;
                     font-weight: 600;
@@ -253,6 +254,8 @@ import Banner from '@/components/layout/Banner.vue';
 
                     &:hover {
                         cursor: pointer;
+                        scale: 1.05;
+                        transition: all 0.3s ease-in-out;
                     }
                 }
             }

@@ -231,6 +231,7 @@ import Title from '@/components/layout/Title.vue';
 
             &:hover {
                 cursor: pointer;
+                background-color: #fb7c88;
             }
         }
 
@@ -242,6 +243,13 @@ import Title from '@/components/layout/Title.vue';
             font-weight: 600;
             letter-spacing: 0.1rem;
             border-radius: 10px;
+
+            &:hover {
+                cursor: pointer;
+                // scale: 1.05;
+                background: linear-gradient(to left, #E28A90, #A4557D);
+                transition: all 0.3s ease-in-out;
+            }
         }
     }
 

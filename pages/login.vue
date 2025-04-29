@@ -4,7 +4,8 @@
         <Breadcrumbs :first-route="'Member'" :secound-route="'Member login'" />
         <Title :title="'Member Login'" />
         <div class="main-section">
-            <el-form class="login-form" ref="formRef" :model="loginInfo" :rules="formRule" :label-position="setFormLabelPosotion()">
+            <el-form class="login-form" ref="formRef" :model="loginInfo" :rules="formRule"
+                :label-position="formatLabelPosition">
                 <el-form-item class="login-input" prop="email">
                     <el-input v-model="loginInfo.email" placeholder="Email">
                         <template #prefix>
@@ -82,11 +83,15 @@ const formRule = reactive<FormRules>({
 });
 
 
+const formatLabelPosition = ref<'top' | 'left' | 'right'>('top'); // 預設為 'top'
 const setFormLabelPosotion = () => {
+    console.log(window.innerWidth)
     if (window.innerWidth < 1024) {
-        return 'top';
+        console.log('top')
+        formatLabelPosition.value = 'top'; // 當視窗寬度小於 1024px 時，設置為 'top'
     } else {
-        return 'left';
+        console.log('left')
+        formatLabelPosition.value = 'left'; // 否則設置為 'left'
     }
 }
 
@@ -117,6 +122,8 @@ const login = async (formEl: FormInstance | undefined) => {
 
 onMounted(() => {
     getCaptcha();
+    setFormLabelPosotion();
+    window.addEventListener('resize', setFormLabelPosotion);
 });
 
 
@@ -207,6 +214,9 @@ onMounted(() => {
                         &:hover {
                             background-color: white;
                             color: #D86C7C;
+                            cursor: pointer;
+                            scale: 1.05;
+                            transition: all 0.3s ease-in-out;
                         }
                     }
 
@@ -234,6 +244,12 @@ onMounted(() => {
                     border: none;
                     border-radius: 10px;
                     width: 40%;
+
+                    &:hover {
+                        cursor: pointer;
+                        scale: 1.05;
+                        transition: all 0.3s ease-in-out;
+                    }
                 }
             }
 
@@ -243,8 +259,12 @@ onMounted(() => {
                 margin-top: 1rem;
 
                 a {
+                    filter: brightness(1);
+                    transition: filter 0.3s ease-in-out;
+
                     &:hover {
-                      cursor: pointer;
+                        cursor: pointer;
+                        filter: brightness(1.8);
                     }
                 }
             }
