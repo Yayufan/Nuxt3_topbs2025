@@ -1,54 +1,68 @@
 <template>
     <main class="common-section">
+        <Banner></Banner>
         <Breadcrumbs firstRoute="Abstracts" secoundRoute="Abstract Submission"></Breadcrumbs>
         <Title title="Abstract Submission"></Title>
 
-        <!-- <el-form class="form" ref="formRef" :model="data" :rules="formRules">
-            <el-form-item label="Abstract Type" prop="type">
-                <el-select v-model="data.absType" placeholder="Type"></el-select>
-            </el-form-item>
-            <el-form-item label="Abstract Prop" prop="prop">
-                <el-select v-model="data.absProp" placeholder="Prop"></el-select>
-            </el-form-item>
-            <el-form-item label="Abstract Title" prop="title">
-                <el-input v-model="data.absTitle" placeholder="Titile"></el-input>
-            </el-form-item>
-            <el-form-item label="First Author" prop="firstAuthor">
-                <el-input v-model="data.firstAuthor" placeholder="First Author"></el-input>
-            </el-form-item>
-            <el-form-item label="Speaker" prop="speaker">
-                <el-input v-model="data.speaker" placeholder="Speaker"></el-input>
-            </el-form-item>
-            <el-form-item label="Speaker Affiliation" prop="speakerAffiliation">
-                <el-input v-model="data.speakerAffiliation" placeholder="Speaker Affiliation"></el-input>
-            </el-form-item>
-            <el-form-item label="Corresponding Author" prop="correspondingAuthor">
-                <el-input v-model="data.correspondingAuthor" placeholder="Corresponding Author"></el-input>
-            </el-form-item>
-            <el-form-item label="Corresponding Author Mail" prop="correspondingAuthorEmail">
-                <el-input v-model="data.correspondingAuthorEmail" placeholder="Corresponding Author Email"></el-input>
-            </el-form-item>
-            <el-form-item label="Corresponding Author Phone" prop="correspondingAuthorPhone">
-                <el-input v-model="data.correspondingAuthorPhone" placeholder="Corresponding Author Phone"></el-input>
-            </el-form-item>
-            <el-form-item label="All Authors" prop="allAuthors">
-                <el-input v-model="data.allAuthor" placeholder="All Authors"></el-input>
-            </el-form-item>
-            <el-form-item label="All Authors Affiliation" prop="allAuthorsAffiliation">
-                <el-input v-model="data.allAuthorAffiliation" placeholder="All Authors Affiliation"></el-input>
-            </el-form-item>
+        <!-- <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
+
+            <div class="main-form">
+                <div class="left-seciton">
+                    <el-form-item label="Presentation Type" prop="type">
+                        <el-select v-model="data.presentationType" placeholder="Type">
+                            <el-option label="Poster Presentation" value="poster"></el-option>
+                            <el-option label="Video Presentation" value="video"></el-option>
+                            <el-option label="Young Investigator" value="youngInvestigator"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="Abstract Title" prop="title">
+                        <el-input v-model="data.absTitle" placeholder="Titile"></el-input>
+                    </el-form-item>
+                    <el-form-item label="First Author" prop="firstAuthor">
+                        <el-input v-model="data.firstAuthor" placeholder="First Author"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Speaker" prop="speaker">
+                        <el-input v-model="data.speaker" placeholder="Speaker"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Speaker Affiliation" prop="speakerAffiliation">
+                        <el-input v-model="data.speakerAffiliation" placeholder="Speaker Affiliation"></el-input>
+                    </el-form-item>
+                </div>
+                <div class="right-section">
+                    <el-form-item label="Corresponding Author" prop="correspondingAuthor">
+                        <el-input v-model="data.correspondingAuthor" placeholder="Corresponding Author"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Corresponding Author Mail" prop="correspondingAuthorEmail">
+                        <el-input v-model="data.correspondingAuthorEmail"
+                            placeholder="Corresponding Author Email"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Corresponding Author Phone" prop="correspondingAuthorPhone">
+                        <el-input v-model="data.correspondingAuthorPhone"
+                            placeholder="Corresponding Author Phone"></el-input>
+                    </el-form-item>
+                    <el-form-item label="All Authors" prop="allAuthors">
+                        <el-input v-model="data.allAuthor" placeholder="All Authors"></el-input>
+                    </el-form-item>
+                    <el-form-item label="All Authors Affiliation" prop="allAuthorsAffiliation">
+                        <el-input v-model="data.allAuthorAffiliation" placeholder="All Authors Affiliation"></el-input>
+                    </el-form-item>
+                </div>
+            </div>
+
             <el-form-item label="File" prop="file">
-                <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload">
+                <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload"
+                    :auto-upload="false">
                     <el-button size="small" type="primary">Upload</el-button>
                     <div slot="tip" class="el-upload__tip">only upload pdf file with size less than 20mb</div>
                 </el-upload>
             </el-form-item>
-             <el-form-item label="File2" prop="file2">
-                <el-upload ref="uploadRef1" class="upload-demo" :limit="1" :on-change="handleDocxUpload">
+            <el-form-item label="File2" prop="file2">
+                <el-upload ref="uploadRef1" class="upload-demo" :limit="1" :on-change="handleDocxUpload"
+                    :auto-upload="false" action="">
                     <el-button size="small" type="primary">Upload</el-button>
                     <div slot="tip" class="el-upload__tip">only upload word file with size less than 20mb</div>
                 </el-upload>
-            </el-form-item> 
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submit">Submit</el-button>
             </el-form-item>
@@ -71,13 +85,18 @@ const memberInfo = reactive<any>({});
 
 const getMemberInfo = async () => {
     let res = await CSRrequest.get('/member/getMemberInfo');
-
-    if (res.code === 10002) {
+    console.log(res);
+    if (res.code === 10002 || res.code === 401) {
         localStorage.removeItem("Authorization-member");
         router.push("/login");
     } else if (res.code === 200) {
         Object.assign(memberInfo, res.data);
         data.memberId = memberInfo.memberId;
+
+        let orderRes = await CSRrequest.get(`/orders/owner`);
+
+
+        console.log(orderRes);
     }
 }
 
@@ -89,13 +108,14 @@ const checkFileSize = (size: number) => {
 const fileList = reactive<UploadUserFile[]>([]);
 
 const handlePdfUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFiles) => {
+    console.log(file);
     if (file.size == 0) {
         ElMessage.error('File is empty');
         return false;
     }
-    
-    
-    if (file.status === 'success' && file.size) {
+
+
+    if (file.status === 'ready' && file.size) {
         if (!checkFileSize(file.size)) {
             ElMessage.error('File size must be less than 20mb');
             uploadFiles.pop();
@@ -115,9 +135,9 @@ const handleDocxUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadF
         ElMessage.error('File is empty');
         return false;
     }
-    
-    
-    if (file.status === 'success' && file.size) {
+
+
+    if (file.status === 'ready' && file.size) {
         if (!checkFileSize(file.size)) {
             ElMessage.error('File size must be less than 20mb');
             uploadFiles.pop();
@@ -155,17 +175,16 @@ watch(fileList, (newVal) => {
 const formRules = ref<FormRules>({})
 
 const data = reactive<any>({
-    absType: '1',
-    absProp: '1',
-    absTitle: '1',
-    firstAuthor: '1',
-    speaker: '1',
-    speakerAffiliation: '1',
-    correspondingAuthor: '1',
-    correspondingAuthorEmail: '1',
-    correspondingAuthorPhone: '1',
-    allAuthor: '1',
-    allAuthorAffiliation: '1',
+    presentationType: 'poster',
+    absTitle: '',
+    firstAuthor: '',
+    speaker: '',
+    speakerAffiliation: '',
+    correspondingAuthor: '',
+    correspondingAuthorEmail: '',
+    correspondingAuthorPhone: '',
+    allAuthor: '',
+    allAuthorAffiliation: '',
 })
 
 
@@ -175,7 +194,8 @@ const submit = async () => {
     fileList.forEach((file: any) => {
         submitData.append('file', file.raw);
     })
-    let res = await CSRrequest.post('/paper',{
+    console.log(submitData.get('file'));
+    let res = await CSRrequest.post('/paper', {
         body: submitData
     });
 
@@ -183,9 +203,84 @@ const submit = async () => {
 
 }
 
+/**=========================================================== */
+// const memberInfo = ref<any>(null);
+
 
 onMounted(() => {
-    // getMemberInfo();
+    getMemberInfo();
 })
 
 </script>
+
+<style lang="scss" scoped>
+.form {
+    width: 80%;
+    margin: 1rem auto;
+    font-weight: 600;
+
+    .member-title {
+        display: flex;
+        align-items: center;
+
+        :deep(.el-form-item__label) {
+            margin: 0 1rem 0 0;
+            text-align: center;
+        }
+    }
+
+    .main-form {
+        display: flex;
+        gap: 5rem;
+        text-wrap: nowrap;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            gap: 2rem;
+
+        }
+
+
+        .left-seciton {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+
+            .category {
+
+                :deep(.el-radio-group) {
+                    flex-direction: column;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                }
+
+                :deep(.el-form-item__error) {
+                    // color: black;
+                    position: absolute;
+                    top: 0.5rem;
+                    left: 10rem;
+
+                    @media screen and (max-width: 768px) {
+                        left: 13rem;
+                    }
+                }
+
+                :deep(.el-select) {
+                    width: 150px;
+                }
+
+            }
+
+        }
+    }
+}
+</style>
