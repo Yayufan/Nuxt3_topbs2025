@@ -23,7 +23,7 @@
                             {{ memberInfo.remitAccountLast5 }}
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0" class="not-pay"
+                        <td v-if="memberInfo.country !== 'Taiwan' && (item.status === 0 || item.status === 3)" class="not-pay"
                             :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') ? 'disabled' : ''"
                             @click="getOrders(item.ordersId, (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee'))">
                             <span>Pay now</span>
@@ -65,7 +65,7 @@ const getMemberInfo = async () => {
         // res.data.country = 'Taiwan1'
         Object.assign(memberInfo, res.data)
         console.log(memberInfo)
-    } else if (res.code === 401) {
+    } else {
         ElMessage.error(res.msg);
         localStorage.removeItem('Authorization-member');
         router.push('/login')
