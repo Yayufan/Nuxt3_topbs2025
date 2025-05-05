@@ -7,7 +7,7 @@
             <Breadcrumbs firstRoute="TOPBS & IOPBS" secoundRoute="President's Message"></Breadcrumbs>
             <Title title="President's Message" class="title"></Title>
 
-            <!-- <div class="card-section">
+            <div class="card-section">
                 <el-card v-for="(item, index) in presidentList" :key="item.name" class="president-card">
                     <div class="president-image-box">
                         <img :src="item.profilePhotoUrl" alt="President's Message" class="president-image" />
@@ -19,7 +19,7 @@
                     </p>
                     <div class="fade-mask">
                     </div>
-                    <a class="see-more-btn" :href="`#president${index}`">See more</a>
+                    <a class="see-more-btn" @click="toTarget(index)">See more</a>
                 </el-card>
             </div>
             <el-divider></el-divider>
@@ -33,13 +33,13 @@
                         {{ item.message }}
                     </p>
                     <div class="president-sign-image-box">
-                        <img src="../assets/img/Sign-HoYongPark.jpg" alt="">
+                        <img :src="item.signPhotoUrl" alt="">
                     </div>
 
                     </p>
 
                 </el-card>
-            </div> -->
+            </div>
 
         </main>
 
@@ -50,7 +50,17 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue'
 import Title from '@/components/layout/Title.vue'
 
-import president1IPhoto from '../assets/img/HoYongPark.jpg'
+import president1Photo from '../assets/img/Ho-Yong-Park.jpg'
+import president1Sign from '../assets/img/Sign-HoYongPark.jpg'
+
+import president2Photo from '../assets/img/ChenShinCheh.jpg'
+import president2Sign from '../assets/img/Sign-ChenShinCheh.jpg'
+
+import president3Photo from '../assets/img/YeHsiangTang.jpg'
+import president3Sign from '../assets/img/Sign-YeHsiangTang.jpg'
+
+
+
 import testPhoto from '../assets/img/team-img-01.png'
 
 const isExpanded = ref(false)
@@ -59,24 +69,66 @@ const presidentList = reactive<any>([
     {
         name: 'Ho Yong Park',
         country: 'Korea',
-        profilePhotoUrl: president1IPhoto,
-        message: `When oncoplastic breast surgery first began in Europe about 30 years ago, it started from the need to improve the cosmetic outcomes of breast-conserving surgery, which often left unsatisfactory results in terms of breast shape. The goal was to enhance the aesthetic results while also ensuring good oncologic outcomes during surgery. This is considered the beginning of oncoplastic breast surgery.\n
-    Since most of the initial developments took place in Europe, the surgical techniques were mainly developed for women with large breasts. Among these techniques, those based on reduction mammoplasty became the foundation, leading to the development of many other mammoplasty methods. This advancement improved the rate of breast-conserving surgery to about 70–80%. However, applying these techniques—originally designed for large breasts—to patients with small or moderate-sized breasts was not easy.\n
-    As a result, many doctors in Asia began to discuss how to improve cosmetic outcomes of breast-conserving surgery for patients with small and moderate breast sizes. They realized that if there were no suitable techniques, then a proper oncoplastic reconstruction method specifically for Asian women with small to moderate-sized breasts was needed. This led to the beginning of the International Oncoplastic Breast Surgery Symposium (IOPBS).`
-        },
-    {
-        name: 'John Doe',
-        country: 'USA',
-        profilePhotoUrl: testPhoto,
-        message: 'Oncoplastic breast surgery has evolved significantly over the years, with advancements in techniques and technology. It is now a standard practice in many countries, providing patients with better options for breast conservation.'
+        profilePhotoUrl: president1Photo,
+        signPhotoUrl: president1Sign,
+        message: `Since most of the initial developments in oncoplastic breast surgery took place in Europe, the surgical techniques were mainly developed for women with large breasts. Among these techniques, those based on reduction mammoplasty became the foundation, leading to the development of many other mammoplasty methods. These advancements improved the rate of breast-conserving surgery to about 70–80%. However, applying these techniques—originally designed for large breasts—to patients with small or moderately sized breasts was not easy.\n
+Many doctors in Asia began discussing how to improve the cosmetic outcomes of breast-conserving surgery for patients with small or moderate breast sizes. This led to the creation of the International Oncoplastic Breast Surgery Symposium (IOPBS). \n
+We are very pleased that the 9th IOPBS will be held in Taiwan in 2025. \n
+Since IOPBS started in Korea in 2007, a significant amount of time has passed. As IOPBS has been hosted in various Asian countries, it has helped us better understand the differences in breast cancer situations and treatment approaches—including surgery—between nations, and has promoted active knowledge exchange. \n
+We also realized that in many Asian countries, the rate of mastectomy remains significantly higher than that of breast-conserving surgery, mainly due to the high number of advanced breast cancer cases. \n
+Recognizing this shared reality, we hope to continue collaborating across borders to promote the early detection of breast cancer. Through this, we aim not only to save patients’ lives but also to preserve their breasts when possible, or to provide aesthetically satisfying reconstruction after mastectomy. We believe this collaborative effort will greatly benefit many women in Asia with small to moderate breast sizes. \n
+Looking ahead, we hope that these continued efforts will lead to even more fruitful knowledge exchange through future IOPBS meetings. The 10th IOPBS is scheduled to be held in Korea in 2027, followed by the 11th IOPBS in Thailand in 2029. \n
+We are also delighted that the 2025 Taiwan Oncoplastic Breast Surgery Symposium (TOPBS) will be jointly held with the 9th IOPBS. I would like to express my heartfelt gratitude to all the doctors and professionals in Taiwan who are involved in breast cancer surgery and treatment. I have no doubt that your dedication and efforts will significantly contribute to the advancement of breast cancer surgery and reconstruction in the future. \n
+Ho Yong Park, M.D.\n
+Honorary Chair, International Oncoplastic Breast Surgery Symposium 
+        `
     },
     {
-        name: 'Jane Smith',
-        country: 'UK',
-        profilePhotoUrl: testPhoto,
-        message: 'The future of oncoplastic breast surgery looks promising, with ongoing research and development aimed at improving patient outcomes and expanding the range of techniques available to surgeons.'
+        name: 'Shin-Cheh Chen',
+        country: 'Taiwan',
+        profilePhotoUrl: president2Photo,
+        signPhotoUrl: president2Sign,
+        message: `The rising incidence of breast cancer among Asian women year after year, along with a relatively higher rate among younger women compared to Western countries, demands greater attention and more effective treatment strategies. Thanks to a deeper understanding of disease mechanisms and advances in medical therapies, the surgical management of breast cancer has gradually shifted toward de-escalation — with breast-conserving surgery replacing mastectomy, sentinel lymph node biopsy replacing axillary lymph node dissection, and neoadjuvant chemotherapy replacing adjuvant chemotherapy.\n 
+Driven by the desire to minimize surgical scarring and preserve the breast’s natural appearance, a variety of new surgical techniques have been developed, such as oncoplastic breast-conserving surgery, nipple-sparing mastectomy, and various implant-based and free flap reconstruction procedures. Ironically, these developments have made surgical approaches more complex and diverse.\n
+In response to these changes, Taiwan established the Taiwan Oncoplastic Breast Surgery Society in 2017 and has since collaborated with Japan’s JOPBS and Korea’s KOPBS. Through initiatives focused on knowledge-sharing, education, and training, we strive to fulfill the mission of this annual meeting: “Sustainable Shape and Oncologic Safety”, while promoting global health equity, innovation, and research. 
+Taipei’s pleasant November weather offers the perfect setting for travel. The city blends modernity with historical charm, featuring numerous heritage sites, world-renowned museums, and easily accessible mountain hot springs — all within just half an hour’s reach. We warmly welcome experts and scholars from Europe, America, Asia, and beyond to join us for this grand event — to exchange knowledge and enjoy a wonderful educational holiday in Taipei.\n
+Shin-Cheh Chen, M.D.\n
+ 9th IOPBS Organizer, TOPBS Founding President `
+    },
+    {
+        name: 'Hsien-Tang Yeh',
+        country: 'Taiwan',
+        profilePhotoUrl: president3Photo,
+        signPhotoUrl: president3Sign,
+        message: `On behalf of the Taiwan Oncoplastic Breast Surgery Society (TOPBS), it is my great pleasure to welcome you to the 9th International Oncoplastic Breast Surgery Biannual Meeting and 2025 TOPBS Annual Meeting. This prestigious gathering will take place in the vibrant city of Taipei, at the Taipei International Convention Center, on November 15–16, 2025. We are truly excited to host you in Taiwan for this special joint event, where East meets West in the spirit of learning and friendship. \n
+        This year’s meeting is guided by the theme “Sustainable Perfect Shape with Safety.” This theme highlights our dedication to achieving the best possible breast form (the perfect shape) for our patients while never compromising on oncologic safety. Our mission is to show that aesthetic excellence and patient safety can – and must – go hand in hand in oncoplastic breast surgery.\n
+        As we convene for this conference, we focus on several core pillars that define our professional community and this event’s goals: \n
+        Collaboration: Bringing together specialists across disciplines and borders to share knowledge and skills. Breast surgeons, plastic surgeons, oncologists, and nursing professionals will stand shoulder to shoulder, reflecting a true multidisciplinary approach. \n
+        Innovation: Exploring new frontiers in oncoplastic techniques and breast care. We will discuss cutting-edge research, advanced surgical methods, and creative solutions that improve patient outcomes and quality of life. \n
+        Safety: Ensuring every innovation is grounded in the highest standards of patient safety. From oncologic treatment efficacy to post-operative care, patient well-being remains our foremost priority. \n
+        Shared Professional Growth: Learning and growing together as a global community. Through open dialogue, and case discussions, , we will nurture mutual growth, inspire each other, and strengthen the bonds within our international network of colleagues. \n
+        Over the course of two exciting days, our program will feature a wide range of scientific sessions, panel discussions, and practical workshops. You can look forward to insightful lectures from pioneers in oncoplastic and reconstructive breast surgery, who will share the latest advancements in techniques such as oncoplastic breast-conserving surgery, breast reconstruction innovations, and patient-centered care approaches. Through these interactive sessions, we encourage everyone to ask questions, share their own experiences, and engage in meaningful conversations that will drive our field forward. \n
+        Equally important to the scientific program is the opportunity to connect on a personal level. By the end of the meeting, I hope each of you will have not only gained new knowledge but also made new friends and future collaborators.\n
+        In closing, I would like to express my sincere gratitude to each and every one of you for participating in this meeting. Your enthusiasm, knowledge, and willingness to share are what make this event possible and successful. It is our collective effort and passion that fuel the advancements in oncoplastic breast surgery. Thank you for joining us in this journey toward a “sustainable perfect shape with safety” for all our patients. Welcome to Taipei, and welcome to an exciting meeting filled with collaboration and growth. I look forward to greeting each of you personally and wish you a rewarding and enjoyable experience at the conference!\n
+        Hsien-Tang Yeh, M.D.\n
+        President, Taiwan Oncoplastic Breast Surgery Society `
     }
 ])
+
+const toTarget = (index: number) => {
+    const targetId = `#president${index}`;
+    const targetElement = document.querySelector(targetId) as HTMLElement;
+    const header = document.querySelector('header'); // 假設你的頁面有固定的 <header>
+  const headerHeight = header ? header.offsetHeight : 0;
+
+  if (targetElement) {
+    const targetPosition = targetElement.offsetTop - headerHeight;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth',
+    });
+  }
+}
 
 
 </script>
@@ -296,7 +348,7 @@ const presidentList = reactive<any>([
             }
 
             .president-sign-image-box {
-                width: 10%;
+                width: 15%;
                 margin-left: auto;
 
                 img {
