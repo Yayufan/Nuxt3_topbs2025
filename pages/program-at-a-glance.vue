@@ -14,6 +14,11 @@
                 <el-button :class="selectedDay === 'day1'? 'active':''" @click="selectedDayFunction('day1')">Day1, Nov 15</el-button>
                 <el-button :class="selectedDay === 'day2'? 'active':''" @click="selectedDayFunction('day2')">Day1, Nov 16</el-button>
             </div>
+
+            <div class="img-section">
+                <img v-if="selectedDay === 'day1'" src="../assets/img/program-day1.jpg" alt="">
+                <img v-if="selectedDay === 'day2'" src="../assets/img/program-day2.jpg" alt="">
+            </div>
         </main>
 
     </div>

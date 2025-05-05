@@ -18,7 +18,7 @@
                         <el-input v-model="data.firstAuthor" placeholder="First Author"></el-input>
                     </el-form-item>
 
-                    <el-form-item v-if="data.absType === 'YoungInvestigator'" label="First Author Birthday"
+                    <el-form-item v-if="data.absType === 'Young Investigator'" label="First Author Birthday"
                         prop="firstAuthorBirthday">
                         <el-date-picker v-model="data.firstAuthorBirthday" placeholder="First Author Affiliation"
                             value-format="YYYY-MM-DD"></el-date-picker>
