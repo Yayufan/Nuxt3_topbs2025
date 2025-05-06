@@ -67,35 +67,6 @@ const isExpanded = ref(false)
 
 const presidentList = reactive<any>([
     {
-        name: 'Ho Yong Park',
-        country: 'Korea',
-        profilePhotoUrl: president1Photo,
-        signPhotoUrl: president1Sign,
-        message: `Since most of the initial developments in oncoplastic breast surgery took place in Europe, the surgical techniques were mainly developed for women with large breasts. Among these techniques, those based on reduction mammoplasty became the foundation, leading to the development of many other mammoplasty methods. These advancements improved the rate of breast-conserving surgery to about 70–80%. However, applying these techniques—originally designed for large breasts—to patients with small or moderately sized breasts was not easy.\n
-Many doctors in Asia began discussing how to improve the cosmetic outcomes of breast-conserving surgery for patients with small or moderate breast sizes. This led to the creation of the International Oncoplastic Breast Surgery Symposium (IOPBS). \n
-We are very pleased that the 9th IOPBS will be held in Taiwan in 2025. \n
-Since IOPBS started in Korea in 2007, a significant amount of time has passed. As IOPBS has been hosted in various Asian countries, it has helped us better understand the differences in breast cancer situations and treatment approaches—including surgery—between nations, and has promoted active knowledge exchange. \n
-We also realized that in many Asian countries, the rate of mastectomy remains significantly higher than that of breast-conserving surgery, mainly due to the high number of advanced breast cancer cases. \n
-Recognizing this shared reality, we hope to continue collaborating across borders to promote the early detection of breast cancer. Through this, we aim not only to save patients’ lives but also to preserve their breasts when possible, or to provide aesthetically satisfying reconstruction after mastectomy. We believe this collaborative effort will greatly benefit many women in Asia with small to moderate breast sizes. \n
-Looking ahead, we hope that these continued efforts will lead to even more fruitful knowledge exchange through future IOPBS meetings. The 10th IOPBS is scheduled to be held in Korea in 2027, followed by the 11th IOPBS in Thailand in 2029. \n
-We are also delighted that the 2025 Taiwan Oncoplastic Breast Surgery Symposium (TOPBS) will be jointly held with the 9th IOPBS. I would like to express my heartfelt gratitude to all the doctors and professionals in Taiwan who are involved in breast cancer surgery and treatment. I have no doubt that your dedication and efforts will significantly contribute to the advancement of breast cancer surgery and reconstruction in the future. \n
-Ho Yong Park, M.D.\n
-Honorary Chair, International Oncoplastic Breast Surgery Symposium 
-        `
-    },
-    {
-        name: 'Shin-Cheh Chen',
-        country: 'Taiwan',
-        profilePhotoUrl: president2Photo,
-        signPhotoUrl: president2Sign,
-        message: `The rising incidence of breast cancer among Asian women year after year, along with a relatively higher rate among younger women compared to Western countries, demands greater attention and more effective treatment strategies. Thanks to a deeper understanding of disease mechanisms and advances in medical therapies, the surgical management of breast cancer has gradually shifted toward de-escalation — with breast-conserving surgery replacing mastectomy, sentinel lymph node biopsy replacing axillary lymph node dissection, and neoadjuvant chemotherapy replacing adjuvant chemotherapy.\n 
-Driven by the desire to minimize surgical scarring and preserve the breast’s natural appearance, a variety of new surgical techniques have been developed, such as oncoplastic breast-conserving surgery, nipple-sparing mastectomy, and various implant-based and free flap reconstruction procedures. Ironically, these developments have made surgical approaches more complex and diverse.\n
-In response to these changes, Taiwan established the Taiwan Oncoplastic Breast Surgery Society in 2017 and has since collaborated with Japan’s JOPBS and Korea’s KOPBS. Through initiatives focused on knowledge-sharing, education, and training, we strive to fulfill the mission of this annual meeting: “Sustainable Shape and Oncologic Safety”, while promoting global health equity, innovation, and research. 
-Taipei’s pleasant November weather offers the perfect setting for travel. The city blends modernity with historical charm, featuring numerous heritage sites, world-renowned museums, and easily accessible mountain hot springs — all within just half an hour’s reach. We warmly welcome experts and scholars from Europe, America, Asia, and beyond to join us for this grand event — to exchange knowledge and enjoy a wonderful educational holiday in Taipei.\n
-Shin-Cheh Chen, M.D.\n
- 9th IOPBS Organizer, TOPBS Founding President `
-    },
-    {
         name: 'Hsien-Tang Yeh',
         country: 'Taiwan',
         profilePhotoUrl: president3Photo,
@@ -112,22 +83,53 @@ Shin-Cheh Chen, M.D.\n
         In closing, I would like to express my sincere gratitude to each and every one of you for participating in this meeting. Your enthusiasm, knowledge, and willingness to share are what make this event possible and successful. It is our collective effort and passion that fuel the advancements in oncoplastic breast surgery. Thank you for joining us in this journey toward a “sustainable perfect shape with safety” for all our patients. Welcome to Taipei, and welcome to an exciting meeting filled with collaboration and growth. I look forward to greeting each of you personally and wish you a rewarding and enjoyable experience at the conference!\n
         Hsien-Tang Yeh, M.D.\n
         President, Taiwan Oncoplastic Breast Surgery Society `
-    }
+    },
+
+    {
+        name: 'Shin-Cheh Chen',
+        country: 'Taiwan',
+        profilePhotoUrl: president2Photo,
+        signPhotoUrl: president2Sign,
+        message: `The rising incidence of breast cancer among Asian women year after year, along with a relatively higher rate among younger women compared to Western countries, demands greater attention and more effective treatment strategies. Thanks to a deeper understanding of disease mechanisms and advances in medical therapies, the surgical management of breast cancer has gradually shifted toward de-escalation — with breast-conserving surgery replacing mastectomy, sentinel lymph node biopsy replacing axillary lymph node dissection, and neoadjuvant chemotherapy replacing adjuvant chemotherapy.\n 
+Driven by the desire to minimize surgical scarring and preserve the breast’s natural appearance, a variety of new surgical techniques have been developed, such as oncoplastic breast-conserving surgery, nipple-sparing mastectomy, and various implant-based and free flap reconstruction procedures. Ironically, these developments have made surgical approaches more complex and diverse.\n
+In response to these changes, Taiwan established the Taiwan Oncoplastic Breast Surgery Society in 2017 and has since collaborated with Japan’s JOPBS and Korea’s KOPBS. Through initiatives focused on knowledge-sharing, education, and training, we strive to fulfill the mission of this annual meeting: “Sustainable Shape and Oncologic Safety”, while promoting global health equity, innovation, and research. 
+Taipei’s pleasant November weather offers the perfect setting for travel. The city blends modernity with historical charm, featuring numerous heritage sites, world-renowned museums, and easily accessible mountain hot springs — all within just half an hour’s reach. We warmly welcome experts and scholars from Europe, America, Asia, and beyond to join us for this grand event — to exchange knowledge and enjoy a wonderful educational holiday in Taipei.\n
+Shin-Cheh Chen, M.D.\n
+ 9th IOPBS Organizer, TOPBS Founding President `
+    },
+
+    {
+        name: 'Ho Yong Park',
+        country: 'Korea',
+        profilePhotoUrl: president1Photo,
+        signPhotoUrl: president1Sign,
+        message: `Since most of the initial developments in oncoplastic breast surgery took place in Europe, the surgical techniques were mainly developed for women with large breasts. Among these techniques, those based on reduction mammoplasty became the foundation, leading to the development of many other mammoplasty methods. These advancements improved the rate of breast-conserving surgery to about 70–80%. However, applying these techniques—originally designed for large breasts—to patients with small or moderately sized breasts was not easy.\n
+Many doctors in Asia began discussing how to improve the cosmetic outcomes of breast-conserving surgery for patients with small or moderate breast sizes. This led to the creation of the International Oncoplastic Breast Surgery Symposium (IOPBS). \n
+We are very pleased that the 9th IOPBS will be held in Taiwan in 2025. \n
+Since IOPBS started in Korea in 2007, a significant amount of time has passed. As IOPBS has been hosted in various Asian countries, it has helped us better understand the differences in breast cancer situations and treatment approaches—including surgery—between nations, and has promoted active knowledge exchange. \n
+We also realized that in many Asian countries, the rate of mastectomy remains significantly higher than that of breast-conserving surgery, mainly due to the high number of advanced breast cancer cases. \n
+Recognizing this shared reality, we hope to continue collaborating across borders to promote the early detection of breast cancer. Through this, we aim not only to save patients’ lives but also to preserve their breasts when possible, or to provide aesthetically satisfying reconstruction after mastectomy. We believe this collaborative effort will greatly benefit many women in Asia with small to moderate breast sizes. \n
+Looking ahead, we hope that these continued efforts will lead to even more fruitful knowledge exchange through future IOPBS meetings. The 10th IOPBS is scheduled to be held in Korea in 2027, followed by the 11th IOPBS in Thailand in 2029. \n
+We are also delighted that the 2025 Taiwan Oncoplastic Breast Surgery Symposium (TOPBS) will be jointly held with the 9th IOPBS. I would like to express my heartfelt gratitude to all the doctors and professionals in Taiwan who are involved in breast cancer surgery and treatment. I have no doubt that your dedication and efforts will significantly contribute to the advancement of breast cancer surgery and reconstruction in the future. \n
+Ho Yong Park, M.D.\n
+Honorary Chair, International Oncoplastic Breast Surgery Symposium 
+        `
+    },
 ])
 
 const toTarget = (index: number) => {
     const targetId = `#president${index}`;
     const targetElement = document.querySelector(targetId) as HTMLElement;
     const header = document.querySelector('header'); // 假設你的頁面有固定的 <header>
-  const headerHeight = header ? header.offsetHeight : 0;
+    const headerHeight = header ? header.offsetHeight : 0;
 
-  if (targetElement) {
-    const targetPosition = targetElement.offsetTop - headerHeight;
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth',
-    });
-  }
+    if (targetElement) {
+        const targetPosition = targetElement.offsetTop - headerHeight;
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+        });
+    }
 }
 
 
@@ -194,8 +196,8 @@ const toTarget = (index: number) => {
                 .president-message {
                     display: -webkit-box;
                     margin-top: 1rem;
-                    -webkit-line-clamp: 7;
-                    line-clamp: 7;
+                    -webkit-line-clamp: 6;
+                    line-clamp: 6;
                     line-height: 2rem;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
@@ -300,8 +302,8 @@ const toTarget = (index: number) => {
 
                 :deep(.el-card__body) {
                     .president-message {
-                        -webkit-line-clamp: 8;
-                        line-clamp: 8;
+                        -webkit-line-clamp: 7;
+                        line-clamp: 7;
                     }
                 }
             }

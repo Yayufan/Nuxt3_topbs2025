@@ -4,7 +4,7 @@
         <Breadcrumbs firstRoute="Abstracts" secoundRoute="Abstract Submission"></Breadcrumbs>
         <Title title="Abstract Submission"></Title>
 
-        <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
+        <!-- <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
 
             <div class="main-form">
                 <div class="left-seciton">
@@ -66,19 +66,12 @@
                         <div slot="tip" class="el-upload__tip">only upload pdf file with size less than 20mb</div>
                     </el-upload>
                 </el-form-item>
-                <!-- <el-form-item label="File2" prop="file2">
-                    <el-upload ref="uploadRef1" class="upload-demo" :limit="1" :on-change="handleDocxUpload"
-                        :auto-upload="false" action="">
-                        <el-button size="small" type="primary">Upload</el-button>
-                        <div slot="tip" class="el-upload__tip">only upload word file with size less than 20mb</div>
-                    </el-upload>
-                </el-form-item> -->
             </div>
 
             <el-form-item label="" prop="submit">
                 <el-button class="submit-btn" type="primary" @click="submit(formRef)">Submit</el-button>
             </el-form-item>
-        </el-form>
+        </el-form> -->
     </main>
 </template>
 

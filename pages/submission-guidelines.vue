@@ -5,7 +5,7 @@
             <Breadcrumbs firstRoute="Abstracts" secoundRoute="Submission Guidelines"></Breadcrumbs>
             <Title title="Submission Guidelines"></Title>
 
-            <div class="content">
+            <!-- <div class="content">
                 <h1 class="title">Important Dates</h1>
 
                 <div class="date-info">
@@ -25,32 +25,7 @@
                 <h1 class="submission-title">[Abstract Submission]</h1>
 
                 <h2>01-Abstract Submission Process</h2>
-                <!-- <div class="step-box-list">
-                    <div class="step-box">
-                        <div class="step">
-                            <h3>Step1</h3>
-                            <p>Sign up and login</p>
-                        </div>
-                    </div>
-                    <div class="step-box">
-                        <div class="step">
-                            <h3>Step2</h3>
-                            <p>Online Registration</p>
-                        </div>
-                    </div>
-                    <div class="step-box">
-                        <div class="step">
-                            <h3>Step3</h3>
-                            <p>Online Submission</p>
-                        </div>
-                    </div>
-                    <div class="step-box">
-                        <div class="step">
-                            <h3>Step4</h3>
-                            <p>Check your email</p>
-                        </div>
-                    </div>
-                </div> -->
+            
 
                 <ul class="second-list step-list">
                     <li><B>Step 1:</B> Sign up and log in</li>
@@ -237,7 +212,7 @@
                 </el-button>
 
 
-            </div>
+            </div> -->
         </main>
 
     </div>

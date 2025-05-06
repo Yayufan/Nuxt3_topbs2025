@@ -13,7 +13,7 @@
                     <span>
                         E-Mail：iopbs2025@gmail.com</span>
                 </p>
-                <p>Copyright Reserved By 2024</p>
+                <p>Copyright Reserved By 2025</p>
             </div>
         </div>
     </footer>

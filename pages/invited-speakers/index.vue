@@ -3,8 +3,8 @@
         <main class="common-section">
             <Banner></Banner>
             <!-- <h1 class="title">Invited Speakers</h1> -->
-            <Title title="Invited Speakers"></Title>
             <Breadcrumbs firstRoute="Program" secoundRoute="Invited Speakers"></Breadcrumbs>
+            <Title title="Invited Speakers"></Title>
             <div class="content">
                 <speaker class="speaker" v-for="item in speakers" :speaker="item"></speaker>
             </div>

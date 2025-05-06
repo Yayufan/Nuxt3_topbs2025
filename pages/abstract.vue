@@ -1,5 +1,5 @@
 <template>
-    <main class="common-section">
+    <!-- <main class="common-section">
         <Banner />
         <Breadcrumbs firstRoute="Member" secoundRoute="Abstract" />
         <Title title="Abstract" />
@@ -32,7 +32,6 @@
             <table class="paper-info-table">
                 <tr>
                     <td colspan="2" class="column-name title">Abstract</td>
-                    <!-- <td>{{ paperInfo.paperId }}</td> -->
                 </tr>
                 <tr>
                     <td class="column-name">Type</td>
@@ -80,7 +79,6 @@
                 </tr>
                 <tr>
                     <td class="column-name">Abstract File</td>
-                    <!-- <td><el-button @click="console.log(paperInfo.paperFileUpload)">click</el-button></td> -->
                     <td v-if="envMinio + paperInfo.FileUpload">
                         <a class="preview-link" :href="envMinio + paperInfo.paperFileUpload[0].path"
                             target="_blank">Preview</a>
@@ -89,7 +87,7 @@
 
             </table>
         </el-dialog>
-    </main>
+    </main> -->
 </template>
 <script lang="ts" setup>
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';

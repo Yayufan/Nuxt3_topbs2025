@@ -83,5 +83,19 @@ const selectedDayFunction = (day: string) => {
             }
         }
     }
+
+
+    .img-section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        img {
+            width: 80%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    }
 }
 </style>

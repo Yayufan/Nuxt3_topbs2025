@@ -5,7 +5,7 @@
             <Breadcrumbs firstRoute="Abstracts" secoundRoute="Award" />
             <Title title="Award"></Title>
 
-            <div class="content">
+            <!-- <div class="content">
                 <p>The organizing committee of TIBCS 2024 will select outstanding abstracts for a variety of awards. 3
                     winners of Young Investigator Award/ 3 winners of Best Presentation Awards/ 1 winner of Brilliant
                     Presentation Award and 5 winners of Selected Presentation Award will be notified on Oct. 26. The
@@ -81,7 +81,7 @@
 
                 </p>
 
-            </div>
+            </div> -->
         </main>
 
     </div>
