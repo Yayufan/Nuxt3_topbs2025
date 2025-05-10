@@ -4,16 +4,12 @@
         <Breadcrumbs firstRoute="Abstracts" secoundRoute="Abstract Submission"></Breadcrumbs>
         <Title title="Abstract Submission"></Title>
 
-        <!-- <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
+        <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
 
             <div class="main-form">
                 <div class="left-seciton">
                     <el-form-item label="Type" prop="absType">
-                        <el-select v-model="data.absType" placeholder="Type">
-                            <el-option label="Poster Presentation" value="Poster"></el-option>
-                            <el-option label="Video Presentation" value="Video"></el-option>
-                            <el-option label="Young Investigator" value="Young Investigator"></el-option>
-                        </el-select>
+                        <el-select disabled v-model="data.absType" placeholder="Type"></el-select>
                     </el-form-item>
                     <el-form-item label="Abstract Title" prop="absTitle">
                         <el-input v-model="data.absTitle" placeholder="Titile"></el-input>
@@ -47,10 +43,13 @@
                         <el-input v-model="data.correspondingAuthorPhone"
                             placeholder="Corresponding Author Phone"></el-input>
                     </el-form-item>
-                    <el-form-item class="allAuthors" label="All Authors(Use semicolon to separate authors)" prop="allAuthor">
+                    <el-form-item class="allAuthors" label="All Authors(Use semicolon to separate authors)"
+                        prop="allAuthor">
                         <el-input type="textarea" v-model="data.allAuthor" placeholder="All Authors"></el-input>
                     </el-form-item>
-                    <el-form-item class="allAuthors" label="All Authors Affiliation(Use semicolon to separate authors affilication)" prop="allAuthorAffiliation">
+                    <el-form-item class="allAuthors"
+                        label="All Authors Affiliation(Use semicolon to separate authors affilication)"
+                        prop="allAuthorAffiliation">
                         <el-input type="textarea" v-model="data.allAuthorAffiliation"
                             placeholder="All Authors Affiliation"></el-input>
                     </el-form-item>
@@ -63,15 +62,25 @@
                     <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload"
                         :auto-upload="false" :on-remove="handleRemove">
                         <el-button size="small" type="primary">Upload</el-button>
-                        <div slot="tip" class="el-upload__tip">only upload pdf file with size less than 20mb</div>
+                        <div slot="tip" class="el-upload__tip">
+                            <span>Only upload pdf file with size less than 20mb</span>
+                            <span class="warning">Updating the paper requires re-uploading.</span>
+                        </div>
                     </el-upload>
                 </el-form-item>
+                <!-- <el-form-item label="File2" prop="file2">
+                    <el-upload ref="uploadRef1" class="upload-demo" :limit="1" :on-change="handleDocxUpload"
+                        :auto-upload="false" action="">
+                        <el-button size="small" type="primary">Upload</el-button>
+                        <div slot="tip" class="el-upload__tip">only upload word file with size less than 20mb</div>
+                    </el-upload>
+                </el-form-item> -->
             </div>
 
             <el-form-item label="" prop="submit">
                 <el-button class="submit-btn" type="primary" @click="submit(formRef)">Submit</el-button>
             </el-form-item>
-        </el-form> -->
+        </el-form>
     </main>
 </template>
 
@@ -84,6 +93,11 @@ import type { FormInstance, FormRules, UploadProps, UploadUserFile, UploadFile, 
 
 
 const router = useRouter();
+
+const paperId = useRoute().params.paperId as string;
+console.log(paperId);
+
+
 /**-------------- Member info --------------- */
 const memberInfo = reactive<any>({});
 
@@ -206,6 +220,19 @@ const data = reactive<any>({
     fileList: [],
 })
 
+const getPaperById = async () => {
+    let res = await CSRrequest.get(`/paper/owner/${paperId}`);
+    console.log(res)
+    const {status, publicationNumber, publicationGroup, reportLocation, reportTime, paperFileUpload, availablePaperReviewers, assignedPaperReviewers, tagList ,...resdata} = res.data;
+    console.log(resdata);   
+
+    if (res.code === 200) {
+        Object.assign(data, resdata);
+    } else {
+        router.push('/member-center');
+    }
+}
+
 
 const formRules = ref<FormRules>({
     absType: [{ required: true, message: 'Please select type', trigger: 'blur' }],
@@ -231,34 +258,21 @@ const submit = async (formEl: FormInstance | undefined) => {
     console.log(data);
     formEl.validate(async (valid) => {
         if (valid) {
-            console.log('submit!');
-            // data.firstAuthorBirthday = transformDate(data.firstAuthorBirthday);
             const { fileList, ...restData } = data;
             submitData.append('data', JSON.stringify(restData));
             data.fileList.forEach((file: any) => {
                 submitData.append('file', file.raw);
             })
-            console.log(submitData.get('file'));
-            console.log(submitData.get('data'));
-            let res = await CSRrequest.post('/paper', {
+            let res = await CSRrequest.put('/paper/owner', {
                 body: submitData
             });
             console.log(res);
             if (res.code === 200) {
                 ElMessage.success('Submit success!');
-                router.push('/member-center');
-            } else if (res.code === 400) {
-                ElMessage.error('Submit failed!');
-            } else if (res.code === 500) {
-                ElMessage.error('Server error!');
-            } else if (res.code === 401) {
-                localStorage.removeItem("Authorization-member");
-                router.push("/login");
+                router.push('/abstract');
             } else {
-                ElMessage.error('Unknown error!');
+                ElMessage.error('Submit failed!');
             }
-
-
 
         } else {
             console.log('error submit!!');
@@ -271,6 +285,7 @@ const submit = async (formEl: FormInstance | undefined) => {
 
 onMounted(() => {
     getMemberInfo();
+    getPaperById();
 })
 
 </script>
@@ -340,23 +355,6 @@ onMounted(() => {
                 }
 
             }
-
-            // .allAuthors {
-            //     :deep(.el-form-item__label) {
-            //         // background-color: $accent-color;
-            //         position: relative;
-            //         &::after {
-            //             content: 'Use commas to separate authors and affiliations';
-            //             font-size: 0.8rem;
-            //             font-weight: 400;
-            //             color: red;
-            //             position: absolute;
-            //             left: 0;
-            //             top: 0.9rem;
-            //         }
-            //     }
-            // }
-
         }
     }
 
@@ -373,6 +371,15 @@ onMounted(() => {
                         transform: scale(1.05);
                         transition: all 0.3s ease-in-out;
                         cursor: pointer;
+                    }
+                }
+
+                .el-upload__tip {
+                    display: flex;
+                    flex-direction: column;
+                    .warning {
+                        color: red;
+                        font-size: 0.8rem;
                     }
                 }
             }

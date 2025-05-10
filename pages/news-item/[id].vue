@@ -1,0 +1,80 @@
+<template>
+    <div class="news-item-section">
+        <Banner />
+        <div v-if="isActive" class="main-box">
+            <Breadcrumbs :title="'News Item'" first-route="News" :secound-route="newsItem.title" />
+
+            <div class="news-item-box">
+                <h1 class="title">{{ newsItem.title }}</h1>
+                <p class="date">{{ newsItem.announcementDate }}</p>
+                <div v-html="newsItem.content" class="content-box ck-content"></div>
+            </div>
+        </div>
+    </div>
+</template>
+<script lang="ts" setup>
+import Banner from '@/components/layout/Banner.vue'
+import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+
+import 'ckeditor5/ckeditor5.css';
+
+const router = useRouter()
+const articleId = useRoute().params.id
+
+const isActive = ref(false)
+
+watch(() => articleId, (newVal) => {
+    console.log(newVal)
+    getNewsItem()
+})
+
+const newsItem = reactive<any>({});
+watch(() => newsItem, (newVal) => {
+    isActive.value = true
+    console.log(newVal)
+}, {
+    deep: true
+})
+
+
+const getNewsItem = async () => {
+    let res = await CSRrequest.get(`/article/group/${articleId}`, {
+        params: {
+            articleId: articleId
+        }
+    })
+    Object.assign(newsItem, res.data)
+    console.log(res.data)
+}
+
+onMounted(() => {
+    getNewsItem()
+})
+</script>
+<style lang="scss" scoped>
+.news-item-section {
+    .main-box {
+        width: 90%;
+        margin: 0 auto;
+
+        .title {
+            display: flex;
+            justify-content: center;
+            font-size: 2rem;
+
+        }
+
+        .date {
+            display: flex;
+            justify-content: flex-end;
+            color: #CC8761;
+
+        }
+
+        .content-box {
+            margin-top: 2rem;
+            // justify-content: center;
+        }
+    }
+}
+</style>

@@ -271,8 +271,8 @@
                             <div class="time-table">
                                 <span class="title">Timetable:</span>
                                 <span>00:15、12:40、06:50、07:30、09:00、10:20、
-                                11:20、12:40、14:00、15:00、15:40、17:40、
-                               19:10、21:10、22:40</span>
+                                    11:20、12:40、14:00、15:00、15:40、17:40、
+                                    19:10、21:10、22:40</span>
                             </div>
                         </td>
                         <td>90 mins</td>
@@ -859,7 +859,7 @@ const backToTop = () => {
         .time-table {
             display: flex;
             flex-direction: column;
-            align-items: start;
+            align-items: flex-start;
             background-color: #D36672;
             color: white;
             border-radius: 10px;

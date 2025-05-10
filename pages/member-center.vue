@@ -107,6 +107,8 @@ onMounted(() => {
 
             &:hover {
                 border: #D8A6AF 2px solid;
+                transform: scale(1.05);
+                transition: all 0.3s ease-in-out;
             }
 
             img {

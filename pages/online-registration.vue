@@ -157,6 +157,11 @@ onMounted(() => {
                 font-size: 1rem;
                 font-weight: 500;
 
+                &:hover {
+                cursor: pointer;
+                background-color: #fb7c88;
+            }
+
             }
         }
     }
