@@ -62,7 +62,7 @@
                         </div>
                         <div class="hotel-info">
                             <p><img src="../assets/img/walk.svg" alt="">3 min by walk (160M)</p>
-                            <p><img src="../assets/img/money.svg" alt="">TWD $2500 up / Night</p>
+                            <p><img src="../assets/img/money.svg" alt="">TWD $3600 up / Night</p>
 
                         </div>
                         <nuxt-link to="/hotel3" class="view-more-btn">View more</nuxt-link>

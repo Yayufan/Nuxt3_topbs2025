@@ -276,6 +276,7 @@ const submit = async (formEl: FormInstance | undefined) => {
 
         } else {
             console.log('error submit!!');
+            ElMessage.error('Please check the form');
             return false;
         }
     })

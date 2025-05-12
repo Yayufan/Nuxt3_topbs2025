@@ -1,17 +1,17 @@
 <template>
-    <main class="common-section">
+    <main class="common-section" v-loading="loading">
         <Banner></Banner>
         <Breadcrumbs firstRoute="Abstracts" secoundRoute="Abstract Submission"></Breadcrumbs>
         <Title title="Abstract Submission"></Title>
 
-        <!-- <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
+        <el-form class="form" ref="formRef" :model="data" :rules="formRules" labelPosition="top">
 
             <div class="main-form">
                 <div class="left-seciton">
                     <el-form-item label="Type" prop="absType">
                         <el-select v-model="data.absType" placeholder="Type">
-                            <el-option label="Poster Presentation" value="Poster"></el-option>
-                            <el-option label="Video Presentation" value="Video"></el-option>
+                            <el-option label="Poster Presentation" value="Poster Presentation"></el-option>
+                            <el-option label="Video Presentation" value="Video Presentation"></el-option>
                             <el-option label="Young Investigator" value="Young Investigator"></el-option>
                         </el-select>
                     </el-form-item>
@@ -71,7 +71,7 @@
             <el-form-item label="" prop="submit">
                 <el-button class="submit-btn" type="primary" @click="submit(formRef)">Submit</el-button>
             </el-form-item>
-        </el-form> -->
+        </el-form>
     </main>
 </template>
 
@@ -192,7 +192,7 @@ const transformDate = (date: string) => {
 
 const formRef = ref<FormInstance>();
 const data = reactive<any>({
-    absType: 'poster',
+    absType: 'Poster Presentation',
     absTitle: '',
     firstAuthor: '',
     firstAuthorBirthday: '',
@@ -225,12 +225,14 @@ const formRules = ref<FormRules>({
 
 
 
+const loading = ref(false);
 const submitData = new FormData();
 const submit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     console.log(data);
     formEl.validate(async (valid) => {
         if (valid) {
+            loading.value = true;
             console.log('submit!');
             // data.firstAuthorBirthday = transformDate(data.firstAuthorBirthday);
             const { fileList, ...restData } = data;
@@ -246,6 +248,7 @@ const submit = async (formEl: FormInstance | undefined) => {
             console.log(res);
             if (res.code === 200) {
                 ElMessage.success('Submit success!');
+                loading.value = false;
                 router.push('/member-center');
             } else if (res.code === 400) {
                 ElMessage.error('Submit failed!');

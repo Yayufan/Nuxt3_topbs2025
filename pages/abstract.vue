@@ -1,5 +1,5 @@
 <template>
-    <!-- <main class="common-section">
+    <main class="common-section">
         <Banner />
         <Breadcrumbs firstRoute="Member" secoundRoute="Abstract" />
         <Title title="Abstract" />
@@ -45,7 +45,7 @@
                     <td class="column-name">First Author</td>
                     <td>{{ paperInfo.firstAuthor }}</td>
                 </tr>
-                <tr>
+                <tr v-if="paperInfo.absType === 'Young Investigator'">
                     <td class="column-name">First Author Birthday</td>
                     <td>{{ paperInfo.firstAuthorBirthday }}</td>
                 </tr>
@@ -87,7 +87,7 @@
 
             </table>
         </el-dialog>
-    </main> -->
+    </main>
 </template>
 <script lang="ts" setup>
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
@@ -254,11 +254,12 @@ onMounted(() => {
                     min-width: 3rem;
 
                     &:hover {
+                        color: black;
                         transform: scale(1.05);
                         transition: all 0.3s ease-in-out;
                     }
                 }
-                
+
                 .edit-btn {
                     border: 1px solid white;
                     color: white;
@@ -266,6 +267,7 @@ onMounted(() => {
                     min-width: 3rem;
 
                     &:hover {
+                        color: black;
                         transform: scale(1.05);
                         transition: all 0.3s ease-in-out;
                     }
@@ -280,26 +282,26 @@ onMounted(() => {
                     color: #E8979E;
                     font-weight: bold;
                 }
-                
+
                 .see-more-btn {
                     border: 1px solid #E8979E;
                     color: #E8979E;
                     padding: 0.3rem;
                     min-width: 3rem;
-                    
+
                     &:hover {
                         transform: scale(1.05);
                         transition: all 0.3s ease-in-out;
                         color: black;
                     }
                 }
-                
+
                 .edit-btn {
                     border: 1px solid #E8979E;
                     color: #E8979E;
                     padding: 0.3rem;
                     min-width: 3rem;
-                    
+
                     &:hover {
                         color: black;
                         transform: scale(1.05);

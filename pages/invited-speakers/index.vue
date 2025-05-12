@@ -9,6 +9,7 @@
                 <speaker class="speaker" v-for="item in speakers" :speaker="item"></speaker>
             </div>
         </main>
+        <p style="text-align: center; color: #e5716b"><B>Speakers are currently being invited</B></p>
 
     </div>
 </template>

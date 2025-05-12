@@ -55,22 +55,24 @@
                     <div class="reserver-section">
                         <div class="price">
                             <img src="../assets/img/money.svg" alt="">
-                            <p>TWD $2500 up / Night</p>
+                            <p>TWD $3600 up / Night</p>
                         </div>
                         <p class="reservation-remark">Please make a reservation by mail/line</p>
                         <!-- <nuxt-link class="reservation-btn">Reservation</nuxt-link> -->
                     </div>
+                    <p class="last-date">This booking offer is valid for reservations made until <span class="date">September 30, 2025</span>.</p>
+
                 </div>
             </div>
 
 
 
-            <div class="demo-img">
+            <!-- <div class="demo-img">
                 <img src="../assets/img/demo-img/accommodation4.png" alt="" style="width: 100%;">
                 <div class="demo-link-section">
                     <nuxt-link @click="router.go(-1)"></nuxt-link>
                 </div>
-            </div>
+            </div> -->
         </main>
 
     </div>
@@ -86,9 +88,46 @@ const toggleImage = (index: number) => {
 const setHoveredIndex = (index: number) => {
     currentIndex.value = index
 }
+const memberInfo = reactive<any>({})
+const getMemberInfo = async () => {
+    let res = await CSRrequest.get("/member/getMemberInfo")
+    console.log(res)
+    if (res.code === 200) {
+        Object.assign(memberInfo, res.data)
+        getOrderStatus()
+    } else {
+        ElMessage.error("Please login first")
+        router.push("/login")
+    }
+}
+
+const getOrderStatus = async () => {
+    let res = await CSRrequest.get(`/orders/owner`)
+    if (res.code === 200) {
+        res.data.forEach((item: any) => {
+            console.log(item)
+
+            if ((item.itemsSummary === 'Group Registration Fee' || item.itemsSummary === 'Registration Fee') && item.status === 2) {
+                console.log('paid')
+            } else {
+                console.log('not paid')
+                ElMessage.error("Please pay the registration fee first")
+                router.push("/member-center")
+            }
+        })
+    } else {
+        ElMessage.error("Please login first")
+        router.push("/login")
+    }
+
+
+
+}
+
 onMounted(() => {
-        router.push("/accommodation")
-    })
+    getMemberInfo()
+    // router.push("/accommodation")
+})
 </script>
 <style lang="scss" scoped>
 .common-section {
@@ -136,6 +175,13 @@ onMounted(() => {
         display: flex;
         margin: 2rem 0 0 5rem;
         gap: 1.5rem;
+
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+            margin: 0;
+            padding: 0 1rem;
+            
+        }
 
         .img-box {
             flex: 1;
@@ -308,7 +354,21 @@ onMounted(() => {
                     border-radius: 25px;
                     font-size: 1rem;
                     cursor: pointer;
+                    &.disabled {
+                        background-color: #E5E7E9;
+                        color: #B9B4AD;
+                        cursor: not-allowed;
+                    }
                 }
+            }
+        }
+
+        .last-date {
+            text-align: start;
+            margin: 1rem 0 0 3rem;
+
+            .date  {
+                color: red;
             }
         }
     }

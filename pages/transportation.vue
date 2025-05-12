@@ -110,17 +110,21 @@
                         <td>NTD $190</td>
 
                     </tr>
-                    <tr>
+                    <tr class="row-6">
                         <td class="left-bottom-corner" :rowspan="2">
                             <div class="transportation">Taxi</div>
                         </td>
-                        <td>Taiyuan Airport -> TICC</td>
+                        <td class="line">Taiyuan Airport <el-icon>
+                                <ElIconRight />
+                            </el-icon> TICC</td>
                         <td>1-1.5 hr</td>
                         <td>NTD $1310</td>
 
                     </tr>
                     <tr>
-                        <td>Taipei Songshan Airport MRT -> TICC</td>
+                        <td class="line">Taipei Songshan Airport MRT <el-icon>
+                                    <ElIconRight />
+                                </el-icon> TICC</td>
                         <td>10-30 mins</td>
                         <td class="right-bottom-corner">NTD $225</td>
                     </tr>
@@ -646,6 +650,14 @@ const backToTop = () => {
                             margin: 0rem 0 0 1rem;
                         }
                     }
+                }
+            }
+
+            .row-6 {
+                .line {
+                    display: flex;
+                    // justify-content: center;
+                    align-items: center;
                 }
             }
 
