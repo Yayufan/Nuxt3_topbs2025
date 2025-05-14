@@ -110,17 +110,21 @@
                         <td>NTD $190</td>
 
                     </tr>
-                    <tr>
+                    <tr class="row-6">
                         <td class="left-bottom-corner" :rowspan="2">
                             <div class="transportation">Taxi</div>
                         </td>
-                        <td>Taiyuan Airport -> TICC</td>
+                        <td class="line">Taiyuan Airport <el-icon>
+                                <ElIconRight />
+                            </el-icon> TICC</td>
                         <td>1-1.5 hr</td>
                         <td>NTD $1310</td>
 
                     </tr>
                     <tr>
-                        <td>Taipei Songshan Airport MRT -> TICC</td>
+                        <td class="line">Taipei Songshan Airport MRT <el-icon>
+                                    <ElIconRight />
+                                </el-icon> TICC</td>
                         <td>10-30 mins</td>
                         <td class="right-bottom-corner">NTD $225</td>
                     </tr>
@@ -271,8 +275,8 @@
                             <div class="time-table">
                                 <span class="title">Timetable:</span>
                                 <span>00:15、12:40、06:50、07:30、09:00、10:20、
-                                11:20、12:40、14:00、15:00、15:40、17:40、
-                               19:10、21:10、22:40</span>
+                                    11:20、12:40、14:00、15:00、15:40、17:40、
+                                    19:10、21:10、22:40</span>
                             </div>
                         </td>
                         <td>90 mins</td>
@@ -649,6 +653,14 @@ const backToTop = () => {
                 }
             }
 
+            .row-6 {
+                .line {
+                    display: flex;
+                    // justify-content: center;
+                    align-items: center;
+                }
+            }
+
             .left-top-corner {
                 border-top-left-radius: 15px;
             }
@@ -859,7 +871,7 @@ const backToTop = () => {
         .time-table {
             display: flex;
             flex-direction: column;
-            align-items: start;
+            align-items: flex-start;
             background-color: #D36672;
             color: white;
             border-radius: 10px;

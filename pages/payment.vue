@@ -18,12 +18,12 @@
                         <td>{{ item.totalAmount }}</td>
                         <td :class="memberInfo.country === 'Taiwan' ? 'none' : 'last-col'">{{
                             enums.payMentStatus[item.status]
-                            }}</td>
+                        }}</td>
                         <td v-if="memberInfo.country === 'Taiwan'" class="last-col">
                             {{ memberInfo.remitAccountLast5 }}
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && item.status === 0" class="not-pay"
+                        <td v-if="memberInfo.country !== 'Taiwan' && (item.status === 0 || item.status === 3)" class="not-pay"
                             :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') ? 'disabled' : ''"
                             @click="getOrders(item.ordersId, (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee'))">
                             <span>Pay now</span>
@@ -65,7 +65,7 @@ const getMemberInfo = async () => {
         // res.data.country = 'Taiwan1'
         Object.assign(memberInfo, res.data)
         console.log(memberInfo)
-    } else if (res.code === 401) {
+    } else {
         ElMessage.error(res.msg);
         localStorage.removeItem('Authorization-member');
         router.push('/login')
@@ -121,12 +121,14 @@ const getOrders = async (ordersId: number, isPayable: boolean) => {
             id: ordersId
         }
     })
+
+    console.log(res.data)
     form.value = res.data
 
     await nextTick();
     if (formRef.value) {
         const formItem = formRef.value.querySelector("form")
-        console.log(formItem)
+        // console.log(formItem)
         formItem.submit()
     }
 
@@ -319,10 +321,16 @@ onMounted(() => {
                     width: 13%;
                     cursor: pointer;
 
+                    &:hover {
+                        transform: scale(1.05);
+                        transition: all 0.3s ease-in-out;
+                    }   
+
                     &.disabled {
                         background-color: #26AE07 !important;
                         opacity: 0.5;
                         cursor: not-allowed;
+                     
                     }
                 }
 

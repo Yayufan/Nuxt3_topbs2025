@@ -1,5 +1,5 @@
 <template>
-    <main class="common-section" v-loading="loading">
+    <main class="common-section">
         <Banner></Banner>
         <Breadcrumbs firstRoute="Abstracts" secoundRoute="Abstract Submission"></Breadcrumbs>
         <Title title="Abstract Submission"></Title>
@@ -9,11 +9,7 @@
             <div class="main-form">
                 <div class="left-seciton">
                     <el-form-item label="Type" prop="absType">
-                        <el-select v-model="data.absType" placeholder="Type">
-                            <el-option label="Poster Presentation" value="Poster Presentation"></el-option>
-                            <el-option label="Video Presentation" value="Video Presentation"></el-option>
-                            <el-option label="Young Investigator" value="Young Investigator"></el-option>
-                        </el-select>
+                        <el-select disabled v-model="data.absType" placeholder="Type"></el-select>
                     </el-form-item>
                     <el-form-item label="Abstract Title" prop="absTitle">
                         <el-input v-model="data.absTitle" placeholder="Titile"></el-input>
@@ -66,9 +62,19 @@
                     <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload"
                         :auto-upload="false" :on-remove="handleRemove">
                         <el-button size="small" type="primary">Upload</el-button>
-                        <div slot="tip" class="el-upload__tip">only upload pdf file with size less than 20mb</div>
+                        <div slot="tip" class="el-upload__tip">
+                            <span>Only upload pdf file with size less than 20mb</span>
+                            <span class="warning">Updating the paper requires re-uploading.</span>
+                        </div>
                     </el-upload>
                 </el-form-item>
+                <!-- <el-form-item label="File2" prop="file2">
+                    <el-upload ref="uploadRef1" class="upload-demo" :limit="1" :on-change="handleDocxUpload"
+                        :auto-upload="false" action="">
+                        <el-button size="small" type="primary">Upload</el-button>
+                        <div slot="tip" class="el-upload__tip">only upload word file with size less than 20mb</div>
+                    </el-upload>
+                </el-form-item> -->
             </div>
 
             <el-form-item label="" prop="submit">
@@ -87,6 +93,11 @@ import type { FormInstance, FormRules, UploadProps, UploadUserFile, UploadFile, 
 
 
 const router = useRouter();
+
+const paperId = useRoute().params.paperId as string;
+console.log(paperId);
+
+
 /**-------------- Member info --------------- */
 const memberInfo = reactive<any>({});
 
@@ -101,14 +112,7 @@ const getMemberInfo = async () => {
         data.memberId = memberInfo.memberId;
 
         let orderRes = await CSRrequest.get(`/orders/owner`);
-        if (orderRes.code === 200) {
-            let registration = orderRes.data.filter((item: any) => item.itemsSummary === 'Registration Fee' || item.itemsSummary === "Group Registration Fee");
-            if (registration.length > 0 && registration[0].status !== 2) {
-                router.push('/payment');
-                ElMessage.error('Please pay registration fee first');
-            } else {
-            }
-        }
+
 
         console.log(orderRes);
     }
@@ -202,7 +206,7 @@ const transformDate = (date: string) => {
 
 const formRef = ref<FormInstance>();
 const data = reactive<any>({
-    absType: 'Poster Presentation',
+    absType: 'poster',
     absTitle: '',
     firstAuthor: '',
     firstAuthorBirthday: '',
@@ -215,6 +219,19 @@ const data = reactive<any>({
     allAuthorAffiliation: '',
     fileList: [],
 })
+
+const getPaperById = async () => {
+    let res = await CSRrequest.get(`/paper/owner/${paperId}`);
+    console.log(res)
+    const {status, publicationNumber, publicationGroup, reportLocation, reportTime, paperFileUpload, availablePaperReviewers, assignedPaperReviewers, tagList ,...resdata} = res.data;
+    console.log(resdata);   
+
+    if (res.code === 200) {
+        Object.assign(data, resdata);
+    } else {
+        router.push('/member-center');
+    }
+}
 
 
 const formRules = ref<FormRules>({
@@ -235,79 +252,41 @@ const formRules = ref<FormRules>({
 
 
 
-const loading = ref(false);
 const submitData = new FormData();
 const submit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return;
     console.log(data);
     formEl.validate(async (valid) => {
         if (valid) {
-            loading.value = true;
-            console.log('submit!');
-            // data.firstAuthorBirthday = transformDate(data.firstAuthorBirthday);
             const { fileList, ...restData } = data;
             submitData.append('data', JSON.stringify(restData));
             data.fileList.forEach((file: any) => {
                 submitData.append('file', file.raw);
             })
-            console.log(submitData.get('file'));
-            console.log(submitData.get('data'));
-            let res = await CSRrequest.post('/paper', {
+            let res = await CSRrequest.put('/paper/owner', {
                 body: submitData
             });
             console.log(res);
             if (res.code === 200) {
                 ElMessage.success('Submit success!');
-                loading.value = false;
-                router.push('/member-center');
-            } else if (res.code === 400) {
-                ElMessage.error('Submit failed!');
-            } else if (res.code === 500) {
-                ElMessage.error('Server error!');
-            } else if (res.code === 401) {
-                localStorage.removeItem("Authorization-member");
-                router.push("/login");
+                router.push('/abstract');
             } else {
-                ElMessage.error('Unknown error!');
+                ElMessage.error('Submit failed!');
             }
-
-
 
         } else {
             console.log('error submit!!');
+            ElMessage.error('Please check the form');
             return false;
         }
     })
-}
-
-const setting = reactive<any>({});
-const findSetting = async () => {
-    try {
-        let res = await CSRrequest.get('/setting/1');
-        console.log(res);
-        Object.assign(setting, res.data);
-        checkAvailable(setting);
-    } catch (error) {
-        console.error('Error fetching setting:', error);
-    }
-}
-
-
-const checkAvailable = (paper: any) => {
-    const currentDate = new Date();
-
-
-    if (currentDate >= setting.abstractSubmissionEndTime) {
-        router.push("/member-center");
-        ElMessage.error('Abstract submission is closed');
-    } 
 }
 
 
 
 onMounted(() => {
     getMemberInfo();
-    findSetting();
+    getPaperById();
 })
 
 </script>
@@ -377,23 +356,6 @@ onMounted(() => {
                 }
 
             }
-
-            // .allAuthors {
-            //     :deep(.el-form-item__label) {
-            //         // background-color: $accent-color;
-            //         position: relative;
-            //         &::after {
-            //             content: 'Use commas to separate authors and affiliations';
-            //             font-size: 0.8rem;
-            //             font-weight: 400;
-            //             color: red;
-            //             position: absolute;
-            //             left: 0;
-            //             top: 0.9rem;
-            //         }
-            //     }
-            // }
-
         }
     }
 
@@ -410,6 +372,15 @@ onMounted(() => {
                         transform: scale(1.05);
                         transition: all 0.3s ease-in-out;
                         cursor: pointer;
+                    }
+                }
+
+                .el-upload__tip {
+                    display: flex;
+                    flex-direction: column;
+                    .warning {
+                        color: red;
+                        font-size: 0.8rem;
                     }
                 }
             }

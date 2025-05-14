@@ -42,7 +42,7 @@
                             <p>+886 2 8780 8000</p>
                         </div>
                         <div class="info-item"><img src="../assets/img/EmailOutlined.svg" alt="">
-                            <p class="email">pbc.taipei@msi.hinet.net</p>
+                            <p class="email">pbc.taipei@msa.hinet.net</p>
                         </div>
                     </div>
                     <div class="reserver-section">
@@ -50,19 +50,21 @@
                             <img src="../assets/img/money.svg" alt="">
                             <p>TWD $3800 up / Night</p>
                         </div>
-                        <nuxt-link class="reservation-btn">Reservation</nuxt-link>
+                        <a v-if="isDisabled"  class="reservation-btn" @click="warning">Reservation</a>
+                        <a v-if="!isDisabled" href="https://reurl.cc/aZkrdX" target="_blank" class="reservation-btn">Reservation</a>
                     </div>
+                    <p class="last-date">This booking offer is valid for reservations made until <span class="date">October 21, 2025</span>.</p>
                 </div>
             </div>
 
 
 
-            <div class="demo-img">
+            <!-- <div class="demo-img">
                 <img src="../assets/img/demo-img/accommodation3.png" alt="" style="width: 100%;">
                 <div class="demo-link-section">
                     <nuxt-link @click="router.go(-1)"></nuxt-link>
                 </div>
-            </div>
+            </div> -->
         </main>
 
     </div>
@@ -71,6 +73,29 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 const router = useRouter()
 
+const isDisabled = ref(false)
+const checkDate = () => {
+    const currentDate = new Date()
+    const lastDate = new Date("2025-10-21")
+    if (currentDate > lastDate) {
+        isDisabled.value = true
+    } else {
+        isDisabled.value = false
+    }
+}
+
+const warning = () => {
+    ElMessageBox.confirm('This room booking offer has ended.', 'Warning', {
+        confirmButtonText: 'OK',
+        // cancelButtonText: 'Cancel',
+        showCancelButton: false,
+        type: 'warning',
+    }).then(() => {
+    }).catch(() => {
+    });
+}
+
+
 const currentIndex = ref(1)
 const toggleImage = (index: number) => {
     currentIndex.value = index
@@ -78,8 +103,46 @@ const toggleImage = (index: number) => {
 const setHoveredIndex = (index: number) => {
     currentIndex.value = index
 }
+const memberInfo = reactive<any>({})
+const getMemberInfo = async () => {
+    let res = await CSRrequest.get("/member/getMemberInfo")
+    console.log(res)
+    if (res.code === 200) {
+        Object.assign(memberInfo, res.data)
+        getOrderStatus()
+    } else {
+        ElMessage.error("Please login first")
+        router.push("/login")
+    }
+}
+
+const getOrderStatus = async () => {
+    let res = await CSRrequest.get(`/orders/owner`)
+    if (res.code === 200) {
+        res.data.forEach((item: any) => {
+            console.log(item)
+
+            if ((item.itemsSummary === 'Group Registration Fee' || item.itemsSummary === 'Registration Fee') && item.status === 2) {
+                console.log('paid')
+            } else {
+                console.log('not paid')
+                ElMessage.error("Please pay the registration fee first")
+                router.push("/member-center")
+            }
+        })
+    } else {
+        ElMessage.error("Please login first")
+        router.push("/login")
+    }
+
+
+
+}
+
 onMounted(() => {
-    router.push("/accommodation")
+    getMemberInfo()
+    checkDate()
+    // router.push("/accommodation")
 })
 </script>
 <style lang="scss" scoped>
@@ -128,6 +191,13 @@ onMounted(() => {
         display: flex;
         margin: 2rem 0 0 5rem;
         gap: 1.5rem;
+
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+            margin: 0;
+            padding: 0 1rem;
+            
+        }
 
         .img-box {
             flex: 1;
@@ -293,7 +363,21 @@ onMounted(() => {
                     color: white;
                     border-radius: 25px;
                     cursor: pointer;
+                    &.disabled {
+                        background-color: #E5E7E9;
+                        color: #B9B4AD;
+                        cursor: not-allowed;
+                    }
                 }
+            }
+        }
+
+        .last-date {
+            text-align: start;
+            margin: 1rem 0 0 3rem;
+
+            .date  {
+                color: red;
             }
         }
     }

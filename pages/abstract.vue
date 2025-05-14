@@ -5,83 +5,90 @@
         <Title title="Abstract" />
 
         <div class="paper-section">
-            <div v-for="(item, index) in paperList" class="paper">
-                <div class="not-editable">
-                    <div class="show-section">
-                        <span>Type :{{ item.absType }}</span>
-                        <span>Prop : {{ item.absProp }}</span>
-                        <span>Title : {{ item.absTitle }}</span>
-                        <el-button @click="seeMore(index)">more</el-button>
-                        <el-button :disabled="item.status !== 0" @click="toggleToEdit(item, index)">edit</el-button>
-                    </div>
-                    <div :class="[`hide-section${index}`, 'hide-section']">
-                        <p>First Author: {{ item.firstAuthor }}</p>
-                        <p>Speaker: {{ item.speaker }}></p>
-                        <p>Speaker Affiliation: {{ item.speakerAffiliation }}></p>
-                        <p>Corresponding Author: {{ item.correspondingAuthor }}></p>
-                        <p>Corresponding Author Email: {{ item.correspondingAuthorEmail }}></p>
-                        <p>Corresponding Author Phone: {{ item.correspondingAuthorPhone }}></p>
-                        <p>All Authors: {{ item.allAuthor }}></p>
-                        <p>All Authors Affiliation: {{ item.allAuthorAffiliation }}></p>
-                        <p>File:</p>
-                    </div>
-                </div>
-
+            <div class="paper-table-box">
+                <table class="paper-table">
+                    <tr class="table-header">
+                        <th v-if="isShowAll">Type</th>
+                        <th>Title</th>
+                        <th v-if="isShowAll">First Author</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr v-for="(paper, index) in paperList" :key="index"
+                        :class="[index === paperList.length - 1 ? 'last-row' : '', isEvenOrOdd(index)]">
+                        <td v-if="isShowAll" :class="isShowAll ? 'first-col' : ''">{{ paper.absType }}</td>
+                        <td class="paper-title" :class="!isShowAll ? 'first-col' : ''">{{ paper.absTitle }}</td>
+                        <td v-if="isShowAll">{{ paper.firstAuthor }}</td>
+                        <td class="last-col">
+                            <el-button link class="edit-btn" @click='headToEditPaper(paper)'>Edit</el-button>
+                            <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
+                            <el-button v-if="!isDisabled" link class="see-more-btn" @click='deletePaper(paper)'>Deleted</el-button>
+                            <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Deleted</el-button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
-        <el-drawer v-model="isEdit">
-            <el-form class="form" ref="formRef" :model="editPaper" :rules="formRules">
-            <el-form-item label="Abstract Type" prop="type">
-                <el-select v-model="editPaper.absType" placeholder="Type"></el-select>
-            </el-form-item>
-            <el-form-item label="Abstract Prop" prop="prop">
-                <el-select v-model="editPaper.absProp" placeholder="Prop"></el-select>
-            </el-form-item>
-            <el-form-item label="Abstract Title" prop="title">
-                <el-input v-model="editPaper.absTitle" placeholder="Titile"></el-input>
-            </el-form-item>
-            <el-form-item label="First Author" prop="firstAuthor">
-                <el-input v-model="editPaper.firstAuthor" placeholder="First Author"></el-input>
-            </el-form-item>
-            <el-form-item label="Speaker" prop="speaker">
-                <el-input v-model="editPaper.speaker" placeholder="Speaker"></el-input>
-            </el-form-item>
-            <el-form-item label="Speaker Affiliation" prop="speakerAffiliation">
-                <el-input v-model="editPaper.speakerAffiliation" placeholder="Speaker Affiliation"></el-input>
-            </el-form-item>
-            <el-form-item label="Corresponding Author" prop="correspondingAuthor">
-                <el-input v-model="editPaper.correspondingAuthor" placeholder="Corresponding Author"></el-input>
-            </el-form-item>
-            <el-form-item label="Corresponding Author Mail" prop="correspondingAuthorEmail">
-                <el-input v-model="editPaper.correspondingAuthorEmail" placeholder="Corresponding Author Email"></el-input>
-            </el-form-item>
-            <el-form-item label="Corresponding Author Phone" prop="correspondingAuthorPhone">
-                <el-input v-model="editPaper.correspondingAuthorPhone" placeholder="Corresponding Author Phone"></el-input>
-            </el-form-item>
-            <el-form-item label="All Authors" prop="allAuthors">
-                <el-input v-model="editPaper.allAuthor" placeholder="All Authors"></el-input>
-            </el-form-item>
-            <el-form-item label="All Authors Affiliation" prop="allAuthorsAffiliation">
-                <el-input v-model="editPaper.allAuthorAffiliation" placeholder="All Authors Affiliation"></el-input>
-            </el-form-item>
-            <el-form-item label="File" prop="file">
-                <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload">
-                    <el-button size="small" type="primary">Upload</el-button>
-                    <div slot="tip" class="el-upload__tip">only upload pdf file with size less than 20mb</div>
-                </el-upload>
-            </el-form-item>
-             <el-form-item label="File2" prop="file2">
-                <el-upload ref="uploadRef1" class="upload-demo" :limit="1" :on-change="handleDocxUpload">
-                    <el-button size="small" type="primary">Upload</el-button>
-                    <div slot="tip" class="el-upload__tip">only upload word file with size less than 20mb</div>
-                </el-upload>
-            </el-form-item> 
-            <el-form-item>
-                <el-button type="primary" @click="submit">Submit</el-button>
-            </el-form-item>
-        </el-form>
-        </el-drawer>
+
+        <el-dialog class="paper-info" v-model="isOpen" :width="dialogWidth">
+            <table class="paper-info-table">
+                <tr>
+                    <td colspan="2" class="column-name title">Abstract</td>
+                </tr>
+                <tr>
+                    <td class="column-name">Type</td>
+                    <td>{{ paperInfo.absType }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">Abstract Title</td>
+                    <td>{{ paperInfo.absTitle }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">First Author</td>
+                    <td>{{ paperInfo.firstAuthor }}</td>
+                </tr>
+                <tr v-if="paperInfo.absType === 'Young Investigator'">
+                    <td class="column-name">First Author Birthday</td>
+                    <td>{{ paperInfo.firstAuthorBirthday }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">Speaker</td>
+                    <td>{{ paperInfo.speaker }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">Speaker Affillication</td>
+                    <td>{{ paperInfo.speakerAffiliation }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">CorrespondingAuthor</td>
+                    <td>{{ paperInfo.correspondingAuthor }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">CorrespondingAuthor Email</td>
+                    <td>{{ paperInfo.correspondingAuthorEmail }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">CorrespondingAuthor Phone</td>
+                    <td>{{ paperInfo.correspondingAuthorPhone }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">All Authors</td>
+                    <td>{{ paperInfo.allAuthor }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">All Authors Affiliation</td>
+                    <td>{{ paperInfo.allAuthorAffiliation }}</td>
+                </tr>
+                <tr>
+                    <td class="column-name">Abstract File</td>
+                    <td v-if="envMinio + paperInfo.FileUpload">
+                        <a class="preview-link" :href="envMinio + paperInfo.paperFileUpload[0].path"
+                            target="_blank">Preview</a>
+                    </td>
+                </tr>
+
+            </table>
+        </el-dialog>
     </main>
 </template>
 <script lang="ts" setup>
@@ -89,7 +96,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
 import Title from '@/components/layout/Title.vue';
 import Banner from '@/components/layout/Banner.vue';
 
-import type { FormInstance, UploadUserFile, UploadProps } from 'element-plus';
+import type { FormInstance, FormRules, UploadUserFile, UploadProps, UploadInstance } from 'element-plus';
 
 
 const router = useRouter();
@@ -97,14 +104,12 @@ const router = useRouter();
 const memberInfo = reactive<any>({});
 const getMemberInfo = async () => {
     let res = await CSRrequest.get('/member/getMemberInfo');
-    if (res.code === 10002) {
+    if (res.code === 200) {
+        Object.assign(memberInfo, res.data);
+    } else {
         localStorage.removeItem('Authorization-member');
         router.push('/login');
-    } else if (res.code === 200) {
-        Object.assign(memberInfo, res.data);
-        editPaper.memberId = memberInfo.memberId;
     }
-
 }
 /**------------------------------------------ */
 const paperList = reactive<any>([]);
@@ -113,110 +118,99 @@ const getPapperList = async () => {
     Object.assign(paperList, res.data);
     console.log(res.data)
 }
-
-const seeMore = (index: number) => {
-    let info = document.getElementsByClassName(`hide-section${index}`);
-    if (info) {
-        info[0].classList.toggle('hide-section');
-    }
-}
-
-const editPaper = reactive<any>({});
-const isEdit = ref(false);
-const toggleToEdit = (paper: any, index: number) => {
-    editPaper.absType = paper.absType;
-    editPaper.absProp = paper.absProp;
-    editPaper.absTitle = paper.absTitle;
-    editPaper.firstAuthor = paper.firstAuthor;
-    editPaper.speaker = paper.speaker;
-    editPaper.speakerAffiliation = paper.speakerAffiliation;
-    editPaper.correspondingAuthor = paper.correspondingAuthor;
-    editPaper.correspondingAuthorEmail = paper.correspondingAuthorEmail;
-    editPaper.correspondingAuthorPhone = paper.correspondingAuthorPhone;
-    editPaper.allAuthor = paper.allAuthor;
-    editPaper.allAuthorAffiliation = paper.allAuthorAffiliation;
-    editPaper.paperId = paper.paperId;
-    isEdit.value = !isEdit.value;
-    console.log(editPaper)
-   
-}
-
-const formRules = ref<FormInstance>();
-
 /**------------------------------------------ */
-const checkFileSize = (size: number) => {
-    return size < 1024 * 1024 * 20;
+
+
+const headToEditPaper = (paper: any) => {
+    router.push(`/abstract-item/${paper.paperId}`)
 }
 
-const fileList = reactive<UploadUserFile[]>([]);
+const isOpen = ref(false);
+const paperInfo = ref<any>({});
+const toggleSeeMore = (paper: any) => {
+    isOpen.value = true;
+    console.log(paper);
 
-const handlePdfUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFiles) => {
-    if (file.size == 0) {
-        ElMessage.error('File is empty');
-        return false;
-    }
-    
-    
-    if (file.status === 'success' && file.size) {
-        if (!checkFileSize(file.size)) {
-            ElMessage.error('File size must be less than 20mb');
-            uploadFiles.pop();
-            return;
-        }
-        if (file.name.split('.').pop() !== 'pdf') {
-            ElMessage.error('File must be pdf');
-            uploadFiles.pop();
-            return;
-        }
-        fileList.push(file);
-    }
-
-}
-const handleDocxUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFiles) => {
-    if (file.size == 0) {
-        ElMessage.error('File is empty');
-        return false;
-    }
-    
-    
-    if (file.status === 'success' && file.size) {
-        if (!checkFileSize(file.size)) {
-            ElMessage.error('File size must be less than 20mb');
-            uploadFiles.pop();
-            return;
-        }
-        if (file.name.split('.').pop() !== 'docx') {
-            ElMessage.error('File must be docx');
-            uploadFiles.pop();
-            return;
-        }
-        fileList.push(file);
-    }
-
+    Object.assign(paperInfo.value, paper);
 }
 
-watch(fileList, (newVal) => {
-    console.log(newVal);
-}, { deep: true })
+const envMinio = useRuntimeConfig().public.minio
+console.log(envMinio);
 
-const submitData = new FormData();
-const submit = async () => {
-    submitData.append('data', JSON.stringify(editPaper));
-    fileList.forEach((file: any) => {
-        submitData.append('file', file.raw);
-    })
-    let res = await CSRrequest.put('/paper/owner',{
-        body: submitData
-    });
+const isEvenOrOdd = (index: number) => {
+    return index % 2 === 0 ? 'even' : 'odd'
+}
 
+const dialogWidth = ref('65%')
+const isShowAll = ref(true);
+const setShowAll = () => {
+    if (window.innerWidth < 1024) {
+        isShowAll.value = false; // 當視窗寬度小於 1024px 時，設置為 'top'
+        dialogWidth.value = '90%'
+    } else {
+        isShowAll.value = true; // 否則設置為 'left'
+        dialogWidth.value = '65%'
+    }
+    console.log(isShowAll.value)
+}
+
+const deletePaper = async (paper: any) => {
+    let res = await CSRrequest.delete(`/paper/owner/${paper.paperId}`,);
     console.log(res);
-
+    if (res.code === 200) {
+        ElMessage.success('Deleted successfully');
+        paperList.length = 0;
+        getPapperList();
+    } else {
+        ElMessage.error('Deleted failed');
+    }
 }
+
+const isDisabled = ref(false);
+
+const setting = reactive<any>({});
+const findSetting = async () => {
+    try {
+        let res = await CSRrequest.get('/setting/1');
+        console.log(res);
+        Object.assign(setting, res.data);
+        checkAvailable(setting);
+    } catch (error) {
+        console.error('Error fetching setting:', error);
+    }
+}
+
+
+const checkAvailable = (paper: any) => {
+    const currentDate = new Date();
+
+
+    if (currentDate >= setting.abstractSubmissionEndTime) {
+        isDisabled.value = true;
+    } 
+}
+
+const isClosed = () => {
+    ElMessage.error('The submission period has ended, can not be deleted');
+}
+
+
+
+
+
+
+
+
+
 
 /**------------------------------------------ */
 onMounted(() => {
     getMemberInfo();
     getPapperList();
+    findSetting();
+    window.addEventListener('resize', setShowAll);
+
+
 })
 
 
@@ -226,29 +220,253 @@ onMounted(() => {
     font-family: $common-section-font-family;
 
     .paper-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        width: 100%;
+        margin: 2rem auto;
+        background: url('assets/img/topbs_background-image.jpg') center center;
+        padding: 3rem 0;
 
-        .paper {
-            border: 1px solid #d7d7d7;
+    }
 
-            .show-section {
+    .submit-btn {
+        margin-left: 80%;
+        margin-top: 20px;
+    }
+
+    .paper-table-box {
+        width: 90%;
+        background-color: white;
+        margin: 0 auto;
+        border-radius: 15px;
+        padding: 1rem;
+
+        .paper-table {
+            width: 90%;
+            margin: 0 auto;
+            font-size: 1rem;
+            // border-collapse: separate;
+            border-spacing: 0;
+
+            tr {
+
+                th {
+                    padding: 1rem;
+                    text-align: left;
+                    font-size: 1.3rem;
+                    // border-bottom: 1px solid #ccc;
+                }
+
+                td {
+                    padding: 1rem;
+                    text-align: left;
+                }
+
+                .paper-title {
+                    max-width: 20rem;
+                    width: 20rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+            }
+
+            .first-col {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            .last-col {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
                 display: flex;
-                justify-content: space-between;
-                padding: 10px;
-                border-bottom: 1px solid #d7d7d7;
             }
 
-            .hide-section {
-                display: none;
+            .even {
+                td {
+                    background-color: #E8979E;
+                    color: white;
+                    font-weight: bold;
+                }
+
+                .see-more-btn {
+                    border: 1px solid white;
+                    color: white;
+                    padding: 0.3rem;
+                    min-width: 3rem;
+
+                    &:hover {
+                        color: black;
+                        transform: scale(1.05);
+                        transition: all 0.3s ease-in-out;
+                    }
+                }
+
+                .edit-btn {
+                    border: 1px solid white;
+                    color: white;
+                    padding: 0.3rem;
+                    min-width: 3rem;
+
+                    &:hover {
+                        color: black;
+                        transform: scale(1.05);
+                        transition: all 0.3s ease-in-out;
+                    }
+                }
+
+
             }
 
-            .editable {
-                display: none;
+            .odd {
+                td {
+                    background-color: white;
+                    color: #E8979E;
+                    font-weight: bold;
+                }
+
+                .see-more-btn {
+                    border: 1px solid #E8979E;
+                    color: #E8979E;
+                    padding: 0.3rem;
+                    min-width: 3rem;
+
+                    &:hover {
+                        transform: scale(1.05);
+                        transition: all 0.3s ease-in-out;
+                        color: black;
+                    }
+                }
+
+                .edit-btn {
+                    border: 1px solid #E8979E;
+                    color: #E8979E;
+                    padding: 0.3rem;
+                    min-width: 3rem;
+
+                    &:hover {
+                        color: black;
+                        transform: scale(1.05);
+                        transition: all 0.3s ease-in-out;
+                    }
+                }
+            }
+
+            // @media screen and (min-width: 1920px) {
+            //     font-size: 1.5rem;
+            // }
+
+
+
+            @media screen and (max-width: 1023px) {
+                font-size: 1rem;
+
+                tr {
+
+                    th {
+                        font-size: 1.8rem;
+                        padding: 0.5rem;
+                        text-align: left;
+                    }
+
+                    td {
+                        padding: 0.5rem;
+                        text-align: left;
+                    }
+
+                    .paper-title {
+                        max-width: 40rem !important;
+                    }
+
+                }
+
+                .see-more-btn {
+                    margin: 0;
+                    min-width: 3rem;
+                }
+
+                .edit-btn {
+                    margin: 0;
+                    min-width: 3rem;
+                }
+
+                .last-col {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.5rem;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                tr {
+                    .paper-title {
+                        max-width: 18rem !important;
+                    }
+                }
+
             }
         }
+
+
     }
+
+    .paper-info {
+        .paper-info-table {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            margin: 0 auto;
+            font-size: 1.3rem;
+
+            @media screen and (max-width: 1048px) {
+                font-size: 1rem;
+            }
+
+            @media screen and (max-width: 368px) {
+                font-size: 0.8rem;
+
+            }
+
+            tr {
+                border: 1px solid #ccc;
+
+                td {
+                    padding: 1rem;
+                    text-align: left;
+                    border: 1px solid #ccc;
+                }
+
+                .column-name {
+                    font-weight: bold;
+                    background-color: #f2f2f2;
+                    width: 30%;
+
+                    @media screen and (max-width: 1048px) {
+                        width: 20%;
+                    }
+
+
+                }
+
+                .preview-link {
+                    color: #007bff;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .title {
+                    font-size: 2rem;
+                    font-weight: bold;
+                    text-align: center;
+                    background-color: #E8979E;
+                    color: white;
+                }
+            }
+        }
+
+    }
+
 }
 </style>

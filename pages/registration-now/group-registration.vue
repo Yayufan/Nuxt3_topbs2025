@@ -105,11 +105,14 @@
                                 :prop="'groupMembers.' + index + '.category'" :rules="formRules.category">
                                 <el-radio-group v-model="item.category" @change="cleanCategoryExtra(item)">
                                     <el-radio :value="1">Member</el-radio>
-                                    <el-form-item v-if="item.category === 1"  :prop="'groupMembers.' + index + '.categoryExtra'" :rules="formRules.categoryExtra">
-                                        <el-select  v-model="item.categoryExtra"
-                                            class="category-select">
-                                            <el-option label="IOPBS" value="IOPBS"></el-option>
+                                    <el-form-item v-if="item.category === 1"
+                                        :prop="'groupMembers.' + index + '.categoryExtra'"
+                                        :rules="formRules.categoryExtra">
+                                        <el-select v-model="item.categoryExtra" class="category-select">
+                                            <el-option label="JBCS" value="JBCS"></el-option>
                                             <el-option label="JOPBS" value="JOPBS"></el-option>
+                                            <el-option label="KBCS" value="KBCS"></el-option>
+                                            <el-option label="HKSBS " value="HKSBS "></el-option>
                                         </el-select>
                                     </el-form-item>
                                     <el-radio :value="2">Others(Trainee/Nurse/Reasearcher)</el-radio>
@@ -309,7 +312,7 @@ const validCategoryExtra = (rule: any, value: string, callback: any) => {
     } else {
         callback();
     }
-    
+
 }
 
 
@@ -321,7 +324,7 @@ const formRules = reactive<FormRules>({
     email: [{ required: true, message: 'Please input your email', trigger: 'blur' }, { type: 'email', message: 'Please input correct email', trigger: 'blur' }],
     idCard: [{ required: true, message: 'Please input your passport number', trigger: 'blur' }],
     password: [{ required: true, message: 'Please input your password', trigger: 'blur' }],
-    confirmPassword: [{ validator: vaildConfirmPassword, trigger: 'blur' }],
+    confirmPassword: [{ required: true, validator: vaildConfirmPassword, trigger: 'blur' }],
     affiliation: [{ required: true, message: 'Please input your affiliation', trigger: 'blur' }],
     jobTitle: [{ required: true, message: 'Please input your job title', trigger: 'blur' }],
     country: [{ required: true, message: 'Please select a country', trigger: 'change' }],
@@ -544,6 +547,7 @@ onMounted(() => {
                         position: absolute;
                         top: 0.5rem;
                         left: 10rem;
+
                         @media screen and (max-width: 768px) {
                             left: 13rem;
                         }

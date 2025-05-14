@@ -3,6 +3,9 @@
         <el-carousel class="carousel-section" arrow="always" trigger="click">
             <img class="home-banner-bak" src="@/assets/img/home_banner@2x.png" alt="">
             <el-carousel-item>
+                <img src="@/assets/img/250422-home-banner.png" alt="">
+            </el-carousel-item>
+            <el-carousel-item>
                 <img src="@/assets/img/home_photo1@2x.png" alt="">
             </el-carousel-item>
             <el-carousel-item>
@@ -20,6 +23,21 @@
             <!-- {{ countdown }} -->
             <div class="countdown-timer" v-html="countdown"></div>
         </div>
+
+        <div class="info-section">
+            <div class="link-section">
+                <QuickLinks></QuickLinks>
+            </div>
+            <div class="news-section">
+                <News></News>
+            </div>
+            <div class="date-section">
+                <KeyDate></KeyDate>
+            </div>
+        </div>
+
+
+
         <div class="video-banner">
             <img src="@/assets/img/video_banner.png" alt="">
         </div>
@@ -29,6 +47,9 @@
     </main>
 </template>
 <script lang="ts" setup>
+import News from '@/components/home/News.vue';
+import QuickLinks from '@/components/home/QuickLinks.vue';
+import KeyDate from '@/components/home/KeyDate.vue';
 
 const countdown = ref('');
 
@@ -61,7 +82,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .common-section {
     font-family: $common-section-font-family;
-    
+
     .el-carousel {
         // margin-top: 2rem;
         height: 27vw;
@@ -210,6 +231,51 @@ onMounted(() => {
 
 
     }
+
+    // .news-section {
+    //     width: calc(100%/3);
+    // }
+    .info-section {
+        display: flex;
+        width: 90%;
+        gap: 3rem;
+        margin: 2rem auto;
+
+        .link-section {
+            width: 25%;
+        }
+
+        .news-section {
+            width: 35%;
+        }
+
+        .date-section {
+            width: 40%;
+        }
+
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+
+            .link-section {
+                width: 80%;
+            }
+
+            .news-section {
+                width: 80%;
+            }
+
+            .date-section {
+                width: 80%;
+            }
+
+
+        }
+
+
+    }
+
 
     .video-banner {
         width: $common-section-width;

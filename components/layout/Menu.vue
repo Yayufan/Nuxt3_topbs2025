@@ -24,8 +24,10 @@
                 <nuxt-link to="/venue"> <el-menu-item index="7-3">Venue</el-menu-item>
                 </nuxt-link>
             </el-sub-menu>
-            <el-sub-menu index="3" popper-class="noSub popper">
-                <template #title>News</template>
+            <el-sub-menu index="3" popper-class="noSub popper" @click="headToNews">
+                <template #title>
+                    <nuxt-link to="/news">News</nuxt-link>
+                </template>
             </el-sub-menu>
             <el-sub-menu index="4">
                 <template #title>Program</template>
@@ -48,12 +50,13 @@
             </el-sub-menu>
             <el-sub-menu index="6">
                 <template #title>Abstracts</template>
-                <nuxt-link to="/submission-guidelines"> <el-menu-item index="66-1">Submission Guidelines</el-menu-item>
+                <nuxt-link to="/submission-guidelines"> <el-menu-item index="66-1">Submission Guideline</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/abstract-submission"> <el-menu-item index="6-2">Abstract Submission</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/award"> <el-menu-item index="6-3">Award</el-menu-item>
                 </nuxt-link>
+                <nuxt-link to="/presentation-guideline"> <el-menu-item index="6-4">Presentation Guideline</el-menu-item></nuxt-link>
             </el-sub-menu>
             <el-sub-menu index="7">
                 <template #title>Sponsorship & Exhibition</template>
@@ -93,15 +96,19 @@ const headToLogin = () => {
     router.push(url);
 }
 
+const headToNews = () => {
+    router.push('/news');
+}
+
 const getInfoFromBackEnd = async () => {
     let res = await CSRrequest.get('/member/getMemberInfo');
-    console.log(res);
-    // if (res.code === 10002) {
-    //     localStorage.removeItem('Authorization-member');
-    //     isLogin.value = false;
-    // } else {
-    //     isLogin.value = true;
-    // }
+    console.log(res)
+    if (res.code === 10002 ||　res.code === 401) {
+        localStorage.removeItem('Authorization-member');
+        isLogin.value = false;
+    } else {
+        isLogin.value = true;
+    }
 }
 
 const isLogin = ref(false);
@@ -109,6 +116,10 @@ const validateLogin = () => {
     let res = localStorage.getItem('Authorization-member');
     if (res) {
         isLogin.value = true;
+        console.log('login');
+    } else {
+        isLogin.value = false;
+        console.log('not login');
     }
 }
 

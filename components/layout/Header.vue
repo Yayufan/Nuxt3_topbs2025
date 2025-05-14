@@ -47,6 +47,13 @@ const emits = defineEmits(['openMenu']);
 
 const headToMemberCenter = () => {
     console.log('headToMemberCenter');
+    let res = localStorage.getItem('Authorization-member');
+    if (!res) {
+        router.push('/login');
+        return;
+    }
+
+
     router.push('/member-center');
 }
 

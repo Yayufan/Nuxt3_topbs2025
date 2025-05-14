@@ -66,6 +66,8 @@ function handleScroll() {
 
 
 <style lang="scss">
+
+
 //覆蓋子選單的邊框
 .my-popper {
   --el-popover-border-radius: 15px;
@@ -135,5 +137,12 @@ function handleScroll() {
     background-color: #F0F0F0;
   }
 
+}
+
+.paper-info{
+  :deep(.el-dialog__body) {
+    background-color: $accent-color  !important;
+    padding: 0;
+  }
 }
 </style>
