@@ -7,7 +7,7 @@
             <h1 class="title">Quick Links</h1>
         </div>
         <div class="link-item-box">
-            <nuxt-link to="" class="link-item item1">
+            <nuxt-link to="/abstract-submission" class="link-item item1">
                 <div class="item-image-box">
                     <img class="link-item" src="../../assets/img/Online submission-01.svg">
                 </div>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="link-item-text">Online Registration</div>
             </nuxt-link>
-            <nuxt-link :to="''" class="link-item item3">
+            <nuxt-link to="/program-at-a-glance" class="link-item item3">
                 <div class="item-image-box">
                     <img class="link-item" src="../../assets/img/AuditOutlined.svg">
                 </div>
