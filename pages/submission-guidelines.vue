@@ -5,214 +5,180 @@
             <Breadcrumbs firstRoute="Abstracts" secoundRoute="Submission Guidelines"></Breadcrumbs>
             <Title title="Submission Guidelines"></Title>
 
-            <!-- <div class="content">
-                <h1 class="title">Important Dates</h1>
+            <div class="content">
+                <!-- <h1 class="sub-title">Submission Guidelines</h1> -->
+                <h1 class="">Important Dates</h1>
 
-                <div class="date-info">
-                    <ul>
-                        <li>Abstract Submission Deadline: September 5 (Fri.), 2025</li>
-                        <li>Notification of abstract acceptance: September 25 (Thu.), 2025</li>
-                        <li> E-poster and Recording Audio Uploaded Deadline: September 5 (Fri.), 2025</li>
+                <div class="important-date-info">
+                    <ul class="disc-list">
+                        <li class="note-text">Abstract Submission Deadline: Friday, September 5, 2025 </li>
+                        <li>Abstract Results Announcement: Thursday, September 25, 2025 </li>
+                        <li>E-Poster & Video Submission Deadline: Friday, October 10, 2025 </li>
                     </ul>
                 </div>
 
+                <div class="review-process">
+                    <h1>Review Process</h1>
+                    <table class="review-process-table">
+                        <tr>
+                            <td rowspan="2">Step1</td>
+                            <td>May15 ~ September 5</td>
+                            <td>Submit abstracts online after complete registration on the official website </td>
+                        </tr>
 
-                <p class="reminder">
-                    If you would like to withdraw your abstract(s) which have been already submitted, please contact the
-                    Secretariat of Taiwan Breast Cancer Society by email (iopbs2025@gmail.com).
-                </p>
+                        <tr>
+                            <td>September 6 ~ September 24 </td>
+                            <td>Abstracts will be reviewed by the committee </td>
+                        </tr>
 
-                <h1 class="submission-title">[Abstract Submission]</h1>
+                        <tr>
+                            <td rowspan="4">
+                                Step2
+                            </td>
+                            <td>September 25 </td>
+                            <td>Notification of accepted abstracts </td>
+                        </tr>
 
-                <h2>01-Abstract Submission Process</h2>
-            
+                        <tr>
+                            <td>September 25 ~ October 10 </td>
+                            <td>E-poster & video upload to the official website. </td>
+                        </tr>
 
-                <ul class="second-list step-list">
-                    <li><B>Step 1:</B> Sign up and log in</li>
-                    <li class="step-list-item"><B>Step 2:</B> Check your email for the submission confirmationBefore
-                        submitting, please complete Online registration. (Click [Registration] -> [Online
-                        registration]).<br /> Please note that your abstract(s) will be withdrawn if the registration is
-                        not completed.
-                    </li>
-                    <li><B>Step 3:</B> Click [Abstract] -> [Online submission] on the website. Fill out the required
-                        information and submit your abstract via the online system.</li>
-                    <li><B>Step 4:</B> Check your email for the submission confirmation</li>
-                </ul>
-
-
-
-
-                <div class="submission-guidelines-box">
-                    <h2>02-Abstract Submission Guidelines</h2>
-                    <p class="list-text">Online only(via offical website) No email, mail, or fax</p>
-
-                    <ul class="second-list disc-list">
-                        <li>The abstracts should follow the formats listed below:</li>
-                        <ul class="third-list no-type-list">
-                            <li><B>Title:</B> Tahoma, 14pt; capitalize only the first word, proper nouns, and acronyms;
-                                no
-                                abbreviations.</li>
-                            <li><B>Body:</B>Purpose, Methods, Results, Conclusion. Tahoma, 11pt; 18pt line spacing; 1.5
-                                cm
-                                margins; no figures, tables, references, or keywords.</li>
-                            <li>Max 30 authors; list hospital before university affiliations.</li>
-                            <li>If an author is affiliated with hospital as well as university, please enter the name of
-                                the
-                                hospital for which he/she works.</li>
-                        </ul>
-                    </ul>
+                        <tr>
+                            <td>October 10 ~ 23 </td>
+                            <td>Committee reviews accepted e-posters and videos to select award winners </td>
+                        </tr>
+                        <tr>
+                            <td>October 24 </td>
+                            <td>Award announcement </td>
+                        </tr>
+                        <tr>
+                            <td>Oral Presentation & Award Ceremony </td>
+                            <td>November 15 </td>
+                            <td>The winners will give oral presentations and receive awards </td>
+                        </tr>
+                        <tr>
+                            <td>Exhibition of Selected Abstract </td>
+                            <td>November 15 ~ 16 </td>
+                            <td>All selected e-posters and videos will be displayed at the event venue. </td>
+                        </tr>
+                    </table>
                 </div>
 
-                <div class="submission-instructions">
-                    <h2>03-Submission Instructions</h2>
-                    <ul class="second-list disc-list">
-                        <li>The presenter must be the first author. Only one presenter is allowed per abstract.</li>
-                        <li>Each section of the online submission form must be completed.</li>
-                        <li>The title of the abstract should reflect significant content, no results/conclusions.</li>
-                        <li>Commercial names can only be used in the body of the abstract with the ® symbol.</li>
-                        <li>Abbreviations may be used in the title and text if defined.</li>
-                        <li>The authors must choose the awards that they would like to apply for. However, the decision
-                            of TIBCS 2025 Committee would be final.</li>
-                    </ul>
-                </div>
 
-                <div class="conflicts-of-interest">
-                    <h2>04-Conflicts of Interest</h2>
-                    <ul class="second-list no-type-list">
-                        <li>All authors must disclose any potential conflicts of interest when submitting the
-                            abstract. The
-                            presenting author is responsible for obtaining this information from all co-authors.</li>
-                    </ul>
-                </div>
+                <div class="abstract-submission-box">
+                    <h1 class="submission-title">[Abstract Submission]</h1>
 
-                <div class="notification-of-acceptance">
-                    <h2>05-Notification of Acceptance</h2>
-                    <ul class="second-list disc-list">
-                        <li>Abstract acceptance will be notified by email.</li>
-                        <li>All submitted abstracts will be reviewed by the Organizing Committee according to standard
-                            review procedures.</li>
-                        <li>The decision of the Organizing Committee on abstract acceptance is final.</li>
-                    </ul>
-                </div>
-
-                <div class="abstract-modification">
-                    <h2>06-Abstract modification or withdrawal</h2>
-                    <ul class="second-list disc-list">
-                        <li> Please note that the abstract(s) will be withdrawn if the author’s registration is not
-                            completed.</li>
-                        <li>You can modify your submitted abstract online before the deadline.</li>
-                        <li>If you would like to revise the accepted abstract, please contact the Secretariat of TIBCS
-                            2025 by email (tibcs@tibcs.org.tw/bcsttpe@gmail.com) within 36 hours after the notification
-                            of abstract acceptance.</li>
-                    </ul>
-                </div>
-
-                <div class="other">
-                    <h2>07-Other submission regulations</h2>
-                    <ul class="second-list disc-list">
-                        <li>By submitting an abstract intended to be presented at TIBCS 2024, the first author warrants
-                            that the materials has neither been nor will be published in any publication in peer preview
-                            setting or presented at a meeting.</li>
-                        <li>No prior publication/presentation; encore abstracts need new data.</li>
-                        <li> Abstracts submitted after the deadline or violating the regulations will be rejected and
-                            returned by TIBCS 2024 Organizing Committee.</li>
-                        <li>With the submission of the abstract, the first author representing him/herself and all
-                            co-authors to undertakes to:</li>
-                        <ul class="third-list square-list">
-                            <li>Release full copyright to TIBCS 2024, and give full permission for the abstract, if
-                                accepted, to be presented in print and/or electronic format.</li>
-                            <li>Warrant that he/she is an investigator with a substantial involvement in the study
-                                presented
-                                in the abstract.</li>
-                            <li> Take responsibility for the accuracy and confidential of the submitted the abstract.
+                    <div class="submission-guidelines-box">
+                        <h2>01. How to confirm your abstract presentation </h2>
+                        <ul class="secondstep-list">
+                            <li><B>Step 1:</B> Register and <nuxt-link class="link" to="/login"> sign in</nuxt-link>.
                             </li>
-                            <li>Ensure that all the authors are acknowledge of, and agree to, the content of the
-                                abstract
-                                and support the data therein.</li>
-                            <li>Be the contact person for all correspondence concerning the abstract and to keep
-                                co-authors
-                                informed about its status.</li>
+
+                            <li><B>Step 2:</B> Complete online registration before submitting your
+                                abstract.
+                            </li>
+                            <li><B>Step 3:</B> Click “Abstract” → “Submit Online” on the website, fill in all required
+                                information, and upload your abstract. </li>
+                            <li><B>Step 4:</B> Check your email for confirmation of successful submission. </li>
                         </ul>
-                    </ul>
+                    </div>
+
+                    <div class="submission-guidelines-box">
+                        <h2>02. Abstract Format </h2>
+                        <p class="list-text">Only PDF files submitted through the official website will be accepted.
+                            Submissions via email, post, or fax are not accepted. </p>
+
+                        <ul class="disc-list">
+                            <li>Title: Tahoma font, 14pt; capitalize only the first word, proper nouns, and
+                                abbreviations;
+                                avoid abbreviations in the title. </li>
+                            <li>Body: Include purpose, methods, results, and conclusion; Tahoma font, 11pt; line spacing
+                                18pt; margin 1.5 cm; no figures, tables, references, or keywords allowed. </li>
+                            <li>Authors: Up to 30 authors. Institutions should list hospitals first, followed by
+                                universities. </li>
+                            <li>If the author is affiliated with both, list the hospital name. </li>
+                        </ul>
+                    </div>
+
+                    <div class="submission-guidelines-box">
+                        <h2>03. Submission Notes </h2>
+                        <ul class="disc-list">
+                            <li>The presenting author must be the first author. Only one presenter per abstract. </li>
+                            <li>All fields in the online submission form must be completed. </li>
+                            <li>The abstract title should reflect the research topic and must not contain results or
+                                conclusions. </li>
+                            <li>Commercial names may be used in the abstract body but must include the ® symbol. </li>
+                            <li>Abbreviations in the abstract body must be defined. </li>
+                            <li>Authors Must indicate which award category they wish to apply for; final selection is at
+                                the
+                                discretion of the 9th IOPBS & TOPBS 2025 Committee. </li>
+                        </ul>
+                    </div>
+
+                    <div class="submission-guidelines-box">
+                        <h2>04. Conflict of Interest Disclosure </h2>
+                        <ul class="disc-list">
+                            <li>All authors must disclose any potential conflicts of interest when submitting the
+                                abstract.
+                            </li>
+                            <li>The presenting author is responsible for collecting and submitting this information for
+                                all
+                                co-authors. </li>
+                        </ul>
+                    </div>
+
+                    <div class="submission-guidelines-box">
+                        <h2>05. Acceptance Notification </h2>
+                        <ul class="disc-list">
+                            <li>Notifications will be sent via email.</li>
+                            <li>All abstracts will be reviewed according to standard procedures. </li>
+                            <li>The committee reserves the right to make final decisions on abstract acceptance. </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="submission-guidelines-box">
+                        <h2>06. Abstract Modification or Withdrawal </h2>
+                        <ul class="disc-list">
+                            <li>Abstracts will be withdrawn if registration is incomplete. </li>
+                            <li>Submitted abstracts may be modified online before the Submission deadline. </li>
+                            <li>To modify an accepted abstract, contact the 9th IOPBS & TOPBS 2025 Secretariat by email
+                                within 36 hours of receiving the acceptance notification. </li>
+                        </ul>
+                    </div>
+
+                    <div class="submission-guidelines-box">
+                        <h2>07. Other Submission Policies </h2>
+                        <ul class="disc-list">
+                            <li>Abstracts submitted must not have been previously published in peer-reviewed journals or
+                                presented at other conferences. </li>
+                            <li>Submission of encore abstract is not allowed; for follow-up studies, new data must be
+                                included. </li>
+                            <li>Abstracts that violate guidelines or are submitted after the deadline will be rejected.
+                            </li>
+                            <li>Submission implies that the first and co-authors agree to grant usage rights, ensure
+                                data
+                                accuracy, and take responsibility for communication. </li>
+
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="shadow-divider"></div>
-                <p class="reminder">TBCS reserves the right to amend the program of the rules and regulations. Should
-                    there be disputes, TBCS reserves the right to the final decision.</p>
+                <p class="reminder note-text">The 9th IOPBS & TOPBS 2025 reserves the right to modify event rules and
+                    program
+                    content. In case of dispute, the committee’s decision is final. </p>
 
-                <div class="poster">
-                    <h2 class="">Poster Submission [Not available until Aug.18, 2025]</h2>
-                    <p class="list-text">For accepted abstracts, the first author must submit an e-poster along with a recording file via
-                        the TIBCS 2025 official website. Printed posters will not be accepted. The e-poster and
-                        recording file will be displayed on the TIBCS official website.</p>
+                <el-divider></el-divider>
 
-                    <ul class="second-list disc-list">
-                        <li>
-                            <B>Important Note:</B>
-                            <p class="third-list">Abstracts selected for oral presentation are also required to submit an e-poster and
-                                recording file.
-                            </p>
-                        </li>
-                        <li>
-                            Deadline for E-Poster Submission: 23:59, Sep. 5 (Fri.), 2025
-                        </li>
-                        <li>
-                            Submission Process:
-                            <ul class="third-list decimal-list">
-                                <li>Log in to the TIBCS 2025 official website to submit your e-poster and recording
-                                    file.
-                                </li>
-                                <li>(Click [here] to download and review the instructions for uploading the e-poster and
-                                    recording.)
-                                </li>
-                            </ul>
-                        </li>
-                        <li>E-Poster Requirements:
-                            <ul class="third-list decimal-list">
-                                <li>All e-posters must be written in English.
-                                </li>
-                                <li>The topic and the first author must match those of the accepted abstract.
-                                </li>
-                                <li>Use the provided [E-Poster Template] to prepare your e-poster. Export it as a JPG or
-                                    PNG file for upload.</li>
-                                <li>The e-poster file must meet the following format requirements:
-                                    <ul class="third-list disc-list">
-                                        <li>Orientation: Portrait
-                                        </li>
-                                        <li>Dimensions: Width 1920 pixels or less
-                                        </li>
-                                        <li>File Size: Preferably below 5 MB
-                                        </li>
-                                        <li>Naming Convention: [Abstract number]_[First Author’s Name]
-                                            <p>Example: 001-Da-Ming Lee
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </li>
+              
 
-                            </ul>
-                        </li>
-                        <li>Recording File Requirements:
-                            <ul class="third-list decimal-list">
-                                <li>Language: English
-                                </li>
-                                <li>Duration: Within 5 minutes
-                                </li>
-                                <li>File Format: MP3 or M4A
-                                </li>
-                                <li>Name the file as specified in the instructions.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-                <el-button>
+                <!-- <el-button>
                     Online Submission
-                </el-button>
+                </el-button> -->
 
 
-            </div> -->
+            </div>
         </main>
 
     </div>
@@ -238,7 +204,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
             font-size: 2.5rem;
         }
 
-        .date-info {
+        .important-date-info {
             border: $accent-color 1px solid;
             padding: 2rem;
 
@@ -353,15 +319,49 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
             list-style-type: decimal-leading-zero;
         }
 
-        .second-list {
-            padding-left: 4rem;
-            font-size: 1.3rem;
-        }
+
 
         .third-list {
             padding-left: 4rem;
             font-size: 1.2rem;
         }
+
+        .note-text {
+            color: #DE6A75;
+        }
+
+        .sub-title {
+            margin-top: 4rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: $accent-hover-bg;
+        }
+
+        .submission-title {
+            font-weight: bold;
+            color: $accent-hover-bg;
+        }
+
+        .review-process-table {
+            width: 100%;
+            border-collapse: collapse;
+            // margin: 2rem 0;
+
+            td {
+                padding: 1rem;
+                border: 1px solid black;
+                text-align: center;
+                font-size: 1.2rem;
+                line-height: normal;
+            }
+        }
+
+        .link {
+            color: #2667B9;
+            text-decoration: underline;
+        }
+
+
 
         @media screen and (max-width: 486px) {
             width: 90%;

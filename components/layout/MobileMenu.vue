@@ -10,7 +10,8 @@
             <div v-for="item in menu">
                 <li @click="item.isActive = !item.isActive">
                     <img :src="'/img/' + item.icon" alt="">
-                    {{ item.title }}
+                    <span v-if=item.submenu>{{ item.title }}</span>
+                    <nuxt-link v-else to="/news" @click="closeMenu">{{ item.title }}</nuxt-link>
                     <img v-if="item.submenu" class="arrow" :class="{ 'is-active': item.isActive }"
                         src="/img/chevron-down.svg" alt="">
                 </li>
@@ -46,13 +47,20 @@ const menu = reactive([
             { title: 'Board Member', link: '/board-member' },
             { title: 'Download Center', link: '/download-center' },
             { title: 'Activity Photos', link: '/activity-photos' },
+            { title: 'Venue', link: '/venue' },
         ]
+    },
+    {
+        title: 'News', icon: 'cellPhone.svg', isActive: false
+        // , submenu: [
+        //     { title: 'News', link: '/news' },
+        // ]
     },
     {
         title: 'Program', icon: 'cloud.svg', isActive: false, submenu: [
             { title: 'Program at a Galance', link: '/program-at-a-glance' },
-            { title: 'Scientific Program', link: '/scientific-program' },
-            { title: 'Social Program', link: '/social-program' },
+            // { title: 'Scientific Program', link: '/scientific-program' },
+            // { title: 'Social Program', link: '/social-program' },
             { title: 'Invited Speakers', link: '/invited-speakers' },
             { title: 'Program Book Download', link: '/program-book-download' },
 
@@ -67,9 +75,11 @@ const menu = reactive([
         ]
     },
     {
-        title: 'Call for Abstract', icon: 'bachelor-cap.svg', isActive: false, submenu: [
-            { title: 'Submission Guidelines', link: '/submission-guidelines' },
+        title: 'Abstract', icon: 'bachelor-cap.svg', isActive: false, submenu: [
+            { title: 'Submission Guideline', link: '/submission-guidelines' },
             { title: 'Abstract Submission', link: '/abstract-submission' },
+            { title: 'Award', link: '/award' },
+            { title: 'Presentation Guideline', link: '/presentation-guideline' },
 
         ]
     },
@@ -82,7 +92,7 @@ const menu = reactive([
         title: 'General Information', icon: 'shop.svg', isActive: false, submenu: [
             { title: 'Accommodation', link: '/accommodation' },
             { title: 'Video', link: '/video' },
-            { title: 'Venue', link: '/venue' },
+            // { title: 'Venue', link: '/venue' },
             { title: 'Transportation', link: '/transportation' },
             { title: 'Travel', link: 'https://www.travel.taipei/en' },
             { title: 'Contact Us', link: '/contact-us' },

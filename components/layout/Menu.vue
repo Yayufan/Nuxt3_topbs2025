@@ -50,12 +50,13 @@
             </el-sub-menu>
             <el-sub-menu index="6">
                 <template #title>Abstracts</template>
-                <nuxt-link to="/submission-guidelines"> <el-menu-item index="66-1">Submission Guidelines</el-menu-item>
+                <nuxt-link to="/submission-guidelines"> <el-menu-item index="66-1">Submission Guideline</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/abstract-submission"> <el-menu-item index="6-2">Abstract Submission</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/award"> <el-menu-item index="6-3">Award</el-menu-item>
                 </nuxt-link>
+                <nuxt-link to="/presentation-guideline"> <el-menu-item index="6-4">Presentation Guideline</el-menu-item></nuxt-link>
             </el-sub-menu>
             <el-sub-menu index="7">
                 <template #title>Sponsorship & Exhibition</template>

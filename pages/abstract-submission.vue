@@ -47,10 +47,13 @@
                         <el-input v-model="data.correspondingAuthorPhone"
                             placeholder="Corresponding Author Phone"></el-input>
                     </el-form-item>
-                    <el-form-item class="allAuthors" label="All Authors(Use semicolon to separate authors)" prop="allAuthor">
+                    <el-form-item class="allAuthors" label="All Authors(Use semicolon to separate authors)"
+                        prop="allAuthor">
                         <el-input type="textarea" v-model="data.allAuthor" placeholder="All Authors"></el-input>
                     </el-form-item>
-                    <el-form-item class="allAuthors" label="All Authors Affiliation(Use semicolon to separate authors affilication)" prop="allAuthorAffiliation">
+                    <el-form-item class="allAuthors"
+                        label="All Authors Affiliation(Use semicolon to separate authors affilication)"
+                        prop="allAuthorAffiliation">
                         <el-input type="textarea" v-model="data.allAuthorAffiliation"
                             placeholder="All Authors Affiliation"></el-input>
                     </el-form-item>
@@ -98,7 +101,14 @@ const getMemberInfo = async () => {
         data.memberId = memberInfo.memberId;
 
         let orderRes = await CSRrequest.get(`/orders/owner`);
-
+        if (orderRes.code === 200) {
+            let registration = orderRes.data.filter((item: any) => item.itemsSummary === 'Registration Fee' || item.itemsSummary === "Group Registration Fee");
+            if (registration.length > 0 && registration[0].status !== 2) {
+                router.push('/payment');
+                ElMessage.error('Please pay registration fee first');
+            } else {
+            }
+        }
 
         console.log(orderRes);
     }
@@ -270,10 +280,34 @@ const submit = async (formEl: FormInstance | undefined) => {
     })
 }
 
+const setting = reactive<any>({});
+const findSetting = async () => {
+    try {
+        let res = await CSRrequest.get('/setting/1');
+        console.log(res);
+        Object.assign(setting, res.data);
+        checkAvailable(setting);
+    } catch (error) {
+        console.error('Error fetching setting:', error);
+    }
+}
+
+
+const checkAvailable = (paper: any) => {
+    const currentDate = new Date();
+
+
+    if (currentDate >= setting.abstractSubmissionEndTime) {
+        router.push("/member-center");
+        ElMessage.error('Abstract submission is closed');
+    } 
+}
+
 
 
 onMounted(() => {
     getMemberInfo();
+    findSetting();
 })
 
 </script>

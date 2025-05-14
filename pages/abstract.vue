@@ -21,6 +21,8 @@
                         <td class="last-col">
                             <el-button link class="edit-btn" @click='headToEditPaper(paper)'>Edit</el-button>
                             <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
+                            <el-button v-if="!isDisabled" link class="see-more-btn" @click='deletePaper(paper)'>Deleted</el-button>
+                            <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Deleted</el-button>
                         </td>
                     </tr>
                 </table>
@@ -152,7 +154,45 @@ const setShowAll = () => {
     console.log(isShowAll.value)
 }
 
+const deletePaper = async (paper: any) => {
+    let res = await CSRrequest.delete(`/paper/owner/${paper.paperId}`,);
+    console.log(res);
+    if (res.code === 200) {
+        ElMessage.success('Deleted successfully');
+        paperList.length = 0;
+        getPapperList();
+    } else {
+        ElMessage.error('Deleted failed');
+    }
+}
 
+const isDisabled = ref(false);
+
+const setting = reactive<any>({});
+const findSetting = async () => {
+    try {
+        let res = await CSRrequest.get('/setting/1');
+        console.log(res);
+        Object.assign(setting, res.data);
+        checkAvailable(setting);
+    } catch (error) {
+        console.error('Error fetching setting:', error);
+    }
+}
+
+
+const checkAvailable = (paper: any) => {
+    const currentDate = new Date();
+
+
+    if (currentDate >= setting.abstractSubmissionEndTime) {
+        isDisabled.value = true;
+    } 
+}
+
+const isClosed = () => {
+    ElMessage.error('The submission period has ended, can not be deleted');
+}
 
 
 
@@ -167,6 +207,7 @@ const setShowAll = () => {
 onMounted(() => {
     getMemberInfo();
     getPapperList();
+    findSetting();
     window.addEventListener('resize', setShowAll);
 
 

@@ -5,83 +5,76 @@
             <Breadcrumbs firstRoute="Abstracts" secoundRoute="Award" />
             <Title title="Award"></Title>
 
-            <!-- <div class="content">
-                <p>The organizing committee of TIBCS 2024 will select outstanding abstracts for a variety of awards. 3
-                    winners of Young Investigator Award/ 3 winners of Best Presentation Awards/ 1 winner of Brilliant
-                    Presentation Award and 5 winners of Selected Presentation Award will be notified on Oct. 26. The
-                    ranking and the awards will be announced in the ceremony on Oct. 27.</p>
+            <div class="content">
+                <p>The 9th IOPBS & TOPBS 2025 Organizing Committee will select outstanding submissions from the
+                    abstracts received and present the following awards: Young Investigator Award (1 winner), Best
+                    Poster Award (1 winner), and Best Video Award (1 winner).
+                    The award results will be announced on Friday, October 24, and the winners will give an oral
+                    presentation and receive their awards on Saturday, November 15. </p>
 
 
                 <ul class="main-list">
 
                     <li>
-                        <B>Young Investigator Award</B>
+                        <B>01.Young Investigator Award</B>
                         <ul class="second-list">
-                            <li>Scholars: 1 winners</li>
-                            <li>Benefits:</li>
-                            <ul class="third-list">
-                                <li>The 1st place: USD 800 and certificate</li>
-                            </ul>
-                            <li>Qualification:</li>
-                            <ul class="third-list">
-                                <li>Applicants who are 45 years old and under are eligible to win the TIBCS Young
-                                    Investigator Award.</li>
-                                <li>Applicants who have complete registration and submission their abstract on the
-                                    website.
-                                    After accepted, the applicants must submit the e-poster and recoding file on the
-                                    website. The committee will select top 3 to have oral presentation.</li>
-                            </ul>
+                            <li>Number of Winners: 1 </li>
+                            <li>Award: USD 800 and a Young Investigator Award certificate </li>
+                            <li>Eligibility:
+                                <ul style="list-style-type: circle;">
+                                    <li>Researchers aged 45 or younger. </li>
+                                    <li>Must complete online registration and submit an abstract. Upon acceptance, an
+                                        e-poster must be submitted.
+
+                                    </li>
+                                </ul>
+
+                            </li>
                         </ul>
                     </li>
 
                     <li>
-                        <B>Best Video Award</B>
+                        <B>02.Best Poster Award</B>
                         <ul class="second-list">
-                            <li>Scholars: 1 winners</li>
-                            <li>Benefits:</li>
-                            <ul class="third-list">
-                                <li>The 1st place: USD 800 and certificate</li>
-                            </ul>
+                            <li>Number of Winners: 1 </li>
+                            <li>Award: USD 800 and a Best Poster Award certificate </li>
+                            <li>Eligibility:
+                                <ul style="list-style-type: circle;">
+                                    <li>Must complete online registration and submit an abstract. Upon acceptance, an
+                                        e-poster must be submitted.
+                                    </li>
+                                </ul>
+
+                            </li>
                         </ul>
                     </li>
 
                     <li>
-                        <B>Best Poster Award</B>
-                        <p class="list-text">According to the review of all the submitted e-posters and recording files by the committee,
-                            the
-                            4th place will be the winner of Brilliant Presentation Award, and the 5-9th place will be
-                            the
-                            winners of Selected Presentation Award.</p>
+                        <B>03.Best Video Award </B>
                         <ul class="second-list">
-                            <li>Scholars: 1 winners</li>
-                            <li>Benefits:</li>
-                            <ul class="third-list">
-                                <li>The 1st place: USD 800 and certificate</li>
-                            </ul>
+                            <li>Number of Winners: 1 </li>
+                            <li>Award: USD 800 and a Best Video Award certificate </li>
+                            <li>Eligibility:
+                                <ul style="list-style-type: circle;">
+                                    <li>Must complete online registration and submit an abstract. Upon acceptance, a video file must be submitted. 
+                                    </li>
+                                </ul>
+
+                            </li>
                         </ul>
                     </li>
                 </ul>
 
-                <div class="award-geremony">
-                    <ul class="second-list">
-                        <li><B>Date:</B></li>
-                        <li><B>Venue:</B></li>
-                        <li>Please note that for those who are not present, it would be considered as waiving the
-                            awards.</li>
-                    </ul>
-                </div>
-
-                <p class="reminder">
-                    For general enquiries, please contact the Secretariat of  by email
-                    (iopbs2025@gmail.com).
-                </p>
-
-                <p class="warn">IOPBS reserves the right to amend the program of the rules and regulations. Should
-                    there be disputes, IOPBS reserves the right to the final decision.
-
-                </p>
-
-            </div> -->
+             
+                <ul class="none-style-list">
+                    <li><B>Note:</B>
+                        <ul class="disc-list">
+                            <li>All prize amounts are before tax.</li>
+                            <li>The organizer reserves the right to withhold awards if there is an insufficient number of submissions or due to other related reasons. </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </main>
 
     </div>
@@ -102,15 +95,17 @@ import Title from '@/components/layout/Title.vue';
         line-height: 2.5rem;
 
         .main-list {
-            list-style: decimal-leading-zero;
+            list-style: none;
             display: flex;
             flex-direction: column;
             gap: 5rem;
+            padding: 0;
         }
 
         .second-list {
             list-style: disc;
             font-size: 1.3rem;
+
         }
 
         .third-list {
@@ -123,14 +118,21 @@ import Title from '@/components/layout/Title.vue';
             margin: 1rem 0;
         }
 
-        .reminder {
-            font-size: 1.2rem;
+        .none-style-list {
+            list-style: none;
+            margin: 1rem 0;
+            font-size: 1.3rem;
+                        padding: 0;
+
         }
 
-        .warn {
-            font-size: 0.8rem;
-            text-align: center;
+        .disc-list {
+            list-style: disc;
+            margin-left: 2rem;
+            font-size: 1.3rem;
         }
+
+
 
         @media screen and (max-width: 476px) {
             width: 80%;
