@@ -120,7 +120,20 @@ const login = async (formEl: FormInstance | undefined) => {
 
 }
 
+const memberInfo = reactive<any>({});
+
+const getMemberInfo = async () => {
+    let res = await CSRrequest.get('/member/getMemberInfo');
+    if (res.code === 10002 || res.code === 401) {
+        localStorage.removeItem('Authorization-member');
+        router.push('/login');
+    } else {
+        router.push('/member-center');
+    }
+}
+
 onMounted(() => {
+    getMemberInfo();
     getCaptcha();
     setFormLabelPosotion();
     window.addEventListener('resize', setFormLabelPosotion);

@@ -64,7 +64,7 @@
             <div class="file-upload">
                 <el-form-item label="Pdf File" prop="fileList">
                     <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload"
-                        :auto-upload="false" :on-remove="handleRemove">
+                        :auto-upload="false" :on-remove="handleRemove" :on-exceed="handleExceed">
                         <el-button size="small" type="primary">Upload</el-button>
                         <div slot="tip" class="el-upload__tip">only upload pdf file with size less than 20mb</div>
                     </el-upload>
@@ -126,6 +126,20 @@ const handleRemove = (file: UploadUserFile, fileList: UploadUserFile[]) => {
         formRef.value.validateField('fileList');
     }
 }
+
+const handleExceed: UploadProps['onExceed'] = (files: UploadUserFile[], fileList: UploadUserFile[]) => {
+    console.log(files);
+    ElMessage.error(`You can only upload 1 file, please upload again`);
+    if (files.length > 0 ) {
+        fileList.splice(0, fileList.length);
+    
+        data.fileList = [];
+        console.log(data.fileList);
+        console.log(fileList);
+    }
+
+
+}  
 
 const handlePdfUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFiles) => {
     console.log(file);

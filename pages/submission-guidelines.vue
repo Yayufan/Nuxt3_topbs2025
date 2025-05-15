@@ -45,7 +45,7 @@
                         </tr>
 
                         <tr>
-                            <td>October 10 ~ 23 </td>
+                            <td>October 11 ~ 23 </td>
                             <td>Committee reviews accepted e-posters and videos to select award winners </td>
                         </tr>
                         <tr>
@@ -78,7 +78,7 @@
                             <li><B>Step 2:</B> Complete online registration before submitting your
                                 abstract.
                             </li>
-                            <li><B>Step 3:</B> Click “Abstract” → “Submit Online” on the website, fill in all required
+                            <li><B>Step 3:</B> Click “Abstract” → “Abstract submission” on the website, fill in all required
                                 information, and upload your abstract. </li>
                             <li><B>Step 4:</B> Check your email for confirmation of successful submission. </li>
                         </ul>
@@ -169,7 +169,6 @@
                     program
                     content. In case of dispute, the committee’s decision is final. </p>
 
-                <el-divider></el-divider>
 
               
 

@@ -3,7 +3,7 @@
         <ol>
             <div>
                 <li>
-                   <nuxt-link to="/" @click="closeMenu"> <img src="/img/bugle.svg" alt="">
+                   <nuxt-link to="/" @click="closeMenu"> <img src="/img/home.svg" alt="">
                     Home</nuxt-link>
                 </li>
             </div>
@@ -44,14 +44,13 @@ const menu = reactive([
             { title: 'Message from President', link: '/message-from-president' },
             { title: 'Conference Information', link: '/conference-information' },
             { title: 'Organizing Committee', link: '/organizing-committee' },
-            { title: 'Board Member', link: '/board-member' },
             { title: 'Download Center', link: '/download-center' },
             { title: 'Activity Photos', link: '/activity-photos' },
             { title: 'Venue', link: '/venue' },
         ]
     },
     {
-        title: 'News', icon: 'cellPhone.svg', isActive: false
+        title: 'News', icon: 'bugle.svg', isActive: false
         // , submenu: [
         //     { title: 'News', link: '/news' },
         // ]
@@ -95,7 +94,6 @@ const menu = reactive([
             // { title: 'Venue', link: '/venue' },
             { title: 'Transportation', link: '/transportation' },
             { title: 'Travel', link: 'https://www.travel.taipei/en' },
-            { title: 'Contact Us', link: '/contact-us' },
         ]
     }
 ])
