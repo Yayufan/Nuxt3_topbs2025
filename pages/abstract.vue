@@ -21,8 +21,8 @@
                         <td class="last-col">
                             <el-button link class="edit-btn" @click='headToEditPaper(paper)'>Edit</el-button>
                             <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
-                            <el-button v-if="!isDisabled" link class="see-more-btn" @click='deletePaper(paper)'>Deleted</el-button>
-                            <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Deleted</el-button>
+                            <el-button v-if="!isDisabled" link class="see-more-btn" @click='deletePaper(paper)'>Delete</el-button>
+                            <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button>
                         </td>
                     </tr>
                 </table>

@@ -15,8 +15,6 @@
                 </nuxt-link>
                 <nuxt-link to="/organizing-committee"> <el-menu-item index="2-3">Organizing Committee</el-menu-item>
                 </nuxt-link>
-                <nuxt-link to="/board-member"> <el-menu-item index="2-4">Board Member</el-menu-item>
-                </nuxt-link>
                 <nuxt-link to="/download-center"> <el-menu-item index="2-5">Download Center</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/activity-photos"> <el-menu-item index="2-6">Activity Photos</el-menu-item>
@@ -73,8 +71,6 @@
                 </nuxt-link>
                 <nuxt-link to="https://www.travel.taipei/en" target="_blank"> <el-menu-item
                         index="8-5">Travel</el-menu-item>
-                </nuxt-link>
-                <nuxt-link to="/contact-us"> <el-menu-item index="8-6">Contact Us</el-menu-item>
                 </nuxt-link>
             </el-sub-menu>
             <el-sub-menu index="9" :class="!isLogin ? 'popper' : 'none'" @click="headToLogin">

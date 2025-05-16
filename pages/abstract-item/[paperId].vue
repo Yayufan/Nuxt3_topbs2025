@@ -60,7 +60,7 @@
             <div class="file-upload">
                 <el-form-item label="Pdf File" prop="fileList">
                     <el-upload ref="uploadRef" class="upload-demo" :limit="1" :on-change="handlePdfUpload"
-                        :auto-upload="false" :on-remove="handleRemove">
+                        :auto-upload="false" :on-remove="handleRemove" :on-exceed="handleExceed">
                         <el-button size="small" type="primary">Upload</el-button>
                         <div slot="tip" class="el-upload__tip">
                             <span>Only upload pdf file with size less than 20mb</span>
@@ -126,10 +126,23 @@ const checkFileSize = (size: number) => {
 const handleRemove = (file: UploadUserFile, fileList: UploadUserFile[]) => {
     console.log(data.fileList);
     data.fileList = [];
+
     if (formRef.value) {
         formRef.value.validateField('fileList');
     }
 }
+
+const handleExceed: UploadProps['onExceed'] = (files: UploadUserFile[], fileList: UploadUserFile[]) => {
+    console.log(files);
+    ElMessage.error(`You can only upload 1 file, please upload again`);
+    if (files.length > 0 ) {
+        fileList.splice(0, fileList.length);
+    
+        data.fileList = [];
+        console.log(data.fileList);
+        console.log(fileList);
+    }
+}   
 
 const handlePdfUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFiles) => {
     console.log(file);
@@ -151,6 +164,7 @@ const handlePdfUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFi
             return;
         }
         data.fileList.push(file);
+        console.log(data.fileList);
         if (formRef.value) {
             formRef.value.validateField('fileList');
         }
@@ -261,8 +275,10 @@ const submit = async (formEl: FormInstance | undefined) => {
             const { fileList, ...restData } = data;
             submitData.append('data', JSON.stringify(restData));
             data.fileList.forEach((file: any) => {
+                console.log(file, "from data");
                 submitData.append('file', file.raw);
             })
+            console.log(submitData.get('file'));
             let res = await CSRrequest.put('/paper/owner', {
                 body: submitData
             });
