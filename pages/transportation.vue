@@ -327,6 +327,13 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
 
+useSeoMeta({
+    title: 'Transportation - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Explore the transportation options for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. This page provides detailed information on how to reach the venue, including MRT, bus, and taxi services.',
+    keywords: 'Transportation , 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
+
 const backToTop = () => {
     window.scrollTo({
         top: 0,

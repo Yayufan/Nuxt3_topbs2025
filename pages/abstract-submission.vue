@@ -85,6 +85,13 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
 
 import type { FormInstance, FormRules, UploadProps, UploadUserFile, UploadFile, UploadFiles, UploadInstance } from 'element-plus';
 
+useSeoMeta({
+    title: 'Abstract Submission - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Welcome to the abstract submission page for the 9th IOPBS (International Oncoplastic Breast Surgery Society) & TOPBS (Taiwan Oncoplastic Breast Surgery Society) Conference 2025. Submit your abstracts for poster, video, or young investigator presentations and be part of this prestigious event in Taipei.',
+    keywords: 'Abstract Submission, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
+
 
 const router = useRouter();
 /**-------------- Member info --------------- */
@@ -93,7 +100,8 @@ const memberInfo = reactive<any>({});
 const getMemberInfo = async () => {
     let res = await CSRrequest.get('/member/getMemberInfo');
     console.log(res);
-    if (res.code === 10002 || res.code === 401) {
+
+    if (res.code != 200) {
         localStorage.removeItem("Authorization-member");
         router.push("/login");
     } else if (res.code === 200) {
@@ -109,8 +117,6 @@ const getMemberInfo = async () => {
             } else {
             }
         }
-
-        console.log(orderRes);
     }
 }
 

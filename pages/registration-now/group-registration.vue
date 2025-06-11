@@ -154,6 +154,13 @@ import Banner from '@/components/layout/Banner.vue';
 
 import countriesJson from '@/assets/data/countries.json'
 
+useSeoMeta({
+    title: 'Group Registration - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Join the 9th IOPBS & TOPBS 2025 Conference in Taipei! Register now for group participation and enjoy exclusive benefits. Explore the latest advancements in oncoplastic breast surgery with global experts.',
+    keywords: 'Group Registration, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
+
 const countries = reactive(countriesJson);
 
 

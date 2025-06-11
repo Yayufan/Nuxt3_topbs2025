@@ -4,7 +4,7 @@
             <!-- <h1 class="title">President's Message</h1>
               -->
             <Banner />
-            <Breadcrumbs firstRoute="TOPBS & IOPBS" secoundRoute="President's Message"></Breadcrumbs>
+            <Breadcrumbs firstRoute="IOPBS & TOPBS" secoundRoute="President's Message"></Breadcrumbs>
             <Title title="President's Message" class="title"></Title>
 
             <div class="card-section">
@@ -58,6 +58,12 @@ import president2Sign from '../assets/img/Sign-ChenShinCheh.jpg'
 
 import president3Photo from '../assets/img/YeHsiangTang.jpg'
 import president3Sign from '../assets/img/Sign-YeHsiangTang.jpg'
+
+useSeoMeta({
+    title: 'President\'s Message - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Read the messages from the presidents of the Taiwan Oncoplastic Breast Surgery Society and the International Oncoplastic Breast Surgery Symposium, welcoming attendees to the 9th IOPBS & TOPBS 2025 conference.',
+    keywords: 'President\'s Message, IOPBS, TOPBS, 2025 Conference, Oncoplastic Breast Surgery'
+})
 
 
 

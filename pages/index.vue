@@ -51,6 +51,12 @@ import News from '@/components/home/News.vue';
 import QuickLinks from '@/components/home/QuickLinks.vue';
 import KeyDate from '@/components/home/KeyDate.vue';
 
+useSeoMeta({
+    title: 'TAIPEI - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Welcome to the 9th IOPBS (International Oncoplastic Breast Surgery Society) & TOPBS (Taiwan Oncoplastic Breast Surgery Society) Conference 2025, held in Taipei from November 15-16, 2025. Explore the latest advancements in sustainable perfect form and safety, bringing together global experts for exchange and collaboration.',
+    keywords: 'Home, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 const countdown = ref('');
 
 const calculateCountdown = () => {

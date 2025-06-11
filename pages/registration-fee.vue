@@ -141,6 +141,13 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
 import Title from '@/components/layout/Title.vue';
+
+useSeoMeta({
+    title: 'Registration Fee - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Explore the registration fee details for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. Find information on personal and group registration fees, early-bird discounts, and payment methods.',
+    keywords: 'Registration Fee, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 </script>
 <style lang="scss" scoped>
 .common-section {

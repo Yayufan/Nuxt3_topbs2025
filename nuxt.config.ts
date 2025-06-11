@@ -32,7 +32,7 @@ export default defineNuxtConfig({
       title: 'TOPBS & IOPBS 2025',
       meta: [
         { name: 'keyword', content: "TOPBS2025、TOPBS 2025、TOPBS、IOPBS2025、IOPBS 2025、IOPBS、IOPBS 9th" },
-        { name: 'description', content: "" }
+        { name: 'description', content: "Welcome to TOPBS 2025 & IOPBS 9th! Held in Taipei from November 15-16, this meeting brings together global experts to explore innovation, safety, and collaboration in oncoplastic breast surgery." }
       ],
       //引入第三方外部css可能會用到
       link: [
@@ -108,5 +108,5 @@ export default defineNuxtConfig({
       ]
     }
   },
-  
+
 })

@@ -12,7 +12,7 @@
 
             <div class="btn-section">
                 <el-button :class="selectedDay === 'day1'? 'active':''" @click="selectedDayFunction('day1')">Day1, Nov 15</el-button>
-                <el-button :class="selectedDay === 'day2'? 'active':''" @click="selectedDayFunction('day2')">Day1, Nov 16</el-button>
+                <el-button :class="selectedDay === 'day2'? 'active':''" @click="selectedDayFunction('day2')">Day2, Nov 16</el-button>
             </div>
 
             <div class="img-section">
@@ -27,6 +27,12 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
 import Title from '@/components/layout/Title.vue';
+
+useSeoMeta({
+    title: 'Program at a Glance - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Explore the program at a glance for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. This page provides an overview of the conference schedule, including key sessions and events.',
+    keywords: 'Program at a Glance, Conference Schedule, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
 
 const selectedDay = ref('day1');
 const selectedDayFunction = (day: string) => {

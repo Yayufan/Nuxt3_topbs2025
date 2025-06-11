@@ -1,6 +1,6 @@
 <template>
     <div class="banner-box">
-        <img src="../../assets/img/banner.png" alt="">
+        <img src="../../assets/img/banner.png" alt="2025 IOPBS & TOPBS International Conference Banner" />
     </div>
 </template>
 <style lang="scss" scoped>

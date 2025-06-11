@@ -9,6 +9,13 @@
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+
+useSeoMeta({
+    title: 'Contact Us - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Get in touch with the organizing committee of the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. This page provides contact information for inquiries, feedback, and assistance related to the conference.',
+    keywords: 'Contact Us, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 </script>
 <style lang="scss" scoped>
 .common-section {

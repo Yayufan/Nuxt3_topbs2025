@@ -32,6 +32,12 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
 
+useSeoMeta({
+    title: 'Online Registration - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Register online for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. Choose your attendee type and proceed with the registration process.',
+    keywords: 'Online Registration, IOPBS, TOPBS, 2025 Conference, Oncoplastic Breast Surgery'
+})
+
 const router = useRouter();
 
 let attendeeType = ref('1');

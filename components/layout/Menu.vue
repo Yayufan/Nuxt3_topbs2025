@@ -8,7 +8,7 @@
                 </template>
             </el-sub-menu>
             <el-sub-menu index="2">
-                <template #title>TOPBS & IOPBS</template>
+                <template #title>IOPBS & TOPBS</template>
                 <nuxt-link to="/message-from-president"> <el-menu-item index="2-1">Message from President</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/conference-information"> <el-menu-item index="2-2">Conference Information</el-menu-item>

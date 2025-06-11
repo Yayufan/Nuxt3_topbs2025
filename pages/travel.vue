@@ -12,6 +12,8 @@
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+
+
 </script>
 <style lang="scss" scoped>
 .common-section {

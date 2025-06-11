@@ -49,6 +49,13 @@ import Banner from '@/components/layout/Banner.vue';
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
 import Title from '@/components/layout/Title.vue';
 
+useSeoMeta({
+    title: 'Member Login - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Member login page for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. Sign in to access your account, retrieve your password, or register for the conference.',
+    keywords: 'Login, Sign In, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
+
 const router = useRouter();
 
 const captcha = reactive<any>({
