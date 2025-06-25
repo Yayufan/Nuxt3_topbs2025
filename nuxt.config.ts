@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     },
 
     esbuild: {
-      drop: ['console', 'debugger'], // 移除 console 和 debugger
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
     },
 
     server: {

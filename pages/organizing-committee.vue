@@ -6,7 +6,7 @@
             <Breadcrumbs firstRoute="IOPBS & TOPBS" secoundRoute="Organizing Committee"></Breadcrumbs>
             <Title title="Committee"></Title>
             <div class="content">
-                <!-- <div class="committee-list">
+                <div class="committee-list">
                     <div v-for="item in commiteeList" class="committee-item-box">
                         <div class="committee-item">
                             <h4 class="committee-job-title">{{ item.jobTitle }}</h4>
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </main>
 
@@ -38,112 +38,112 @@ const commiteeList = reactive([
         jobTitle: 'President',
         list: [{
             chineseName: '葉顯堂',
-            englishName: 'Yeh, Hsien-Tang ',
+            englishName: 'Hsien-Tang Yeh',
         }
         ]
     }, {
-        jobTitle: 'Vice President',
+        jobTitle: 'Organizer, 9th IOPBS',
         list: [{
-            chineseName: '沈士哲',
-            englishName: 'Shen, Shih-Che',
-        }, {
+            chineseName: '陳訓徹',
+            englishName: 'Shin-Cheh Chen',
+        }]
+    }, {
+        jobTitle: 'Honorary Chair, IOPBS',
+        list: [{
+            chineseName: '朴鎬用',
+            englishName: 'Ho Yong Park',
+        }]
+    }
+    
+    , {
+        jobTitle: 'Vice President',
+        list: [{ 
             chineseName: '洪進昇',
-            englishName: 'Hung, Chin-Sheng',
+            englishName: 'Chin-Sheng Hung',      
+        }, {
+             chineseName: '沈士哲',
+            englishName: 'Shih-Che Shen',
         }
         ]
     }, {
         jobTitle: 'Secretary General',
         list: [{
             chineseName: '林敬翰',
-            englishName: 'JOSEPH LIN ',
-        }]
-    }, {
-        jobTitle: 'Executive Director ',
-        list: [{
-            chineseName: '廖國秀 ',
-            englishName: 'Liao, Guo-Shiou',
-        }, {
-            chineseName: '劉良智',
-            englishName: 'Liu, Liang-Chih',
-        }]
-    }, {
-        jobTitle: 'Director',
-        list: [
-            {
-                chineseName: '王明暘 ',
-                englishName: 'Wang, Ming-Yang',
-            }, {
-                chineseName: '巫承哲 ',
-                englishName: 'Wu, Cheng-Che',
-            }, {
-                chineseName: '姚忠瑾',
-                englishName: 'Yao, Chung-Chin ',
-            }, {
-                chineseName: '郭文宏',
-                englishName: 'Kuo, Wen-Hung',
-            }, {
-                chineseName: '陳芳銘',
-                englishName: 'Chen, Fang-Ming ',
-            }, {
-                chineseName: '陳柵君',
-                englishName: 'Chen, Cha-Chun',
-            }, {
-                chineseName: '陳錫根',
-                englishName: 'Chen, Shyi-Gen',
-            }, {
-                chineseName: '曾信順',
-                englishName: 'Tseng, Hsin-Shun',
-            }, {
-                chineseName: '游啓昌',
-                englishName: 'Yu, Chi-Chang',
-            }, {
-                chineseName: '賴鴻文',
-                englishName: 'Lai, Hung-Wen',
-            }
-        ]
-    }, {
-        jobTitle: 'Executive Supervisor',
-        list: [{
-            chineseName: '張耀仁',
-            englishName: 'Chang, Yao-Jen',
-        }]
-    }, {
-        jobTitle: 'Supervisor',
-        list: [{
-            chineseName: '于家珩',
-            englishName: 'Yue, Chia-Herng',
-        }, {
-            chineseName: '周旭桓',
-            englishName: 'Chou, Hsu-Huan',
-        }, {
-            chineseName: '黃其晟',
-            englishName: 'Huang, Chi-Cheng',
-        }, {
-            chineseName: '謝家明',
-            englishName: 'Hsieh, Chia-Ming',
+            englishName: 'Joseph Lin',
         }]
     }, {
         jobTitle: 'Honorary President',
         list: [{
             chineseName: '鄭翠芬',
-            englishName: 'Cheng, Tsui-Fen',
+            englishName: 'Fiona Tsui-Fen Cheng',
         }]
     }, {
-        jobTitle: 'Honorary Advisor',
+        jobTitle: 'Organizing Committee',
         list: [{
-            chineseName: '陳訓徹',
-            englishName: 'Chen, Shin-Cheh',
+            chineseName: '張耀仁',
+            englishName: 'Yao-Jen Chang',
+        }, {
+            chineseName: '陳柵君',
+            englishName: 'Cha-Chun Chen',
         }, {
             chineseName: '陳達人',
-            englishName: 'Chen, Dar-Ren',
-        }]
-    }, {
-        jobTitle: 'Honorary Director',
-        list: [{
+            englishName: 'Dar-Ren Chen',
+        }, {
+            chineseName: '陳芳銘',
+            englishName: 'Fang-Ming Chen',
+        }, {
+            chineseName: '陳錫根',
+            englishName: 'Shyi-Gen Chen',
+        }, {
+            chineseName: '周旭桓',
+            englishName: 'Hsu-Huan Chou',
+        },  {
+            chineseName: '謝家明',
+            englishName: 'Chia-Ming Hsieh',
+        },{
+            chineseName: '黃其晟',
+            englishName: 'Chi-Cheng Huang',
+        },{
+            chineseName: '郭文宏',
+            englishName: 'Wen-Hung Kuo',
+        },{
+            chineseName: '賴鴻文',
+            englishName: 'Hung-Wen Lai',
+        },{
+            chineseName: '廖國秀',
+            englishName: 'Guo-Shiou Liao',
+        },{
+            chineseName: '劉良智',
+            englishName: 'Liang-Chih Liu',
+        },{
             chineseName: '歐陽賦',
-            englishName: 'Ou-Yang, Fu',
-        }]
+            englishName: 'Fu Ou-Yang',
+        },{
+            chineseName: '曾信順',
+            englishName: 'Hsin-Shun Tseng',
+        },{
+            chineseName: '王明暘',
+            englishName: 'Ming-Yang Wang',
+        },{
+            chineseName: '巫承哲',
+            englishName: 'Cheng-Che Wu',
+        },{
+            chineseName: '姚忠瑾',
+            englishName: 'Chung-Chin Yao',
+        },{
+            chineseName: '游啓昌',
+            englishName: 'Chi-Chang Yu',
+        },{
+            chineseName: '于家珩',
+            englishName: 'Chia-Herng Yue',
+        }
+    ]
     }
+    
+    
+    
+    
+  
 ])
 
 
