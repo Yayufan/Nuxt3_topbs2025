@@ -186,6 +186,13 @@
 import Banner from '@/components/layout/Banner.vue';
 import Title from '@/components/layout/Title.vue';
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+
+useSeoMeta({
+    title: 'Submission Guidelines - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Explore the submission guidelines for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. This page provides detailed information on abstract submission, important dates, review process, and more.',
+    keywords: 'Submission Guideline , 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 </script>
 <style lang="scss" scoped>
 .common-section {

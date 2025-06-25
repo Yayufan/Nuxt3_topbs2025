@@ -147,6 +147,12 @@ import countriesJson from '@/assets/data/countries.json'
 import Category from '../education-surgery/[category].vue';
 import { id } from 'element-plus/es/locale/index.mjs';
 
+useSeoMeta({
+    title: 'Registration Information - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery ',
+    description: 'Register now for the 9th IOPBS & TOPBS 2025 International Conference! Get early bird discounts and detailed registration guidelines for this major event in oncoplastic breast surgery in 2025.',
+    keywords: 'Registration Now, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 const countries = reactive(countriesJson);
 
 
@@ -367,9 +373,9 @@ watch(() => attendeeType, (value) => {
         formLabel.phoneNumValidate = '請輸入手機號碼'
         formLabel.categoryValidate = '請選擇類別'
         formLabel.remitAccountLast5Validate = '請輸入匯款帳號末五碼'
-        formLabel.category1 = '會員(台灣乳房腫瘤手術暨重建醫學會)'
-        formLabel.category2 = '其他(包含護理人員、住院醫師、研究人員、學生... 等)'
-        formLabel.category3 = '非會員'
+        formLabel.category1 = '台灣乳房腫瘤手術暨重建醫學會會員'
+        formLabel.category2 = '非會員(包含護理人員、住院醫師、研究人員、學生...等)'
+        formLabel.category3 = '非會員醫師(非本會會員醫師、廠商)'
     }
 }, { immediate: true })
 
@@ -383,7 +389,7 @@ interface formData {
     lastName: string,
     chineseName: string,
     email: string,
-    confirmEmail:string,
+    confirmEmail: string,
     password: string,
     confirmPassword: string,
     affiliation: string,

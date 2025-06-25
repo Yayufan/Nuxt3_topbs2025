@@ -78,6 +78,13 @@
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
+useSeoMeta({
+    title: 'Accommodation - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Explore recommended hotels for the 9th IOPBS & TOPBS 2025 conference in Taipei. Book your stay at Grand HYATT TAIPEI, PACIFIC BUSSINESS HOTEL, or CHECK INN, all conveniently located near the event venue.',
+    keywords: 'Recommended Hotel, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
+
 </script>
 <style lang="scss" scoped>
 .common-section {

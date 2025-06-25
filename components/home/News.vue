@@ -361,12 +361,13 @@ let currentPage = ref(1)
                     .NewsItemTitle {
                         font-size: 1.3rem;
                         color: #371307;
+                        // width: 100%;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        white-space: nowrap;
+                        // white-space: nowrap;
 
                         @media screen and (max-width:481px) {
-                            width: 96px;
+                            // width: 96px;
 
                         }
 

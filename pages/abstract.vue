@@ -21,8 +21,10 @@
                         <td class="last-col">
                             <el-button link class="edit-btn" @click='headToEditPaper(paper)'>Edit</el-button>
                             <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
-                            <el-button v-if="!isDisabled" link class="see-more-btn" @click='deletePaper(paper)'>Delete</el-button>
+                            <el-button v-if="!isDisabled" link class="see-more-btn"
+                                @click='deletePaper(paper)'>Delete</el-button>
                             <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button>
+                            <el-button v-if="paper.status === 1" link class="see-more-btn" @click="headToUploadFile(paper)">Upload</el-button>
                         </td>
                     </tr>
                 </table>
@@ -125,6 +127,10 @@ const headToEditPaper = (paper: any) => {
     router.push(`/abstract-item/${paper.paperId}`)
 }
 
+const headToUploadFile = (paper: any) => {
+    router.push(`/abstract-file/${paper.paperId}`)
+}
+
 const isOpen = ref(false);
 const paperInfo = ref<any>({});
 const toggleSeeMore = (paper: any) => {
@@ -144,7 +150,7 @@ const isEvenOrOdd = (index: number) => {
 const dialogWidth = ref('65%')
 const isShowAll = ref(true);
 const setShowAll = () => {
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 1200) {
         isShowAll.value = false; // 當視窗寬度小於 1024px 時，設置為 'top'
         dialogWidth.value = '90%'
     } else {
@@ -187,7 +193,7 @@ const checkAvailable = (paper: any) => {
 
     if (currentDate >= setting.abstractSubmissionEndTime) {
         isDisabled.value = true;
-    } 
+    }
 }
 
 const isClosed = () => {
@@ -357,6 +363,7 @@ onMounted(() => {
 
 
 
+
             @media screen and (max-width: 1023px) {
                 font-size: 1rem;
 
@@ -390,7 +397,7 @@ onMounted(() => {
                 }
 
                 .last-col {
-                    flex-direction: column;
+                    // flex-direction: column;
                     align-items: flex-start;
                     gap: 0.5rem;
                 }

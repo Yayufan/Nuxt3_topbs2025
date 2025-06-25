@@ -83,6 +83,13 @@
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
 import Banner from '@/components/layout/Banner.vue';
 import Title from '@/components/layout/Title.vue';
+
+useSeoMeta({
+    title: 'Award - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Discover the award opportunities at the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. The organizing committee will present awards for Young Investigator, Best Poster, and Best Video. Winners will be announced on October 24 and recognized during the conference.',
+    keywords: 'Abstract Award, Award, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 </script>
 <style lang="scss" scoped>
 .common-section {

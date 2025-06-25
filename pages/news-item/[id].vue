@@ -73,6 +73,8 @@ onMounted(() => {
 
         .content-box {
             margin-top: 2rem;
+            width: 80%;
+            margin-inline: auto;
             // justify-content: center;
         }
     }

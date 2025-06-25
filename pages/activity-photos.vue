@@ -2,7 +2,7 @@
     <div>
         <main class="common-section">
             <h1 class="title">Activity Photos</h1>
-            <Breadcrumbs firstRoute="TOPBS & IOPBS" secoundRoute="Activity Photos"></Breadcrumbs>
+            <Breadcrumbs firstRoute="IOPBS & TOPBS" secoundRoute="Activity Photos"></Breadcrumbs>
             <div class="content">
                 <h1 class="">Page Under Construction</h1>
             </div>
@@ -12,6 +12,13 @@
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+
+useSeoMeta({
+    title: 'Activity Photos - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Explore the activity photos from the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. This page is currently under construction, but stay tuned for updates showcasing the highlights and memorable moments from the event.',
+    keywords: 'Activity Photo , 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 </script>
 <style lang="scss" scoped>
 .common-section {

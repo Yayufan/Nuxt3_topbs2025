@@ -35,6 +35,12 @@
 <script lang="ts" setup>
 import Banner from '@/components/layout/Banner.vue';
 
+useSeoMeta({
+    title: 'News - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
+    description: 'Stay updated with the latest news and announcements for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. This page provides the latest articles and updates related to the conference.',
+    keywords: 'News, Latest News, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
+})
+
 const router = useRouter()
 
 let newsList = reactive<any>([])
