@@ -24,11 +24,15 @@
                             <el-button v-if="!isDisabled" link class="see-more-btn"
                                 @click='deletePaper(paper)'>Delete</el-button>
                             <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button>
-                            <el-button v-if="paper.status === 1" link class="see-more-btn" @click="headToUploadFile(paper)">Upload</el-button>
+                            <el-button v-if="paper.status === 1" link class="see-more-btn"
+                                @click="headToUploadFile(paper)">Upload</el-button>
                         </td>
                     </tr>
                 </table>
             </div>
+            <el-button class="go-submit-btn" :disabled="isDisabled" @click="headToSubmit">
+                Abstract Submission
+            </el-button>
         </div>
 
 
@@ -161,15 +165,23 @@ const setShowAll = () => {
 }
 
 const deletePaper = async (paper: any) => {
-    let res = await CSRrequest.delete(`/paper/owner/${paper.paperId}`,);
-    console.log(res);
-    if (res.code === 200) {
-        ElMessage.success('Deleted successfully');
-        paperList.length = 0;
-        getPapperList();
-    } else {
-        ElMessage.error('Deleted failed');
-    }
+    ElMessageBox.confirm('Are you sure you want to delete this paper?', 'Warning', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+    }).then(async () => {
+        let res = await CSRrequest.delete(`/paper/owner/${paper.paperId}`,);
+        console.log(res);
+        if (res.code === 200) {
+            ElMessage.success('Deleted successfully');
+            paperList.length = 0;
+            getPapperList();
+        } else {
+            ElMessage.error('Deleted failed');
+        }
+    }).catch(() => {
+        ElMessage.info('Deletion cancelled');
+    });
 }
 
 const isDisabled = ref(false);
@@ -198,6 +210,14 @@ const checkAvailable = (paper: any) => {
 
 const isClosed = () => {
     ElMessage.error('The submission period has ended, can not be deleted');
+}
+
+const headToSubmit = () => {
+    if (isDisabled.value) {
+        ElMessage.error('The submission period has ended, can not be submitted');
+    } else {
+        router.push('/abstract-submission');
+    }
 }
 
 
@@ -473,6 +493,26 @@ onMounted(() => {
             }
         }
 
+    }
+
+    .go-submit-btn {
+        width: 20%;
+        margin: 2rem auto;
+        display: block;
+        background-color: #E8979E;
+        color: white;
+        border-radius: 5px;
+
+        &:hover {
+            color: white;
+            transform: scale(1.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media screen and (max-width: 767px) {
+            width: 80%;
+            font-size: 1.2rem;
+        }
     }
 
 }
