@@ -3,7 +3,8 @@
         <div class="temp-box"></div>
         <el-breadcrumb class="breadcrumb" :separator-icon="ArrowRight">
             <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-            <el-breadcrumb-item>{{ props.firstRoute }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="props.firstRoute !== 'News'">{{ props.firstRoute }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-else ><a class="is-link" href="/news">News</a></el-breadcrumb-item>
             <el-breadcrumb-item>{{ props.secoundRoute }}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
@@ -43,6 +44,16 @@ const props = defineProps<{
         :deep(.el-breadcrumb__inner) {
 
             color: #DFB4BD;
+        }
+
+        a {
+            color: #DFB4BD;
+            text-decoration: none;
+            &:hover {
+                color: #D5C1C5;
+                text-decoration: underline;
+                transform: scale(1.05);
+            }
         }
 
         img {

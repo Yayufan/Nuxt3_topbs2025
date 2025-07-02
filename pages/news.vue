@@ -61,7 +61,7 @@ const handlePageClick = (option: string) => {
 const getNewsList = async () => {
     console.log("獲取最新消息列表")
     console.log(currentPage.value)
-    let res = await CSRrequest.get('/article/pagination', {
+    let res = await CSRrequest.get('/article/news/pagination', {
         params: {
             page: currentPage.value,
             size: 10
