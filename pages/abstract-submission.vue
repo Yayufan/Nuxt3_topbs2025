@@ -303,7 +303,7 @@ const submit = async (formEl: FormInstance | undefined) => {
 const setting = reactive<any>({});
 const findSetting = async () => {
     try {
-        let res = await CSRrequest.get('/setting/1');
+        let res = await CSRrequest.get('/setting');
         console.log(res);
         Object.assign(setting, res.data);
         checkAvailable(setting);

@@ -64,7 +64,7 @@ let newsList = reactive<any>([])
 
 const getNewsList = async () => {
     console.log(currentPage.value)
-    let res = await CSRrequest.get('/article/pagination', {
+    let res = await CSRrequest.get('/article/news/pagination', {
         params: {
             page: currentPage.value,
             size: 3
