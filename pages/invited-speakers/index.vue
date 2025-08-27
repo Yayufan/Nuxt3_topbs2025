@@ -26,7 +26,7 @@ const getSpeakers = async () => {
   let res = await CSRrequest.get('/invited-speaker/pagination', {
     params: {
       page: 1,
-      size: 15,
+      size: 100,
     },
   })
     console.log(res);
