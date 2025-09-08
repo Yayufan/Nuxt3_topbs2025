@@ -11,9 +11,9 @@
 
                 <div class="important-date-info">
                     <ul class="disc-list">
-                        <li class="note-text">Abstract Submission Deadline: Friday, September 5, 2025 </li>
-                        <li>Abstract Results Announcement: Thursday, September 25, 2025 </li>
-                        <li>E-Poster & Video Submission Deadline: Friday, October 10, 2025 </li>
+                        <li class="note-text">Abstract Submission Deadline: Monday, September 22, 2025 </li>
+                        <li>Abstract Results Announcement: Monday, October 06, 2025 </li>
+                        <li>E-Poster & Video Submission Deadline: Monday, October 20, 2025 </li>
                     </ul>
                 </div>
 
@@ -22,12 +22,12 @@
                     <table class="review-process-table">
                         <tr>
                             <td rowspan="2">Step1</td>
-                            <td>May15 ~ September 5</td>
+                            <td>May15 ~ September 22</td>
                             <td>Submit abstracts online after complete registration on the official website </td>
                         </tr>
 
                         <tr>
-                            <td>September 6 ~ September 24 </td>
+                            <td>September 23 ~ October 05 </td>
                             <td>Abstracts will be reviewed by the committee </td>
                         </tr>
 
@@ -35,21 +35,21 @@
                             <td rowspan="4">
                                 Step2
                             </td>
-                            <td>September 25 </td>
+                            <td>October 06 </td>
                             <td>Notification of accepted abstracts </td>
                         </tr>
 
                         <tr>
-                            <td>September 25 ~ October 10 </td>
+                            <td>October 06 ~ October 20 </td>
                             <td>E-poster & video upload to the official website. </td>
                         </tr>
 
                         <tr>
-                            <td>October 11 ~ 23 </td>
+                            <td>October 20 ~ 31 </td>
                             <td>Committee reviews accepted e-posters and videos to select award winners </td>
                         </tr>
                         <tr>
-                            <td>October 24 </td>
+                            <td>November 05 </td>
                             <td>Award announcement </td>
                         </tr>
                         <tr>

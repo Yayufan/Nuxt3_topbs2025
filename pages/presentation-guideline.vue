@@ -15,7 +15,7 @@
                     <p class="list-text">For accepted abstracts, authors must submit an e-poster via the official
                         website of the 9th IOPBS & TOPBS 2025. E-posters will be displayed at the event venue. </p>
                     <ul class="disc-list">
-                        <li class="note-text">E-poster Submission Deadline: Friday, October 10, 2025, 23:59 (local time)
+                        <li class="note-text">E-poster Submission Deadline: Monday, October 20, 2025, 23:59 (local time)
                         </li>
                         <li><B>Submission Method:</B> Please <nuxt-link class="link" to="/login">log in</nuxt-link> to
                             the official website of the 9th
@@ -49,7 +49,7 @@
                             website of the 9th IOPBS & TOPBS 2025. Videos will be displayed at the event venue. </B>
                     </p>
                     <ul class="disc-list">
-                        <li class="note-text"><B>Video Submission Deadline:</B> Friday, October 10, 2025, 23:59 (local time) </li>
+                        <li class="note-text"><B>Video Submission Deadline:</B> Monday, October 20, 2025, 23:59 (local time) </li>
                         <li><B>Submission Method: </B>Please log in to the official website of the 9th IOPBS & TOPBS
                             2025 to upload the video. </li>
                     </ul>

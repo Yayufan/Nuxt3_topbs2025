@@ -9,7 +9,7 @@
                 <p>The 9th IOPBS & TOPBS 2025 Organizing Committee will select outstanding submissions from the
                     abstracts received and present the following awards: Young Investigator Award (1 winner), Best
                     Poster Award (1 winner), and Best Video Award (1 winner).
-                    The award results will be announced on Friday, October 24, and the winners will give an oral
+                    The award results will be announced on Wednesday, November 05, and the winners will give an oral
                     presentation and receive their awards on Saturday, November 15. </p>
 
 

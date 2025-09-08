@@ -136,16 +136,16 @@ const handleRemove = (file: UploadUserFile, fileList: UploadUserFile[]) => {
 const handleExceed: UploadProps['onExceed'] = (files: UploadUserFile[], fileList: UploadUserFile[]) => {
     console.log(files);
     ElMessage.error(`You can only upload 1 file, please upload again`);
-    if (files.length > 0 ) {
+    if (files.length > 0) {
         fileList.splice(0, fileList.length);
-    
+
         data.fileList = [];
         console.log(data.fileList);
         console.log(fileList);
     }
 
 
-}  
+}
 
 const handlePdfUpload: UploadProps['onChange'] = (file: UploadUserFile, uploadFiles) => {
     console.log(file);
@@ -314,13 +314,19 @@ const findSetting = async () => {
 
 
 const checkAvailable = (paper: any) => {
+    // 獲取今日時間
     const currentDate = new Date();
+    // 將截止時間字串轉換為 Date 物件
+    const endDate = new Date(setting.abstractSubmissionEndTime);
 
+    console.log("今日", currentDate);
+    console.log("截止日", endDate);
+    console.log("是否阻擋", currentDate >= endDate);
 
-    if (currentDate >= setting.abstractSubmissionEndTime) {
+    if (currentDate >= endDate) {
         router.push("/member-center");
         ElMessage.error('Abstract submission is closed');
-    } 
+    }
 }
 
 

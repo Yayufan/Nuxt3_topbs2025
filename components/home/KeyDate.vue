@@ -23,20 +23,10 @@
 
             <li class="key-date-item">
                 <div class="key-date-info">
-                    <p class="date-box"><span>05</span><span class="month">Sep<span class="year">2025</span></span></p>
+                    <p class="date-box"><span>22</span><span class="month">Sep<span class="year">2025</span></span></p>
                     <p class="info">Abstract Submission Deadline</p>
                 </div>
                 <a class="key-date-link" href="https://evt.to/eiiouhhdw" target="_blank">
-                    <img class="home-banner-bak" src="../../assets/img/save date-01.svg">
-                </a>
-            </li>
-
-            <li class="key-date-item">
-                <div class="key-date-info">
-                    <p class="date-box"><span>25</span><span class="month">Sep<span class="year">2025</span></span></p>
-                    <p class="info">Notification of Acceptance</p>
-                </div>
-                <a class="key-date-link" href="https://evt.to/eiiouhsmw" target="_blank">
                     <img class="home-banner-bak" src="../../assets/img/save date-01.svg">
                 </a>
             </li>
@@ -53,7 +43,18 @@
 
             <li class="key-date-item">
                 <div class="key-date-info">
-                    <p class="date-box"><span>15~16</span><span class="month">Nov<span class="year">2025</span></span></p>
+                    <p class="date-box"><span>06</span><span class="month">Oct<span class="year">2025</span></span></p>
+                    <p class="info">Notification of Acceptance</p>
+                </div>
+                <a class="key-date-link" href="https://evt.to/eiiouhsmw" target="_blank">
+                    <img class="home-banner-bak" src="../../assets/img/save date-01.svg">
+                </a>
+            </li>
+
+            <li class="key-date-item">
+                <div class="key-date-info">
+                    <p class="date-box"><span>15~16</span><span class="month">Nov<span class="year">2025</span></span>
+                    </p>
                     <p class="info">9th IOPBS & TOPBS2025</p>
                 </div>
                 <a class="key-date-link" href="https://evt.to/eiiiuaoow" target="_blank">
@@ -199,10 +200,10 @@
                 border-radius: 5px;
 
                 &:hover {
-                cursor: pointer;
-                scale: 1.05;
-                transition: all 0.3s ease-in-out;
-            }
+                    cursor: pointer;
+                    scale: 1.05;
+                    transition: all 0.3s ease-in-out;
+                }
 
                 img {
                     width: 2rem;
