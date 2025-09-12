@@ -29,7 +29,9 @@
             </el-sub-menu>
             <el-sub-menu index="4">
                 <template #title>Program</template>
-                <nuxt-link to="/program-at-a-glance"> <el-menu-item index="4-1">Program at a Glance</el-menu-item>
+                <nuxt-link to="/program-at-a-glance"> <el-menu-item index="4-1">Program at a
+                        Glance</el-menu-item></nuxt-link>
+                <nuxt-link to="/program"> <el-menu-item index="4-2">Program</el-menu-item>
                 </nuxt-link>
                 <nuxt-link to="/invited-speakers"> <el-menu-item index="4-3">Invited Speakers</el-menu-item>
                 </nuxt-link>
@@ -54,7 +56,8 @@
                 </nuxt-link>
                 <nuxt-link to="/award"> <el-menu-item index="6-3">Award</el-menu-item>
                 </nuxt-link>
-                <nuxt-link to="/presentation-guideline"> <el-menu-item index="6-4">Presentation Guideline</el-menu-item></nuxt-link>
+                <nuxt-link to="/presentation-guideline"> <el-menu-item index="6-4">Presentation
+                        Guideline</el-menu-item></nuxt-link>
             </el-sub-menu>
             <el-sub-menu index="7">
                 <template #title>Sponsorship & Exhibition</template>
@@ -76,7 +79,7 @@
             <el-sub-menu index="9" :class="!isLogin ? 'popper' : 'none'" @click="headToLogin">
                 <template #title>
                     <nuxt-link v-if="!isLogin" to="/login">Login</nuxt-link>
-                    <nuxt-link  v-else to="/member-center">Member</nuxt-link>
+                    <nuxt-link v-else to="/member-center">Member</nuxt-link>
                 </template>
                 <nuxt-link v-if="isLogin" to="/member-center"> <el-menu-item>Member Center</el-menu-item></nuxt-link>
                 <nuxt-link v-if="isLogin" @click="logout"> <el-menu-item>Logout</el-menu-item></nuxt-link>
@@ -99,7 +102,7 @@ const headToNews = () => {
 const getInfoFromBackEnd = async () => {
     let res = await CSRrequest.get('/member/getMemberInfo');
     console.log(res)
-    if (res.code === 10002 ||　res.code === 401) {
+    if (res.code === 10002 || res.code === 401) {
         localStorage.removeItem('Authorization-member');
         isLogin.value = false;
     } else {
