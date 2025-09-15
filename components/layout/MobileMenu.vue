@@ -3,8 +3,8 @@
         <ol>
             <div>
                 <li>
-                   <nuxt-link to="/" @click="closeMenu"> <img src="/img/home.svg" alt="">
-                    Home</nuxt-link>
+                    <nuxt-link to="/" @click="closeMenu"> <img src="/img/home.svg" alt="">
+                        Home</nuxt-link>
                 </li>
             </div>
             <div v-for="item in menu">
@@ -16,7 +16,8 @@
                         src="/img/chevron-down.svg" alt="">
                 </li>
                 <div class="submenu" :class="{ 'is-open': item.isActive }">
-                    <nuxt-link v-for="submenu in item.submenu" :to="submenu.link" @click="closeMenu">{{ submenu.title }}</nuxt-link>
+                    <nuxt-link v-for="submenu in item.submenu" :to="submenu.link" @click="closeMenu">{{ submenu.title
+                    }}</nuxt-link>
                 </div>
             </div>
             <div>
@@ -57,7 +58,8 @@ const menu = reactive([
     },
     {
         title: 'Program', icon: 'cloud.svg', isActive: false, submenu: [
-            { title: 'Program at a Galance', link: '/program-at-a-glance' },
+            { title: 'Program at a Glance', link: '/program-at-a-glance' },
+            { title: 'Program', link: '/program' },
             // { title: 'Scientific Program', link: '/scientific-program' },
             // { title: 'Social Program', link: '/social-program' },
             { title: 'Invited Speakers', link: '/invited-speakers' },

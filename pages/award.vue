@@ -16,7 +16,7 @@
                 <ul class="main-list">
 
                     <li>
-                        <B>01.Young Investigator Award</B>
+                        <b>01.Young Investigator Award</b>
                         <ul class="second-list">
                             <li>Number of Winners: 1 </li>
                             <li>Award: USD 800 and a Young Investigator Award certificate </li>
@@ -34,7 +34,7 @@
                     </li>
 
                     <li>
-                        <B>02.Best Poster Award</B>
+                        <b>02.Best Poster Award</b>
                         <ul class="second-list">
                             <li>Number of Winners: 1 </li>
                             <li>Award: USD 800 and a Best Poster Award certificate </li>
@@ -50,13 +50,14 @@
                     </li>
 
                     <li>
-                        <B>03.Best Video Award </B>
+                        <b>03.Best Video Award </b>
                         <ul class="second-list">
                             <li>Number of Winners: 1 </li>
                             <li>Award: USD 800 and a Best Video Award certificate </li>
                             <li>Eligibility:
                                 <ul style="list-style-type: circle;">
-                                    <li>Must complete online registration and submit an abstract. Upon acceptance, a video file must be submitted. 
+                                    <li>Must complete online registration and submit an abstract. Upon acceptance, a
+                                        video file must be submitted.
                                     </li>
                                 </ul>
 
@@ -65,12 +66,13 @@
                     </li>
                 </ul>
 
-             
+
                 <ul class="none-style-list">
-                    <li><B>Note:</B>
+                    <li><b>Note:</b>
                         <ul class="disc-list">
                             <li>All prize amounts are before tax.</li>
-                            <li>The organizer reserves the right to withhold awards if there is an insufficient number of submissions or due to other related reasons. </li>
+                            <li>The organizer reserves the right to withhold awards if there is an insufficient number
+                                of submissions or due to other related reasons. </li>
                         </ul>
                     </li>
                 </ul>
@@ -129,7 +131,7 @@ useSeoMeta({
             list-style: none;
             margin: 1rem 0;
             font-size: 1.3rem;
-                        padding: 0;
+            padding: 0;
 
         }
 
