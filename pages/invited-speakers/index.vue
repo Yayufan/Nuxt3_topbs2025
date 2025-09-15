@@ -37,7 +37,9 @@ const getSpeakers = async () => {
     internationalSpeakers.sort((a: any, b: any) => {
       const countryCompare = a.country.localeCompare(b.country);
       if (countryCompare !== 0) return countryCompare;
-      return a.name.split(' ').pop().localeCompare(b.name.split(' ').pop());
+      const nameCompare = a.name.split(' ').pop().localeCompare(b.name.split(' ').pop());
+      if (nameCompare !== 0) return nameCompare;
+      return a.name.localeCompare(b.name);
     });
     speakers.splice(0, speakers.length, ...internationalSpeakers, ...taiwaneseSpeakers);
   }
