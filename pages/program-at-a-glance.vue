@@ -4,7 +4,10 @@
         <Breadcrumbs firstRoute="Program" secoundRoute="Program at a Glance"></Breadcrumbs>
         <Title title="Program at a Glance" class="title"></Title>
 
-        <div class="btn-section">
+        <div class="content">
+            <h1 class="">Page Under Construction</h1>
+        </div>
+        <!-- <div class="btn-section">
             <el-button :class="selectedDay === 'Day1' ? 'active' : ''" @click="selectedDayFunction('Day1')">Day1,
                 Nov
                 15</el-button>
@@ -14,10 +17,8 @@
         </div>
 
         <div class="img-section">
-            <!-- <img v-if="selectedDay === 'day1'" src="../assets/img/program-day1.jpg" alt="">
-                <img v-if="selectedDay === 'day2'" src="../assets/img/program-day2.jpg" alt=""> -->
             <img :src="imageUrl" alt="">
-        </div>
+        </div> -->
 
     </main>
 </template>

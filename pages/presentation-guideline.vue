@@ -17,19 +17,19 @@
                     <ul class="disc-list">
                         <li class="note-text">E-poster Submission Deadline: Monday, October 20, 2025, 23:59 (local time)
                         </li>
-                        <li><B>Submission Method:</B> Please <nuxt-link class="link" to="/login">log in</nuxt-link> to
+                        <li><b>Submission Method:</b> Please <nuxt-link class="link" to="/login">log in</nuxt-link> to
                             the official website of the 9th
                             IOPBS &
                             TOPBS 2025 to upload your e-poster. </li>
                     </ul>
-                    <p class="list-text"><B>E-Poster Preparation Guidelines:</B> </p>
+                    <p class="list-text"><b>E-Poster Preparation Guidelines:</b> </p>
                     <ul class="disc-list">
                         <li>All e-posters must be written in English. </li>
                         <li>The topic and first author must be consistent with the accepted abstract. </li>
                         <li>Please download and use the official e-poster template, and upload the PPT file. </li>
                     </ul>
 
-                    <p class="list-text"><B>E-Poster Format Requirements: </B> </p>
+                    <p class="list-text"><b>E-Poster Format Requirements: </b> </p>
                     <ul class="disc-list">
                         <li>Portrait orientation, width must not exceed 1920 pixels. </li>
                         <li>Single-page only. </li>
@@ -45,15 +45,16 @@
 
                 <div class="video">
                     <h1 class="submission-title">[Video Submission]</h1>
-                    <p class="list-text"><B>For accepted abstracts, authors must submit a video file via the official
-                            website of the 9th IOPBS & TOPBS 2025. Videos will be displayed at the event venue. </B>
+                    <p class="list-text"><b>For accepted abstracts, authors must submit a video file via the official
+                            website of the 9th IOPBS & TOPBS 2025. Videos will be displayed at the event venue. </b>
                     </p>
                     <ul class="disc-list">
-                        <li class="note-text"><B>Video Submission Deadline:</B> Monday, October 20, 2025, 23:59 (local time) </li>
-                        <li><B>Submission Method: </B>Please log in to the official website of the 9th IOPBS & TOPBS
+                        <li class="note-text"><b>Video Submission Deadline:</b> Monday, October 20, 2025, 23:59 (local
+                            time) </li>
+                        <li><b>Submission Method: </b>Please log in to the official website of the 9th IOPBS & TOPBS
                             2025 to upload the video. </li>
                     </ul>
-                    <p class="list-text"><B>Video Format Requirements: </B> </p>
+                    <p class="list-text"><b>Video Format Requirements: </b> </p>
                     <ul class="disc-list">
                         <li>The topic and first author must be consistent with the accepted abstract.</li>
                         <li>Language: English narration </li>
@@ -75,18 +76,18 @@
                     <p class="list-text">Authors of awarded posters and videos are required to give an oral presentation
                         at the 9th IOPBS & TOPBS 2025. </p>
                     <ul>
-                        <li class="note-text"><B>Date:</B> Saturday, November 15, 2025 </li>
-                        <li><B>Time:</B>Specific presentation times will be announced along with the list of awardees.
+                        <li class="note-text"><b>Date:</b> Saturday, November 15, 2025 </li>
+                        <li><b>Time:</b>Specific presentation times will be announced along with the list of awardees.
                         </li>
-                        <li><B>Venue:</B>1st Floor, Taipei International Convention Center
+                        <li><b>Venue:</b>1st Floor, Taipei International Convention Center
                             <ul>
                                 <li>Address: 1st Floor, No. 1, Section 5, Xinyi Road, Xinyi District, Taipei City 110,
                                     Taiwan </li>
                             </ul>
                         </li>
-                        <li><B>Language:</B>English</li>
-                        <li><B>Presentation Duration:</B>8 minutes</li>
-                        <li><B>Presentation Order:</B> To be announced to selected presenters</li>
+                        <li><b>Language:</b>English</li>
+                        <li><b>Presentation Duration:</b>8 minutes</li>
+                        <li><b>Presentation Order:</b> To be announced to selected presenters</li>
                     </ul>
                 </div>
             </div>
@@ -110,9 +111,9 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
         font-size: 1.5rem;
         line-height: 2.5rem;
 
-       
 
-      
+
+
 
         .reminder {
             margin: 1rem 0;
@@ -130,7 +131,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
             font-size: 2rem;
         }
 
-    
+
 
         .disc-list {
             list-style-type: disc;

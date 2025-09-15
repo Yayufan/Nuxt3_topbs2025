@@ -72,15 +72,16 @@
                     <div class="submission-guidelines-box">
                         <h2>01. How to confirm your abstract presentation </h2>
                         <ul class="secondstep-list">
-                            <li><B>Step 1:</B> Register and <nuxt-link class="link" to="/login"> sign in</nuxt-link>.
+                            <li><b>Step 1:</b> Register and <nuxt-link class="link" to="/login"> sign in</nuxt-link>.
                             </li>
 
-                            <li><B>Step 2:</B> Complete online registration before submitting your
+                            <li><b>Step 2:</b> Complete online registration before submitting your
                                 abstract.
                             </li>
-                            <li><B>Step 3:</B> Click “Abstract” → “Abstract submission” on the website, fill in all required
+                            <li><b>Step 3:</b> Click “Abstract” → “Abstract submission” on the website, fill in all
+                                required
                                 information, and upload your abstract. </li>
-                            <li><B>Step 4:</B> Check your email for confirmation of successful submission. </li>
+                            <li><b>Step 4:</b> Check your email for confirmation of successful submission. </li>
                         </ul>
                     </div>
 
@@ -170,7 +171,7 @@
                     content. In case of dispute, the committee’s decision is final. </p>
 
 
-              
+
 
                 <!-- <el-button>
                     Online Submission
