@@ -129,7 +129,8 @@
             <p class="tips">*Please fill in the form completely</p>
             <p class="tips">*The credit card transaction page will be given through email to the sender.</p>
             <p class="tips">*Payment for group registration must be paid at once by one person.</p>
-            <div class="btn-section"> <nuxt-link class="group-register-btn" @click="headToRegister">Group Registration
+            <div class="btn-section"> <nuxt-link class="group-register-btn"
+                    to="/registration-now/group-registration">Group Registration
                     Form</nuxt-link>
 
             </div>
@@ -147,31 +148,6 @@ useSeoMeta({
     description: 'Explore the registration fee details for the 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery. Find information on personal and group registration fees, early-bird discounts, and payment methods.',
     keywords: 'Registration Fee, 9th IOPBS, IOPBS 2025, TOPBS 2025, 2025 IOPBS, 2025 TOPBS '
 })
-
-const router = useRouter();
-
-const deadline = ref(new Date());
-const fetchDeadline = async () => {
-    try {
-        const res = await CSRrequest.get('/setting');
-        deadline.value = new Date(res.data.lastRegistrationTime);
-    } catch (error) {
-        console.error('Error fetching deadline data:', error);
-    }
-}
-
-const registerUrl = ref('');
-const headToRegister = () => {
-    registerUrl.value = deadline.value < new Date() ? '' : '/registration-now/registration-closed';
-    router.push(registerUrl.value);
-    if (deadline.value < new Date()) {
-        alert('The registration deadline has passed.');
-    }
-}
-
-onMounted(() => {
-    fetchDeadline();
-});
 
 </script>
 <style lang="scss" scoped>
