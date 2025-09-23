@@ -1,17 +1,22 @@
 <template>
     <div>
         <main class="common-section">
-            <h1 class="title">Venue</h1>
+            <Banner></Banner>
+            <Title title="Venue"></Title>
             <Breadcrumbs firstRoute="IOPBS & TOPBS" secoundRoute="Venue"></Breadcrumbs>
             <div class="content">
-                <h1 class="">Page Under Construction</h1>
+                <img src="@/assets/img/250916-Venue.png" alt="">
+                <a href="/files/250916_Venue.pdf" target="_blank" class="download">Download Venue</a>
             </div>
+
         </main>
 
     </div>
 </template>
 <script setup lang="ts">
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+import Title from '@/components/layout/Title.vue';
+import Banner from '@/components/layout/Banner.vue';
 
 useSeoMeta({
     title: 'Venue - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery',
@@ -21,7 +26,6 @@ useSeoMeta({
 </script>
 <style lang="scss" scoped>
 .common-section {
-    width: $common-section-width;
     margin: $common-section-margin;
     font-family: $common-section-font-family;
 
@@ -30,11 +34,35 @@ useSeoMeta({
         font-size: 2.5rem;
         color: $main-color;
     }
+
     .content {
         margin: 1rem auto;
         text-align: center;
+        width: 80%;
+
         h1 {
             font-size: 2rem;
+        }
+
+        img {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .download {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #DD6777;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken(#DD6777, 10%);
+                transform: scaleX(1.05);
+            }
         }
     }
 }

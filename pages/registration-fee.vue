@@ -130,7 +130,8 @@
             <p class="tips">*The credit card transaction page will be given through email to the sender.</p>
             <p class="tips">*Payment for group registration must be paid at once by one person.</p>
             <div class="btn-section"> <nuxt-link class="group-register-btn"
-                    to="/registration-now/group-registration">Group Registration Form</nuxt-link>
+                    to="/registration-now/group-registration">Group Registration
+                    Form</nuxt-link>
 
             </div>
         </main>
@@ -310,7 +311,8 @@ useSeoMeta({
         td {
             padding: 1rem;
             border: 1px solid #EEE2DC;
-           &:first-child {
+
+            &:first-child {
                 background: linear-gradient(to right, #E28A90, #A4557D);
                 color: white;
                 width: 60%;

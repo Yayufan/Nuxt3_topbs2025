@@ -4,9 +4,9 @@
         <Breadcrumbs firstRoute="Program" secoundRoute="Program at a Glance"></Breadcrumbs>
         <Title title="Program at a Glance" class="title"></Title>
 
-        <div class="content">
+        <!-- <div class="content">
             <h1 class="">Page Under Construction</h1>
-        </div>
+        </div> -->
         <!-- <div class="btn-section">
             <el-button :class="selectedDay === 'Day1' ? 'active' : ''" @click="selectedDayFunction('Day1')">Day1,
                 Nov
@@ -14,11 +14,12 @@
             <el-button :class="selectedDay === 'Day2' ? 'active' : ''" @click="selectedDayFunction('Day2')">Day2,
                 Nov
                 16</el-button>
-        </div>
+        </div> -->
 
         <div class="img-section">
             <img :src="imageUrl" alt="">
-        </div> -->
+            <img :src="imageUrl2" alt="">
+        </div>
 
     </main>
 </template>
@@ -35,34 +36,49 @@ useSeoMeta({
 
 const selectedDay = ref('Day1');
 
-const selectedDayFunction = (day: string) => {
-    selectedDay.value = day;
-    console.log(selectedDay.value);
-    getProgramFile();
-}
+// const selectedDayFunction = (day: string) => {
+//     selectedDay.value = day;
+//     console.log(selectedDay.value);
+//     getProgramFile();
+// }
 
 let imageUrl = ref<string>('');
+let imageUrl2 = ref<string>('');
 const envMinio = useRuntimeConfig().public.minio
 
 
 
-const getProgramFile = async () => {
-    console.log('Fetching program file for:', selectedDay.value);
+const getDay1ProgramFile = async () => {
     try {
         let res = await CSRrequest.get('/publish-file/agenda', {
             params: {
-                type: selectedDay.value
+                type: "Day1"
             }
         })
         imageUrl.value = ''; // Reset image URL before setting a new one
-        console.log('Program file fetched successfully:', res);
         imageUrl.value = envMinio + res.data[0].path; // Assuming the response contains a 'path' field with the image URL
     } catch (error) {
         console.error('Error fetching program file:', error);
     }
 }
+
+
+const getDay2ProgramFile = async () => {
+    try {
+        let res = await CSRrequest.get('/publish-file/agenda', {
+            params: {
+                type: "Day2"
+            }
+        })
+        imageUrl2.value = ''; // Reset image URL before setting a new one
+        imageUrl2.value = envMinio + res.data[0].path; // Assuming the response contains a 'path' field with the image URL
+    } catch (error) {
+        console.error('Error fetching program file:', error);
+    }
+}
 onMounted(() => {
-    getProgramFile();
+    getDay1ProgramFile();
+    getDay2ProgramFile();
 });
 
 </script>
@@ -110,8 +126,11 @@ onMounted(() => {
     .img-section {
         width: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
         margin-top: 2rem;
+        gap: 2rem;
 
         img {
             width: 80%;

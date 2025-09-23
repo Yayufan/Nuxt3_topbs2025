@@ -170,6 +170,23 @@ const router = useRouter()
 
 const attendeeType = useRoute().params.attendeeType
 
+const deadline = ref(new Date());
+const fetchDeadline = async () => {
+    try {
+        const res = await CSRrequest.get('/setting');
+        deadline.value = new Date(res.data.earlyBirdDiscountPhaseOneDeadline);
+
+        if (deadline.value < new Date()) {
+            alert('The registration deadline has passed.');
+            router.push('/registration-fee');
+        }
+
+
+    } catch (error) {
+        console.error('Error fetching deadline data:', error);
+    }
+}
+
 /**-------------------------------匯款帳號末5碼校驗----------------------------- */
 
 
@@ -390,6 +407,7 @@ const getMemberInfo = async () => {
 
 /**---------------------- */
 onMounted(() => {
+    fetchDeadline();
     getCaptcha()
     initMember()
     getMemberInfo();
