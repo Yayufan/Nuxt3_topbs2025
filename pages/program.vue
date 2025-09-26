@@ -24,6 +24,8 @@
                     @click="selectRoomFunction('101')">101</el-button>
                 <el-button :class="selectRoom === '102' ? 'active' : ''" class="room2-btn"
                     @click="selectRoomFunction('102')">102</el-button>
+                <el-button :class="selectRoom === '103' ? 'active' : ''" class="room3-btn"
+                    @click="selectRoomFunction('103')">103</el-button>
                 <!-- <el-button :class="selectRoom === '103' ? 'active' : ''" class="room3-btn"
                     @click="selectRoomFunction('103')">103</el-button> -->
             </div>
@@ -168,7 +170,7 @@ onMounted(() => {
 
             &.room2-btn {
                 border-radius: 0px;
-                border-radius: 0px 10px 0px 0px;
+                border-radius: 0px 0px 0px 0px;
                 // background: linear-gradient(to left, #A4557D, #E28A90);
             }
 

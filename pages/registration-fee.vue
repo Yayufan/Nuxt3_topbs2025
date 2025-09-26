@@ -48,6 +48,9 @@
             <p class="tips">*The prices are listed in USD. According to the financial regulations in Taiwan, the actual
                 credit card payment will be charged in TWD or your local currency. It may be a little different from the
                 price listed above. </p>
+            <p class="tips">*Online registration and payment are available until 11/7.
+            </p>
+            <p class="tips">*Late registration will only be accepted on-site on 11/15 and 11/16.</p>
             <div class="btn-section"> <nuxt-link class="register-btn" to="/online-registration">Register Now
                     !</nuxt-link>
             </div>

@@ -41,9 +41,12 @@
                 </a>
             </li>
 
+
+
             <li class="key-date-item">
                 <div class="key-date-info">
-                    <p class="date-box"><span>06</span><span class="month">Oct<span class="year">2025</span></span></p>
+                    <p class="date-box"><span>06</span><span class="month">Oct <span class="year">2025</span></span>
+                    </p>
                     <p class="info">Notification of Acceptance</p>
                 </div>
                 <a class="key-date-link" href="https://evt.to/eiiouhsmw" target="_blank">
@@ -51,6 +54,16 @@
                 </a>
             </li>
 
+            <li class="key-date-item">
+                <div class="key-date-info">
+                    <p class="date-box"><span>06</span><span class="month">Nov<span class="year">2025</span></span>
+                    </p>
+                    <p class="info">Online registration Deadline</p>
+                </div>
+                <a class="key-date-link" href="http://evt.to/eodeohauw" target="_blank">
+                    <img class="home-banner-bak" src="../../assets/img/save date-01.svg">
+                </a>
+            </li>
             <li class="key-date-item">
                 <div class="key-date-info">
                     <p class="date-box"><span>15~16</span><span class="month">Nov<span class="year">2025</span></span>
@@ -150,6 +163,7 @@
                         align-items: center;
                         text-align: center;
                         flex-wrap: none;
+                        width: 4rem;
 
                         .year {
                             font-size: 0.6rem;

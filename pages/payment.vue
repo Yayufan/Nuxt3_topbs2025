@@ -23,8 +23,9 @@
                             {{ memberInfo.remitAccountLast5 }}
                         </td>
                         <td v-if="memberInfo.country !== 'Taiwan'" class="temp-col"></td>
-                        <td v-if="memberInfo.country !== 'Taiwan' && (item.status === 0 || item.status === 3)" class="not-pay"
-                            :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') ? 'disabled' : ''"
+                        <td v-if="memberInfo.country !== 'Taiwan' && (item.status === 0 || item.status === 3)"
+                            class="not-pay"
+                            :class="(memberInfo.groupRole == 'slave' && item.itemsSummary == 'Group Registration Fee') || isOverDeadline ? 'disabled' : ''"
                             @click="getOrders(item.ordersId, (memberInfo.groupRole != 'slave' || item.itemsSummary != 'Group Registration Fee'))">
                             <span>Pay now</span>
                         </td>
@@ -149,9 +150,29 @@ const isTaiwan = (country: string) => {
     return country === 'Taiwan' ? 'taiwan' : 'none'
 }
 
+const deadline = ref(new Date());
+const isOverDeadline = ref(false);
+const fetchDeadline = async () => {
+    try {
+        const res = await CSRrequest.get('/setting');
+        deadline.value = new Date(res.data.lastRegistrationTime);
+
+        if (deadline.value < new Date()) {
+            alert('The registration deadline has passed.');
+            isOverDeadline.value = true;
+            // router.push('/registration-fee');
+        }
+
+
+    } catch (error) {
+        console.error('Error fetching deadline data:', error);
+    }
+}
+
 onMounted(() => {
     getOrderListForOwner()
     getMemberInfo()
+    fetchDeadline()
 })
 </script>
 
@@ -324,13 +345,13 @@ onMounted(() => {
                     &:hover {
                         transform: scale(1.05);
                         transition: all 0.3s ease-in-out;
-                    }   
+                    }
 
                     &.disabled {
                         background-color: #26AE07 !important;
                         opacity: 0.5;
                         cursor: not-allowed;
-                     
+
                     }
                 }
 
