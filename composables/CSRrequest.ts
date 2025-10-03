@@ -60,6 +60,7 @@ export default {
                 'Authorization-member': localStorage.getItem('Authorization-member') || ''
             },
             ...options,
+            // timeout: 60000
         })
     },
     //put方法,新增泛型且預設返回類型

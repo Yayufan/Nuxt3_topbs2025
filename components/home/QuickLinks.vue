@@ -7,23 +7,23 @@
             <h1 class="title">Quick Links</h1>
         </div>
         <div class="link-item-box">
-            <nuxt-link to="/abstract-submission" class="link-item item1">
-                <div class="item-image-box">
-                    <img class="link-item" src="../../assets/img/Online submission-01.svg">
-                </div>
-                <div class="link-item-text">Online Submission</div>
-            </nuxt-link>
-            <nuxt-link to="/registration-fee" class="link-item item2">
-                <div class="item-image-box">
-                    <img class="link-item" src="../../assets/img/Online registration-01.svg">
-                </div>
-                <div class="link-item-text">Online Registration</div>
-            </nuxt-link>
-            <nuxt-link to="/program-at-a-glance" class="link-item item3">
+            <nuxt-link to="/program-at-a-glance" class="link-item item1">
                 <div class="item-image-box">
                     <img class="link-item" src="../../assets/img/AuditOutlined.svg">
                 </div>
                 <div class="link-item-text">Program</div>
+            </nuxt-link>
+            <!-- <nuxt-link to="/abstract-submission" class="link-item item2">
+                <div class="item-image-box">
+                    <img class="link-item" src="../../assets/img/Online submission-01.svg">
+                </div>
+                <div class="link-item-text">Online Submission</div>
+            </nuxt-link> -->
+            <nuxt-link to="/registration-fee" class="link-item item3">
+                <div class="item-image-box">
+                    <img class="link-item" src="../../assets/img/Online registration-01.svg">
+                </div>
+                <div class="link-item-text">Online Registration</div>
             </nuxt-link>
         </div>
     </div>
