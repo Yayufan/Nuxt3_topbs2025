@@ -19,11 +19,12 @@
                         <td class="paper-title" :class="!isShowAll ? 'first-col' : ''">{{ paper.absTitle }}</td>
                         <td v-if="isShowAll">{{ paper.firstAuthor }}</td>
                         <td class="last-col">
-                            <el-button link class="edit-btn" @click='headToEditPaper(paper)'>Edit</el-button>
+                            <el-button v-if="!isDisabled" link class="edit-btn"
+                                @click='headToEditPaper(paper)'>Edit</el-button>
                             <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
                             <el-button v-if="!isDisabled" link class="see-more-btn"
                                 @click='deletePaper(paper)'>Delete</el-button>
-                            <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button>
+                            <!-- <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button> -->
                             <el-button v-if="paper.status === 1" link class="see-more-btn"
                                 @click="headToUploadFile(paper)">Upload</el-button>
                         </td>
@@ -201,9 +202,10 @@ const findSetting = async () => {
 
 const checkAvailable = (paper: any) => {
     const currentDate = new Date();
-
-
-    if (currentDate >= setting.abstractSubmissionEndTime) {
+    console.log(setting.abstractSubmissionEndTime);
+    const deadLine = new Date(setting.abstractSubmissionEndTime);
+    console.log(currentDate);
+    if (currentDate >= deadLine) {
         isDisabled.value = true;
     }
 }
@@ -219,6 +221,8 @@ const headToSubmit = () => {
         router.push('/abstract-submission');
     }
 }
+
+
 
 
 

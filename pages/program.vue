@@ -35,6 +35,10 @@
                 <img v-if="selectedDay === 'day2'" src="../assets/img/program-day2.jpg" alt=""> -->
                 <img :src="imageUrl" alt="">
             </div>
+            <div class="warning">
+                <p v-if="selectRoom === '103'">*Meet Professor - Expert Video Show (Limited Seats(20) - Pre-Registration
+                    Required)</p>
+            </div>
         </main>
 
     </div>
@@ -62,7 +66,6 @@ const selectedDayFunction = (day: string) => {
 
 const selectRoomFunction = (room: string) => {
     selectRoom.value = room;
-    console.log(selectRoom.value);
     getProgramFile();
 }
 
@@ -192,7 +195,18 @@ onMounted(() => {
             width: 80%;
             height: auto;
             border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);       }
+    }
+
+    .warning {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+
+        p {
+            color: #EB7574;
+            font-weight: bold;
         }
     }
 }

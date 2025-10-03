@@ -29,16 +29,16 @@
                 <el-button size="small" type="primary">Upload</el-button>
             </el-upload> -->
 
-            <el-upload v-if="!isUploadDialogVisiabled" ref="upload" class="upload" drag :limit="1" :on-change="handleUpload" :auto-upload="false"
-                :on-exceed="handleExceed">
+            <el-upload v-if="!isUploadDialogVisiabled" ref="upload" class="upload" drag :limit="1"
+                :on-change="handleUpload" :auto-upload="false" :on-exceed="handleExceed">
                 <el-icon class="el-icon--upload"><ElIcon-upload-filled /></el-icon>
                 <div class="el-upload__text">
                     Drop file here or <em>click to upload</em>
                 </div>
             </el-upload>
 
-            <el-progress v-if="!isUploadDialogVisiabled" class="progress" color="#E8979E" :percentage="percentage" :stroke-width="15" striped
-                striped-flow />
+            <el-progress v-if="!isUploadDialogVisiabled" class="progress" color="#E8979E" :percentage="percentage"
+                :stroke-width="15" striped striped-flow />
 
         </div>
 
@@ -51,7 +51,7 @@
                 </div>
             </el-upload>
 
-            <el-progress  class="progress" color="#E8979E" :percentage="percentage" :stroke-width="15" striped
+            <el-progress class="progress" color="#E8979E" :percentage="percentage" :stroke-width="15" striped
                 striped-flow />
 
         </el-dialog>
@@ -123,6 +123,15 @@ const handleUpload: UploadProps['onChange'] = async (file: UploadUserFile, uploa
         if (checkResult.data.exist) {
             console.log('File already exists, skipping upload');
         }
+
+        if (res.file.type == '') {
+            ElMessage.error('File type is not supported');
+            percentage.value = 0;
+            upload.value!.clearFiles()
+            return false;
+
+        }
+
         await slideUpload(paperId, checkResult, res.file, res.hash, res.chunks, percentage)
         console.log('Upload completed');
         ElMessage.success('Upload completed');

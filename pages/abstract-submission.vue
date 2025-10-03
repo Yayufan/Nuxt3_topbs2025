@@ -319,9 +319,6 @@ const checkAvailable = (paper: any) => {
     // 將截止時間字串轉換為 Date 物件
     const endDate = new Date(setting.abstractSubmissionEndTime);
 
-    console.log("今日", currentDate);
-    console.log("截止日", endDate);
-    console.log("是否阻擋", currentDate >= endDate);
 
     if (currentDate >= endDate) {
         router.push("/member-center");
