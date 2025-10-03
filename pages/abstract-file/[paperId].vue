@@ -177,6 +177,15 @@ const handleUpdateUpload: UploadProps['onChange'] = async (file: UploadUserFile,
             console.log('File already exists, skipping upload', checkResult.data);
             console.log('File already exists, skipping upload');
         }
+
+        if (res.file.type == '') {
+            ElMessage.error('File type is not supported');
+            percentage.value = 0;
+            upload.value!.clearFiles()
+            return false;
+
+        }
+
         await slideUpdateUpload(paperId, paperFileUploadId.value, checkResult, res.file, res.hash, res.chunks, percentage)
         console.log('Upload completed');
         ElMessage.success('Upload completed');
