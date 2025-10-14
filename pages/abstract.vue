@@ -11,6 +11,7 @@
                         <th v-if="isShowAll">Type</th>
                         <th>Title</th>
                         <th v-if="isShowAll">First Author</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     <tr v-for="(paper, index) in paperList" :key="index"
@@ -18,6 +19,10 @@
                         <td v-if="isShowAll" :class="isShowAll ? 'first-col' : ''">{{ paper.absType }}</td>
                         <td class="paper-title" :class="!isShowAll ? 'first-col' : ''">{{ paper.absTitle }}</td>
                         <td v-if="isShowAll">{{ paper.firstAuthor }}</td>
+                        <td>
+                            <span v-if="paper.status === 1" class="status-accepted">Accepted</span>
+                            <span v-else-if="paper.status === 2" class="status-rejected">Rejected</span>
+                        </td>
                         <td class="last-col">
                             <el-button v-if="!isDisabled" link class="edit-btn"
                                 @click='headToEditPaper(paper)'>Edit</el-button>
@@ -41,6 +46,10 @@
             <table class="paper-info-table">
                 <tr>
                     <td colspan="2" class="column-name title">Abstract</td>
+                </tr>
+                <tr v-if="paperInfo.publicationNumber">
+                    <td class="column-name">Abstract Number</td>
+                    <td>{{ paperInfo.publicationNumber }}</td>
                 </tr>
                 <tr>
                     <td class="column-name">Type</td>
@@ -91,6 +100,13 @@
                     <td v-if="envMinio + paperInfo.FileUpload">
                         <a class="preview-link" :href="envMinio + paperInfo.paperFileUpload[0].path"
                             target="_blank">Preview</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="column-name">Abstract Status</td>
+                    <td v-if="paperInfo.status">
+                        <span v-if="paperInfo.status === 1" class="status-accepted">Accepted</span>
+                        <span v-else-if="paperInfo.status === 2" class="status-rejected">Rejected</span>
                     </td>
                 </tr>
 
@@ -311,6 +327,30 @@ onMounted(() => {
                 display: flex;
             }
 
+            .status-unreviewed {
+                color: gray;
+                border: 1px solid gainsboro;
+                border-radius: 5px;
+                padding: 0.2rem 0.5rem;
+                font-weight: bold;
+            }
+
+            .status-accepted {
+                color: rgb(77, 151, 77);
+                border: 1px solid green;
+                border-radius: 5px;
+                padding: 0.2rem 0.5rem;
+                font-weight: bold;
+            }
+
+            .status-rejected {
+                color: red;
+                border: 1px solid red;
+                border-radius: 5px;
+                padding: 0.2rem 0.5rem;
+                font-weight: bold;
+            }
+
             .even {
                 td {
                     background-color: #E8979E;
@@ -353,6 +393,8 @@ onMounted(() => {
                     color: #E8979E;
                     font-weight: bold;
                 }
+
+
 
                 .see-more-btn {
                     border: 1px solid #E8979E;
@@ -402,6 +444,30 @@ onMounted(() => {
                     td {
                         padding: 0.5rem;
                         text-align: left;
+
+                        .status-unreviewed {
+                            color: gray;
+                            border: 1px solid gainsboro;
+                            border-radius: 5px;
+                            padding: 0.2rem 0.5rem;
+                            font-weight: bold;
+                        }
+
+                        .status-accepted {
+                            color: rgb(77, 151, 77);
+                            border: 1px solid green;
+                            border-radius: 5px;
+                            padding: 0.2rem 0.5rem;
+                            font-weight: bold;
+                        }
+
+                        .status-rejected {
+                            color: red;
+                            border: 1px solid red;
+                            border-radius: 5px;
+                            padding: 0.2rem 0.5rem;
+                            font-weight: bold;
+                        }
                     }
 
                     .paper-title {
@@ -409,6 +475,8 @@ onMounted(() => {
                     }
 
                 }
+
+
 
                 .see-more-btn {
                     margin: 0;
@@ -476,6 +544,21 @@ onMounted(() => {
                     }
 
 
+                }
+
+                .status-unreviewed {
+                    color: gray;
+                    font-weight: bold;
+                }
+
+                .status-accepted {
+                    color: rgb(77, 151, 77);
+                    font-weight: bold;
+                }
+
+                .status-rejected {
+                    color: red;
+                    font-weight: bold;
                 }
 
                 .preview-link {

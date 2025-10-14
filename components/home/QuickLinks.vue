@@ -13,12 +13,13 @@
                 </div>
                 <div class="link-item-text">Program</div>
             </nuxt-link>
-            <!-- <nuxt-link to="/abstract-submission" class="link-item item2">
+            <nuxt-link v-if="new Date() > new Date('2025-10-15')" to="/news-item/1976099371456970753"
+                class="link-item item2">
                 <div class="item-image-box">
                     <img class="link-item" src="../../assets/img/Online submission-01.svg">
                 </div>
-                <div class="link-item-text">Online Submission</div>
-            </nuxt-link> -->
+                <div class="link-item-text">Meet Professor - Expert Video Show</div>
+            </nuxt-link>
             <nuxt-link to="/registration-fee" class="link-item item3">
                 <div class="item-image-box">
                     <img class="link-item" src="../../assets/img/Online registration-01.svg">
