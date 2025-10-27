@@ -72,6 +72,7 @@
             padding: 1rem;
             border-radius: 8px;
 
+
             &:hover {
                 cursor: pointer;
                 scale: 1.05;
@@ -92,6 +93,7 @@
 
             .link-item-text {
                 min-width: 70%;
+                max-width: 70%;
                 font-size: 1.3rem;
                 font-weight: bold;
                 color: white;

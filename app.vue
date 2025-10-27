@@ -6,7 +6,7 @@
     <Header @open-menu="openMenu" :isActive="isActive"></Header>
     <Menu class="menu-bar"></Menu>
     <!-- 先用一個main標籤將之後要顯示的路由組件包起來 -->
-    <main class="content" :class="{'is-open': isActive}">
+    <main class="content" :class="{ 'is-open': isActive }">
       <NuxtPage v-if="!isActive"></NuxtPage>
       <MobileMenu class="mobile-menu" v-if="isActive" @close-menu="closeMenu"></MobileMenu>
     </main>
@@ -66,8 +66,6 @@ function handleScroll() {
 
 
 <style lang="scss">
-
-
 //覆蓋子選單的邊框
 .my-popper {
   --el-popover-border-radius: 15px;
@@ -139,9 +137,9 @@ function handleScroll() {
 
 }
 
-.paper-info{
+.paper-info {
   :deep(.el-dialog__body) {
-    background-color: $accent-color  !important;
+    background-color: $accent-color !important;
     padding: 0;
   }
 }
