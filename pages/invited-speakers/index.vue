@@ -6,10 +6,14 @@
       <Breadcrumbs firstRoute="Program" secoundRoute="Invited Speakers"></Breadcrumbs>
       <Title title="Invited Speakers"></Title>
       <div class="content">
-        <speaker class="speaker" v-for="item in speakers" :speaker="item"></speaker>
+        <speaker class="speaker" v-for="item in internationalSpeakers" :speaker="item"></speaker>
+      </div>
+      <el-divider></el-divider>
+      <div class="content">
+        <speaker class="speaker" v-for="item in taiwaneseSpeakers" :speaker="item"></speaker>
       </div>
     </main>
-    <p style="text-align: center; color: #e5716b"><b>Speakers are currently being invited</b></p>
+    <!-- <p style="text-align: center; color: #e5716b"><b>Speakers are currently being invited</b></p> -->
 
   </div>
 </template>
@@ -21,6 +25,8 @@ import Title from '@/components/layout/Title.vue';
 
 
 const speakers = reactive<any>([]);
+const taiwaneseSpeakers = reactive<any>([]);
+const internationalSpeakers = reactive<any>([]);
 
 const getSpeakers = async () => {
   let res = await CSRrequest.get('/invited-speaker/pagination', {
@@ -32,8 +38,29 @@ const getSpeakers = async () => {
   if (res.code === 200) {
     Object.assign(speakers, res.data.records);
 
-    const taiwaneseSpeakers = res.data.records.filter((speaker: any) => speaker.country === 'Taiwan');
-    const internationalSpeakers = res.data.records.filter((speaker: any) => speaker.country !== 'Taiwan');
+    // const taiwaneseSpeakers =;
+
+    Object.assign(taiwaneseSpeakers, res.data.records.filter((speaker: any) => speaker.country === 'Taiwan'))
+
+    taiwaneseSpeakers.sort((a: any, b: any) => {
+      const aLast = a.name.trim().split(/\s+/).pop()!;
+      const bLast = b.name.trim().split(/\s+/).pop()!;
+      const lastCompare = aLast.localeCompare(bLast, 'en', { sensitivity: 'base' });
+      if (lastCompare !== 0) return lastCompare;
+
+      const firstA = a.name.replace(aLast, '').trim();
+      const firstB = b.name.replace(bLast, '').trim();
+      const firstCompare = firstA.localeCompare(firstB, 'en', { sensitivity: 'base' });
+      if (firstCompare !== 0) return firstCompare;
+
+      return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+    })
+
+
+    // const internationalSpeakers =;
+
+    Object.assign(internationalSpeakers, res.data.records.filter((speaker: any) => speaker.country !== 'Taiwan'));
+
     internationalSpeakers.sort((a: any, b: any) => {
       const countryCompare = a.country.localeCompare(b.country);
       if (countryCompare !== 0) return countryCompare;
@@ -72,20 +99,20 @@ onMounted(() => {
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 2rem;
-    padding: 2rem;
+    padding: 1.5rem;
 
     h1 {
       font-size: 1.5rem;
     }
 
     .speaker {
-      width: calc(100% / 5 - 2rem);
+      width: calc(100% / 4 - 2rem);
 
       @media screen and (max-width: 1200px) {
         width: calc(100% / 3 - 2rem);
       }
 
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 870px) {
         width: calc(100% / 2 - 2rem);
       }
 

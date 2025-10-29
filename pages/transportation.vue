@@ -26,180 +26,204 @@
 
             <div class="transport-table">
                 <table>
-                    <tr>
-                        <th class="left-top-corner"> </th>
-                        <th>Line/Timetable</th>
-                        <th>Travel Time</th>
-                        <th class="right-top-corner">Fare</th>
-                    </tr>
-                    <tr class="row-2">
-                        <td>
-                            <p class="transportation">Taoyuan Airport MRT</p>
-                        </td>
-                        <td>
-                            <div>Terminal 1: <span>A12</span> <el-icon>
-                                    <ElIconRight />
-                                </el-icon> <span>A1</span></div>
-                            <div>Terminal 2: <span>A13</span> <el-icon>
-                                    <ElIconRight />
-                                </el-icon> <span>A1</span></div>
-                        </td>
-                        <td>50 mins</td>
-                        <td>NTD $160</td>
-                    </tr>
-                    <tr class="row-3">
-                        <td>
-                            <p class="transportation">Taipei Songshan Airport MRT</p>
-                        </td>
-                        <td>
-                            <p>Songshan Airport: <span>BR13</span> <el-icon>
-                                    <ElIconRight />
-                                </el-icon> <span>R03</span></p>
-                        </td>
-                        <td>17 mins</td>
-                        <td>NTD $25</td>
-                    </tr>
-                    <tr class="row-4">
-                        <td>
-                            <p class="transportation">MRT</p>
-                        </td>
-                        <td>
-                            <p>Taipei Main Station</p>
-                            <div><span>BL12</span><span>R10</span><el-icon>
-                                    <ElIconRight />
-                                </el-icon><span>BR09</span><span>R05</span><el-icon>
-                                    <ElIconRight />
-                                </el-icon><span>R03</span>
-                            </div>
-                        </td>
-                        <td>15 mins</td>
-                        <td>NTD $25</td>
-                    </tr>
-                    <tr class="row-5">
-                        <td>
-                            <p class="transportation">iBus(1960)</p>
-                            <span class="small-font transportation-hint">Bus location</span>
-                            <div class="small-font transportation-hint">
-                                <div>Terminal 1:</div>
-                                <div>
-                                    <div>Passenger bus</div>
-                                    <div>waiting area on Floor B1</div>
+                    <thead>
+                        <tr>
+                            <th class="left-top-corner"> </th>
+                            <th>Line/Timetable</th>
+                            <th>Travel Time</th>
+                            <th class="right-top-corner">Fare</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-2">
+                            <td>
+                                <p class="transportation">Taoyuan Airport MRT</p>
+                            </td>
+                            <td>
+                                <div>Terminal 1: <span>A12</span> <el-icon>
+                                        <ElIconRight />
+                                    </el-icon> <span>A1</span></div>
+                                <div>Terminal 2: <span>A13</span> <el-icon>
+                                        <ElIconRight />
+                                    </el-icon> <span>A1</span></div>
+                            </td>
+                            <td>50 mins</td>
+                            <td>NTD $160</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="row-3">
+                            <td>
+                                <p class="transportation">Taipei Songshan Airport MRT</p>
+                            </td>
+                            <td>
+                                <p>Songshan Airport: <span>BR13</span> <el-icon>
+                                        <ElIconRight />
+                                    </el-icon> <span>R03</span></p>
+                            </td>
+                            <td>17 mins</td>
+                            <td>NTD $25</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="row-4">
+                            <td>
+                                <p class="transportation">MRT</p>
+                            </td>
+                            <td>
+                                <p>Taipei Main Station</p>
+                                <div><span>BL12</span><span>R10</span><el-icon>
+                                        <ElIconRight />
+                                    </el-icon><span>BR09</span><span>R05</span><el-icon>
+                                        <ElIconRight />
+                                    </el-icon><span>R03</span>
                                 </div>
-                            </div>
-                            <div class="small-font transportation-hint">
-                                <div>Terminal 2:</div>
-                                <div>
-                                    <div>Passenger bus</div>
-                                    <div>waiting area on the 1st
-                                        floor</div>
+                            </td>
+                            <td>15 mins</td>
+                            <td>NTD $25</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="row-5">
+                            <td>
+                                <p class="transportation">iBus(1960)</p>
+                                <span class="small-font transportation-hint">Bus location</span>
+                                <div class="small-font transportation-hint">
+                                    <div>Terminal 1:</div>
+                                    <div>
+                                        <div>Passenger bus</div>
+                                        <div>waiting area on Floor B1</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            Terminal 1/2 -> Grand Hyatt Taipei
-                            <div class="bus-timetable">
-                                <span class="small-font">TimeTable:</span>
-                                <span class="small-font">00:15、12:40、06:50、07:30、09:00、10:20、
-                                </span>
-                                <span class="small-font">11:20、12:40、
-                                    14:00、15:00、15:40、17:40、</span>
-                                <span class="small-font">19:10、21:10、22:40</span>
-                            </div>
-                        </td>
-                        <td>90 mins</td>
-                        <td>NTD $190</td>
+                                <div class="small-font transportation-hint">
+                                    <div>Terminal 2:</div>
+                                    <div>
+                                        <div>Passenger bus</div>
+                                        <div>waiting area on the 1st
+                                            floor</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                Terminal 1/2 -> Grand Hyatt Taipei
+                                <div class="bus-timetable">
+                                    <span class="small-font">TimeTable:</span>
+                                    <span class="small-font">00:15、12:40、06:50、07:30、09:00、10:20、
+                                    </span>
+                                    <span class="small-font">11:20、12:40、
+                                        14:00、15:00、15:40、17:40、</span>
+                                    <span class="small-font">19:10、21:10、22:40</span>
+                                </div>
+                            </td>
+                            <td>90 mins</td>
+                            <td>NTD $190</td>
 
-                    </tr>
-                    <tr class="row-6">
-                        <td class="left-bottom-corner" :rowspan="2">
-                            <div class="transportation">Taxi</div>
-                        </td>
-                        <td class="line">Taiyuan Airport <el-icon>
-                                <ElIconRight />
-                            </el-icon> TICC</td>
-                        <td>1-1.5 hr</td>
-                        <td>NTD $1310</td>
-
-                    </tr>
-                    <tr>
-                        <td class="line">Taipei Songshan Airport MRT <el-icon>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="row-6">
+                            <td class="left-bottom-corner" :rowspan="2">
+                                <div class="transportation">Taxi</div>
+                            </td>
+                            <td class="line">Taiyuan Airport <el-icon>
                                     <ElIconRight />
                                 </el-icon> TICC</td>
-                        <td>10-30 mins</td>
-                        <td class="right-bottom-corner">NTD $225</td>
-                    </tr>
+                            <td>1-1.5 hr</td>
+                            <td>NTD $1310</td>
+
+                        </tr>
+                        <tr>
+                            <td class="line">Taipei Songshan Airport MRT <el-icon>
+                                    <ElIconRight />
+                                </el-icon> TICC</td>
+                            <td>10-30 mins</td>
+                            <td class="right-bottom-corner">NTD $225</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
             <div class="mobile-table-section">
                 <p class="transport-title">Taoyuan Airport MRT</p>
                 <table class="transport-mobile-table">
-                    <tr>
-                        <th>
-                            Line/Timetable
-                        </th>
-                        <th>
-                            Travel Time
-                        </th>
-                        <th>
-                            Fare
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="tayouan-airport-mrt-line">
-                            <span>
-                                Terminal 1: <span class="line-number">A12</span>
-                                <el-icon>
-                                    <ElIconRight />
-                                </el-icon>
-                                <span class="line-number">A1</span>
-                            </span>
-                            <span>
-                                Terminal 2:
-                                <span class="line-number">A13</span>
+                    <thead>
+                        <tr>
+                            <th>
+                                Line/Timetable
+                            </th>
+                            <th>
+                                Travel Time
+                            </th>
+                            <th>
+                                Fare
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tayouan-airport-mrt-line">
+                                <span>
+                                    Terminal 1: <span class="line-number">A12</span>
+                                    <el-icon>
+                                        <ElIconRight />
+                                    </el-icon>
+                                    <span class="line-number">A1</span>
+                                </span>
+                                <span>
+                                    Terminal 2:
+                                    <span class="line-number">A13</span>
 
-                                <el-icon>
-                                    <ElIconRight />
-                                </el-icon>
-                                <span class="line-number">A1</span>
-                            </span>
-                        </td>
-                        <td>50 mins</td>
-                        <td>NTD $160</td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
+                                    <el-icon>
+                                        <ElIconRight />
+                                    </el-icon>
+                                    <span class="line-number">A1</span>
+                                </span>
+                            </td>
+                            <td>50 mins</td>
+                            <td>NTD $160</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
                 </table>
                 <div class="shadow-divider"></div>
                 <p class="transport-title">Taipei Songshan Airport MRT</p>
                 <table class="transport-mobile-table">
-                    <tr>
-                        <th>
-                            Line/Timetable
-                        </th>
-                        <th>
-                            Travel Time
-                        </th>
-                        <th>
-                            Fare
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="taipei-songshan-airport-mrt">
-                            <span>
-                                Songshan Airport:
-                            </span>
-                            <span>
-                                <span class="line-number">BR13</span> <el-icon>
-                                    <ElIconRight />
-                                </el-icon> <span class="line-number">R03</span>
-                            </span>
-                        </td>
-                        <td>17 mins</td>
-                        <td>NTD $25</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>
+                                Line/Timetable
+                            </th>
+                            <th>
+                                Travel Time
+                            </th>
+                            <th>
+                                Fare
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="taipei-songshan-airport-mrt">
+                                <span>
+                                    Songshan Airport:
+                                </span>
+                                <span>
+                                    <span class="line-number">BR13</span> <el-icon>
+                                        <ElIconRight />
+                                    </el-icon> <span class="line-number">R03</span>
+                                </span>
+                            </td>
+                            <td>17 mins</td>
+                            <td>NTD $25</td>
+                        </tr>
+                    </tbody>
                     <tr>
                     </tr>
                     <tr>
@@ -208,43 +232,47 @@
                 <div class="shadow-divider"></div>
                 <p class="transport-title">MRT</p>
                 <table class="transport-mobile-table">
-                    <tr>
-                        <th>
-                            Line/Timetable
-                        </th>
-                        <th>
-                            Travel Time
-                        </th>
-                        <th>
-                            Fare
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="mrt">
-                            <div>Taipei Main Station</div>
-                            <div class="line-section">
-                                <div class="line-box">
-                                    <span class="line-number bl12">BL12</span>
-                                    <span class="line-number">R10</span>
+                    <thead>
+                        <tr>
+                            <th>
+                                Line/Timetable
+                            </th>
+                            <th>
+                                Travel Time
+                            </th>
+                            <th>
+                                Fare
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="mrt">
+                                <div>Taipei Main Station</div>
+                                <div class="line-section">
+                                    <div class="line-box">
+                                        <span class="line-number bl12">BL12</span>
+                                        <span class="line-number">R10</span>
+                                    </div>
+                                    <el-icon class="arrow">
+                                        <ElIconRight />
+                                    </el-icon>
+                                    <div class="line-box">
+                                        <span class="line-number br09"> BR09</span>
+                                        <span class="line-number"> R05</span>
+                                    </div>
+                                    <el-icon class="arrow">
+                                        <ElIconRight />
+                                    </el-icon>
+                                    <div class="line-box">
+                                        <span class="line-number">R03</span>
+                                    </div>
                                 </div>
-                                <el-icon class="arrow">
-                                    <ElIconRight />
-                                </el-icon>
-                                <div class="line-box">
-                                    <span class="line-number br09"> BR09</span>
-                                    <span class="line-number"> R05</span>
-                                </div>
-                                <el-icon class="arrow">
-                                    <ElIconRight />
-                                </el-icon>
-                                <div class="line-box">
-                                    <span class="line-number">R03</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>15 mins</td>
-                        <td>NTD $25</td>
-                    </tr>
+                            </td>
+                            <td>15 mins</td>
+                            <td>NTD $25</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div class="shadow-divider"></div>
                 <p class="transport-title">iBus(1960)</p>
@@ -258,49 +286,57 @@
                     </p>
                 </div>
                 <table class="transport-mobile-table">
-                    <tr>
-                        <th>Line/Timetable</th>
-                        <th>Travel Time</th>
-                        <th>Fare</th>
-                    </tr>
-                    <tr>
-                        <td class="ibus">
-                            <div class="line-name">
-                                <span>Terminal 1/2</span>
-                                <el-icon class="arrow">
-                                    <ElIconRight />
-                                </el-icon>
-                                <span>Grand Hyatt Taipei</span>
-                            </div>
-                            <div class="time-table">
-                                <span class="title">Timetable:</span>
-                                <span>00:15、12:40、06:50、07:30、09:00、10:20、
-                                    11:20、12:40、14:00、15:00、15:40、17:40、
-                                    19:10、21:10、22:40</span>
-                            </div>
-                        </td>
-                        <td>90 mins</td>
-                        <td>NTD $190</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Line/Timetable</th>
+                            <th>Travel Time</th>
+                            <th>Fare</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ibus">
+                                <div class="line-name">
+                                    <span>Terminal 1/2</span>
+                                    <el-icon class="arrow">
+                                        <ElIconRight />
+                                    </el-icon>
+                                    <span>Grand Hyatt Taipei</span>
+                                </div>
+                                <div class="time-table">
+                                    <span class="title">Timetable:</span>
+                                    <span>00:15、12:40、06:50、07:30、09:00、10:20、
+                                        11:20、12:40、14:00、15:00、15:40、17:40、
+                                        19:10、21:10、22:40</span>
+                                </div>
+                            </td>
+                            <td>90 mins</td>
+                            <td>NTD $190</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div class="shadow-divider"></div>
                 <p class="transport-title">Taxi</p>
                 <table class="transport-mobile-table">
-                    <tr>
-                        <th>Line/Timetable</th>
-                        <th>Travel Time</th>
-                        <th>Fare</th>
-                    </tr>
-                    <tr class="taxi">
-                        <td class="no-radius">Taiyuan Airport -> TICC</td>
-                        <td>1-1.5 hr</td>
-                        <td class="no-radius">NTD $1310</td>
-                    </tr>
-                    <tr>
-                        <td>Taipei Songshan Airport MRT -> TICC</td>
-                        <td>10-30 mins</td>
-                        <td>NTD $225</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Line/Timetable</th>
+                            <th>Travel Time</th>
+                            <th>Fare</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="taxi">
+                            <td class="no-radius">Taiyuan Airport -> TICC</td>
+                            <td>1-1.5 hr</td>
+                            <td class="no-radius">NTD $1310</td>
+                        </tr>
+                        <tr>
+                            <td>Taipei Songshan Airport MRT -> TICC</td>
+                            <td>10-30 mins</td>
+                            <td>NTD $225</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <p class="tips">*MRT (Taiwan Mass Rapid Transit)</p>
             </div>

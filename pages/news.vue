@@ -15,7 +15,8 @@
                 <h5>Date</h5>
             </div>
             <ul class="news-list">
-                <li class="news-item" v-for="(item, index) in newsList.records" :key="index" @click="headToNews(item.articleId)">
+                <li class="news-item" v-for="(item, index) in newsList.records" :key="index"
+                    @click="headToNews(item.articleId)" :class="{ 'last-one': item.isRecent }">
                     <div class="news-title">
                         <nuxt-link to="">{{ item.title }}</nuxt-link>
                     </div>
@@ -24,8 +25,9 @@
             </ul>
 
             <div class="pagination-box">
-                <el-pagination :class="clickBtn" layout="prev, pager, next" :total="Number(newsList.total)" @current-change="changePage"
-                @prev-click="handlePageClick('prev')" @next-click="handlePageClick('next')"/>
+                <el-pagination :class="clickBtn" layout="prev, pager, next" :total="Number(newsList.total)"
+                    @current-change="changePage" @prev-click="handlePageClick('prev')"
+                    @next-click="handlePageClick('next')" />
             </div>
         </div>
 
@@ -59,26 +61,27 @@ const handlePageClick = (option: string) => {
 
 
 const getNewsList = async () => {
-    console.log("獲取最新消息列表")
-    console.log(currentPage.value)
     let res = await CSRrequest.get('/article/news/pagination', {
         params: {
             page: currentPage.value,
             size: 10
         }
     })
+    res.data.records.forEach((item: any) => {
+        // item.announcementDate = item.announcementDate.split(' ')[0]
+        if (item.announcementDate && (new Date(item.announcementDate).getTime() >= Date.now() - 7 * 24 * 60 * 60 * 1000)) {
+            item.isRecent = true;
+        }
+    });
 
     Object.assign(newsList, res.data)
-    console.log("獲取的最新消息列表", res.data)
 }
 
 const headToNews = (id: number) => {
-    console.log("點擊了最新消息", id)
     router.push('/news-item/' + id)
 }
 
 onMounted(() => {
-    console.log(123)
     getNewsList()
 })
 </script>
@@ -126,6 +129,24 @@ onMounted(() => {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+
+            .last-one {
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    content: 'News';
+                    display: block;
+                    width: auto;
+                    // height: 100%;
+                    padding: 0.2rem;
+                    left: -0.5rem;
+                    top: -1.3rem;
+                    z-index: 10;
+                    background-color: rgb(240, 100, 100);
+                    color: white;
+                }
+            }
 
             .news-item {
                 display: flex;
@@ -180,7 +201,7 @@ onMounted(() => {
                         color: #cc8761;
                     }
                 }
-                
+
             }
         }
 
@@ -198,6 +219,7 @@ onMounted(() => {
                     .number {
                         color: #767777;
                     }
+
                     .is-active {
                         color: #B62D66;
                     }
@@ -206,18 +228,19 @@ onMounted(() => {
                 :deep(.btn-prev) {
                     background-color: #C8C9C9;
                     border-radius: 50%;
-                    
+
                     i {
                         color: white;
                         font-size: 1rem;
-                        
+
                     }
                 }
+
                 :deep(.btn-next) {
                     background-color: #B62D66;
                     background-color: #C8C9C9;
                     border-radius: 50%;
-                    
+
                     i {
                         color: white;
                         font-size: 1rem;
@@ -229,7 +252,7 @@ onMounted(() => {
             .prev {
                 :deep(.btn-prev) {
                     background-color: #B62D66;
-                    
+
                 }
             }
 

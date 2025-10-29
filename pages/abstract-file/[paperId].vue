@@ -133,7 +133,6 @@ const handleUpload: UploadProps['onChange'] = async (file: UploadUserFile, uploa
         }
 
         await slideUpload(paperId, checkResult, res.file, res.hash, res.chunks, percentage)
-        console.log('Upload completed');
         ElMessage.success('Upload completed');
         upload.value!.clearFiles()
         getPaperFileList();
@@ -198,6 +197,7 @@ const handleUpdateUpload: UploadProps['onChange'] = async (file: UploadUserFile,
 }
 
 const envMinio = useRuntimeConfig().public.minio
+console.log('envMinio', envMinio);
 
 const isEvenOrOdd = (index: number) => {
     return index % 2 === 0 ? 'even' : 'odd'
