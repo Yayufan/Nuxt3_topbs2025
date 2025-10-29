@@ -7,33 +7,37 @@
         <div class="paper-section">
             <div class="paper-table-box">
                 <table class="paper-table">
-                    <tr class="table-header">
-                        <th v-if="isShowAll">Type</th>
-                        <th>Title</th>
-                        <th v-if="isShowAll">First Author</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr v-for="(paper, index) in paperList" :key="index"
-                        :class="[index === paperList.length - 1 ? 'last-row' : '', isEvenOrOdd(index)]">
-                        <td v-if="isShowAll" :class="isShowAll ? 'first-col' : ''">{{ paper.absType }}</td>
-                        <td class="paper-title" :class="!isShowAll ? 'first-col' : ''">{{ paper.absTitle }}</td>
-                        <td v-if="isShowAll">{{ paper.firstAuthor }}</td>
-                        <td>
-                            <span v-if="paper.status === 1" class="status-accepted">Accepted</span>
-                            <span v-else-if="paper.status === 2" class="status-rejected">Rejected</span>
-                        </td>
-                        <td class="last-col">
-                            <el-button v-if="!isDisabled" link class="edit-btn"
-                                @click='headToEditPaper(paper)'>Edit</el-button>
-                            <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
-                            <el-button v-if="!isDisabled" link class="see-more-btn"
-                                @click='deletePaper(paper)'>Delete</el-button>
-                            <!-- <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button> -->
-                            <el-button v-if="paper.status === 1" link class="see-more-btn"
-                                @click="headToUploadFile(paper)">Upload</el-button>
-                        </td>
-                    </tr>
+                    <thead>
+                        <tr class="table-header">
+                            <th v-if="isShowAll">Type</th>
+                            <th>Title</th>
+                            <th v-if="isShowAll">First Author</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(paper, index) in paperList" :key="index"
+                            :class="[index === paperList.length - 1 ? 'last-row' : '', isEvenOrOdd(index)]">
+                            <td v-if="isShowAll" :class="isShowAll ? 'first-col' : ''">{{ paper.absType }}</td>
+                            <td class="paper-title" :class="!isShowAll ? 'first-col' : ''">{{ paper.absTitle }}</td>
+                            <td v-if="isShowAll">{{ paper.firstAuthor }}</td>
+                            <td>
+                                <span v-if="paper.status === 1" class="status-accepted">Accepted</span>
+                                <span v-else-if="paper.status === 2" class="status-rejected">Rejected</span>
+                            </td>
+                            <td class="last-col">
+                                <el-button v-if="!isDisabled" link class="edit-btn"
+                                    @click='headToEditPaper(paper)'>Edit</el-button>
+                                <el-button link class="see-more-btn" @click='toggleSeeMore(paper)'>View</el-button>
+                                <el-button v-if="!isDisabled" link class="see-more-btn"
+                                    @click='deletePaper(paper)'>Delete</el-button>
+                                <!-- <el-button v-if="isDisabled" link class="see-more-btn" @click='isClosed'>Delete</el-button> -->
+                                <el-button v-if="paper.status === 1" link class="see-more-btn"
+                                    @click="headToUploadFile(paper)">Upload</el-button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <el-button class="go-submit-btn" :disabled="isDisabled" @click="headToSubmit">
@@ -44,71 +48,101 @@
 
         <el-dialog class="paper-info" v-model="isOpen" :width="dialogWidth">
             <table class="paper-info-table">
-                <tr>
-                    <td colspan="2" class="column-name title">Abstract</td>
-                </tr>
-                <tr v-if="paperInfo.publicationNumber">
-                    <td class="column-name">Abstract Number</td>
-                    <td>{{ paperInfo.publicationNumber }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">Type</td>
-                    <td>{{ paperInfo.absType }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">Abstract Title</td>
-                    <td>{{ paperInfo.absTitle }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">First Author</td>
-                    <td>{{ paperInfo.firstAuthor }}</td>
-                </tr>
-                <tr v-if="paperInfo.absType === 'Young Investigator'">
-                    <td class="column-name">First Author Birthday</td>
-                    <td>{{ paperInfo.firstAuthorBirthday }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">Speaker</td>
-                    <td>{{ paperInfo.speaker }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">Speaker Affillication</td>
-                    <td>{{ paperInfo.speakerAffiliation }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">CorrespondingAuthor</td>
-                    <td>{{ paperInfo.correspondingAuthor }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">CorrespondingAuthor Email</td>
-                    <td>{{ paperInfo.correspondingAuthorEmail }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">CorrespondingAuthor Phone</td>
-                    <td>{{ paperInfo.correspondingAuthorPhone }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">All Authors</td>
-                    <td>{{ paperInfo.allAuthor }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">All Authors Affiliation</td>
-                    <td>{{ paperInfo.allAuthorAffiliation }}</td>
-                </tr>
-                <tr>
-                    <td class="column-name">Abstract File</td>
-                    <td v-if="envMinio + paperInfo.FileUpload">
-                        <a class="preview-link" :href="envMinio + paperInfo.paperFileUpload[0].path"
-                            target="_blank">Preview</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="column-name">Abstract Status</td>
-                    <td v-if="paperInfo.status">
-                        <span v-if="paperInfo.status === 1" class="status-accepted">Accepted</span>
-                        <span v-else-if="paperInfo.status === 2" class="status-rejected">Rejected</span>
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td colspan="2" class="column-name title">Abstract</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-if="paperInfo.publicationNumber">
+                        <td class="column-name">Abstract Number</td>
+                        <td>{{ paperInfo.publicationNumber }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">Type</td>
+                        <td>{{ paperInfo.absType }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">Abstract Title</td>
+                        <td>{{ paperInfo.absTitle }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">First Author</td>
+                        <td>{{ paperInfo.firstAuthor }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr v-if="paperInfo.absType === 'Young Investigator'">
+                        <td class="column-name">First Author Birthday</td>
+                        <td>{{ paperInfo.firstAuthorBirthday }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">Speaker</td>
+                        <td>{{ paperInfo.speaker }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">Speaker Affillication</td>
+                        <td>{{ paperInfo.speakerAffiliation }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">CorrespondingAuthor</td>
+                        <td>{{ paperInfo.correspondingAuthor }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">CorrespondingAuthor Email</td>
+                        <td>{{ paperInfo.correspondingAuthorEmail }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">CorrespondingAuthor Phone</td>
+                        <td>{{ paperInfo.correspondingAuthorPhone }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">All Authors</td>
+                        <td>{{ paperInfo.allAuthor }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">All Authors Affiliation</td>
+                        <td>{{ paperInfo.allAuthorAffiliation }}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">Abstract File</td>
+                        <td v-if="envMinio + paperInfo.FileUpload">
+                            <a class="preview-link" :href="envMinio + paperInfo.paperFileUpload[0].path"
+                                target="_blank">Preview</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td class="column-name">Abstract Status</td>
+                        <td v-if="paperInfo.status">
+                            <span v-if="paperInfo.status === 1" class="status-accepted">Accepted</span>
+                            <span v-else-if="paperInfo.status === 2" class="status-rejected">Rejected</span>
+                        </td>
+                    </tr>
+                </tbody>
 
             </table>
         </el-dialog>

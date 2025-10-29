@@ -152,6 +152,10 @@ console.log(sponsorsList);
                     width: 100%;
                     height: auto;
                 }
+
+                @media screen and (max-width: 810px) {
+                    width: 8rem;
+                }
             }
 
             .sponsor-logo-box {
@@ -173,6 +177,18 @@ console.log(sponsorsList);
                         max-width: 100%;
                         max-height: 100%;
                         object-fit: cover;
+                    }
+
+                    @media screen and (max-width:1024px) {
+                        width: calc(100% / 3 - 2rem);
+                    }
+
+                    @media screen and (max-width:810px) {
+                        width: calc(100% / 2 - 2rem);
+                    }
+
+                    @media screen and (max-width:425px) {
+                        width: calc(100% - 2rem);
                     }
                 }
 

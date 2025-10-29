@@ -92,12 +92,9 @@ const formRule = reactive<FormRules>({
 
 const formatLabelPosition = ref<'top' | 'left' | 'right'>('top'); // 預設為 'top'
 const setFormLabelPosotion = () => {
-    console.log(window.innerWidth)
     if (window.innerWidth < 1024) {
-        console.log('top')
         formatLabelPosition.value = 'top'; // 當視窗寬度小於 1024px 時，設置為 'top'
     } else {
-        console.log('left')
         formatLabelPosition.value = 'left'; // 否則設置為 'left'
     }
 }
@@ -121,7 +118,6 @@ const login = async (formEl: FormInstance | undefined) => {
             }
         } else {
             ElMessage.error('Please input correct information');
-            return false;
         }
     });
 
