@@ -156,12 +156,12 @@ const isTaiwan = (country: string) => {
 
 const deadline = ref(new Date());
 const isOverDeadline = ref(false);
+const eventDays = ['2025-11-15', '2025-11-16'];
 const fetchDeadline = async () => {
     try {
         const res = await CSRrequest.get('/setting');
         deadline.value = new Date(res.data.lastRegistrationTime);
-
-        if (deadline.value < new Date()) {
+        if (deadline.value < new Date() && !eventDays.includes(new Date().toISOString().split('T')[0])) {
             alert('The registration deadline has passed.');
             isOverDeadline.value = true;
             // router.push('/registration-fee');
@@ -172,6 +172,8 @@ const fetchDeadline = async () => {
         console.error('Error fetching deadline data:', error);
     }
 }
+
+
 
 onMounted(() => {
     getOrderListForOwner()
