@@ -6,13 +6,33 @@
             <Title title="List of Sponsors"></Title>
 
             <div class="content">
-                <div v-for="sponsor in sponsorsList" class="level-box">
+                <div class="level-box" v-if="diamondSponsors">
                     <div class="level-svg-box">
-                        <img :src="sponsor.imgSrc" alt="">
+                        <img :src="diamondSponsors.imgSrc" alt="level">
+                    </div>
+                    <div v-for="sponsorLogoList in diamondSponsors.sponsorLogos" class="diamond-sponsor-logo-box">
+                        <div v-for="logo in sponsorLogoList" class="sponsor-logo-item">
+                            <img :src="logo" alt="logo">
+                        </div>
+                        <div v-for="sponsorLogoList in diamondSponsors.sponsorLogos" class="diamond-sponsor-logo-box">
+                            <div v-for="logo in sponsorLogoList" class="sponsor2-logo-item">
+                                <img src="../assets/img/sponsors/diamond2/1_Sankyo.png" alt="logo">
+                                <img src="../assets/img/sponsors/diamond2/2_AZ.png" alt="logo">
+                            </div>
+                        </div>
+                    </div>
+                    <el-divider></el-divider>
+                </div>
+
+
+
+                <div v-if="sponsorsList && sponsorsList.length > 0" v-for="sponsor in sponsorsList" class="level-box">
+                    <div class="level-svg-box">
+                        <img :src="sponsor.imgSrc" alt="level">
                     </div>
                     <div v-for="sponsorLogoList in sponsor.sponsorLogos" class="sponsor-logo-box">
                         <div v-for="logo in sponsorLogoList" class="sponsor-logo-item">
-                            <img :src="logo" alt="">
+                            <img :src="logo" alt="logo">
                         </div>
                     </div>
                     <el-divider></el-divider>
@@ -48,83 +68,112 @@ const sponsorConfig = [
 ]
 
 const cols = ref(4);
-const allGroupedSponsors = sponsorConfig.map(config => {
-    const results: Record<string, string[][]> = {};
 
-    sponsorConfig.forEach(config => {
+const screenWidth = ref(0);
 
+onMounted(() => {
+    generateSponsorlogoList()
+    screenWidth.value = window.innerWidth;
+    window.addEventListener('resize', () => {
+        screenWidth.value = window.innerWidth;
 
-        let modules: Record<string, string>;
-
-        switch (config.key) {
-            case 'diamond Sponsor':
-                modules = import.meta.glob('@/assets/img/sponsors/diamond/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
-                break;
-            case 'platinum Sponsor':
-                modules = import.meta.glob('@/assets/img/sponsors/platinum/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
-                break;
-            case 'gold Sponsor':
-                modules = import.meta.glob('@/assets/img/sponsors/gold/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
-                break;
-            case 'silver Sponsor':
-                modules = import.meta.glob('@/assets/img/sponsors/silver/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
-                break;
-            case 'bronze Sponsor':
-                modules = import.meta.glob('@/assets/img/sponsors/bronze/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
-                break;
-            default:
-                modules = {};
-                break;
+        if (screenWidth.value <= 425) {
+            cols.value = 1;
+        } else if (screenWidth.value <= 810) {
+            cols.value = 2;
+        } else if (screenWidth.value <= 1024) {
+            cols.value = 3;
+        } else {
+            cols.value = 4;
         }
-
-        const galleryImages: string[] = Object.values(modules);
-        const groupedList: string[][] = [];
-
-        galleryImages.forEach((image, index) => {
-            const groupIndex = Math.floor(index / cols.value);
-            if (!groupedList[groupIndex]) {
-                groupedList[groupIndex] = [];
-            }
-            groupedList[groupIndex].push(image);
-        });
-
-        results[config.key] = groupedList;
+        generateSponsorlogoList()
     });
-    console.log(results);
-    return results;
-})
+
+});
+
+const allGroupedSponsors = ref<any[]>([]);
+const diamondSponsors = ref<any>({});
+const sponsorsList = ref<any[]>([]);
+
+const generateSponsorlogoList = () => {
+
+    allGroupedSponsors.value = sponsorConfig.map(config => {
+        const results: Record<string, string[][]> = {};
+
+        sponsorConfig.forEach(config => {
 
 
+            let modules: Record<string, string>;
 
-const sponsorsList = [
-    {
+            switch (config.key) {
+                case 'diamond Sponsor':
+                    modules = import.meta.glob('@/assets/img/sponsors/diamond/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
+                    break;
+                case 'platinum Sponsor':
+                    modules = import.meta.glob('@/assets/img/sponsors/platinum/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
+                    break;
+                case 'gold Sponsor':
+                    modules = import.meta.glob('@/assets/img/sponsors/gold/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
+                    break;
+                case 'silver Sponsor':
+                    modules = import.meta.glob('@/assets/img/sponsors/silver/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
+                    break;
+                case 'bronze Sponsor':
+                    modules = import.meta.glob('@/assets/img/sponsors/bronze/*.{png,jpg,jpeg,svg}', { eager: true, query: '?url', import: 'default' });
+                    break;
+                default:
+                    modules = {};
+                    break;
+            }
+
+            const galleryImages: string[] = Object.values(modules);
+            const groupedList: string[][] = [];
+
+            galleryImages.forEach((image, index) => {
+                const groupIndex = Math.floor(index / cols.value);
+                if (!groupedList[groupIndex]) {
+                    groupedList[groupIndex] = [];
+                }
+                groupedList[groupIndex].push(image);
+            });
+
+            results[config.key] = groupedList;
+        });
+        return results;
+    })
+
+    diamondSponsors.value = {
         level: 'Diamond Sponsor',
         imgSrc: DiamondLogo,
-        sponsorLogos: allGroupedSponsors[0]['diamond Sponsor']
-    },
-    {
-        level: 'Platinum Sponsor',
-        imgSrc: PlatinumLogo,
-        sponsorLogos: allGroupedSponsors[1]['platinum Sponsor']
-    },
-    {
-        level: 'Gold Sponsor',
-        imgSrc: GoldLogo,
-        sponsorLogos: allGroupedSponsors[2]['gold Sponsor']
-    },
-    {
-        level: 'Silver Sponsor',
-        imgSrc: SilverLogo,
-        sponsorLogos: allGroupedSponsors[3]['silver Sponsor']
-    },
-    {
-        level: 'Bronze Sponsor',
-        imgSrc: BronzeLogo,
-        sponsorLogos: allGroupedSponsors[4]['bronze Sponsor']
+        sponsorLogos: allGroupedSponsors.value[0]['diamond Sponsor']
     }
-]
 
-console.log(sponsorsList);
+    sponsorsList.value = [
+
+        {
+            level: 'Platinum Sponsor',
+            imgSrc: PlatinumLogo,
+            sponsorLogos: allGroupedSponsors.value[1]['platinum Sponsor']
+        },
+        {
+            level: 'Gold Sponsor',
+            imgSrc: GoldLogo,
+            sponsorLogos: allGroupedSponsors.value[2]['gold Sponsor']
+        },
+        {
+            level: 'Silver Sponsor',
+            imgSrc: SilverLogo,
+            sponsorLogos: allGroupedSponsors.value[3]['silver Sponsor']
+        },
+        {
+            level: 'Bronze Sponsor',
+            imgSrc: BronzeLogo,
+            sponsorLogos: allGroupedSponsors.value[4]['bronze Sponsor']
+        }
+    ]
+
+}
+
 
 </script>
 <style lang="scss" scoped>
@@ -177,6 +226,7 @@ console.log(sponsorsList);
                         max-width: 100%;
                         max-height: 100%;
                         object-fit: cover;
+
                     }
 
                     @media screen and (max-width:1024px) {
@@ -190,6 +240,83 @@ console.log(sponsorsList);
                     @media screen and (max-width:425px) {
                         width: calc(100% - 2rem);
                     }
+                }
+
+
+            }
+
+            .diamond-sponsor-logo-box {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                flex-wrap: wrap;
+                margin-top: 1rem;
+
+
+
+                .sponsor-logo-item {
+                    width: calc(100% / 1.7 - 1rem);
+                    height: auto;
+
+                    img {
+                        width: 90%;
+                        height: auto;
+                        max-width: 100%;
+                        max-height: 100%;
+                        object-fit: cover;
+
+                    }
+
+                    @media screen and (max-width:1024px) {
+                        width: 100%;
+                    }
+
+                    @media screen and (max-width: 425px) {
+                        display: none;
+                        width: calc(100%);
+
+                    }
+
+
+                }
+
+                .sponsor2-logo-item {
+                    width: calc(100% / 1.5 - 1rem);
+                    height: auto;
+                    display: none;
+
+                    img {
+                        width: 90%;
+                        height: auto;
+                        max-width: 100%;
+                        max-height: 100%;
+                        object-fit: cover;
+
+                    }
+
+                    // @media screen and (max-width: 1024px) {
+                    //     display: flex;
+                    //     justify-content: center;
+                    //     width: calc(100% / 2 - 2rem);
+
+                    // }
+
+                    // @media screen and (max-width: 810px) {
+                    //     display: flex;
+                    //     justify-content: center;
+                    //     width: calc(100% / 2 - 1rem);
+
+                    // }
+
+                    @media screen and (max-width: 425px) {
+                        display: block;
+                        width: calc(100% - 1rem);
+
+                    }
+
+
                 }
 
 
