@@ -39,10 +39,8 @@ const getProgramBookFile = async () => {
             }
         })
         programBookFile.value = res.data;
-        console.log('Program book file response:', res);
-        console.log('Program book file data:', !programBookFile.value);
+
     } catch (error) {
-        console.error('Error fetching program book file:', error);
     }
 }
 

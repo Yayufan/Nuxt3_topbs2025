@@ -101,7 +101,6 @@ const headToNews = () => {
 
 const getInfoFromBackEnd = async () => {
     let res = await CSRrequest.get('/member/getMemberInfo');
-    console.log(res)
     if (res.code === 10002 || res.code === 401) {
         localStorage.removeItem('Authorization-member');
         isLogin.value = false;
@@ -115,10 +114,8 @@ const validateLogin = () => {
     let res = localStorage.getItem('Authorization-member');
     if (res) {
         isLogin.value = true;
-        console.log('login');
     } else {
         isLogin.value = false;
-        console.log('not login');
     }
 }
 

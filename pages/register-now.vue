@@ -49,7 +49,8 @@
                     </div>
                     <div class="right-section">
                         <el-form-item class="required" label="Country" prop="country">
-                            <el-select " v-model="formData.country" placeholder="Select a Country or Location" filterable @change="cleanRemitAccount">
+                            <el-select " v-model="formData.country" placeholder="Select a Country or Location"
+                                filterable @change="cleanRemitAccount">
                                 <el-option v-for="item in countries" :key="item" :label="item"
                                     :value="item"></el-option>
                             </el-select>
@@ -108,7 +109,7 @@ const validateRemitAccount = (rule: any, value: string, callback: any) => {
         callback(new Error('Please input your remit account last 5 number'))
     } else if (formData.country === 'Taiwan' && value.length !== 5) {
         callback(new Error('Please input 5 numbers'))
-    } 
+    }
     else {
         callback()
     }
@@ -158,8 +159,8 @@ const formData = reactive<formData>({
 })
 
 const vaildConfirmPassword = (rule: any, value: string, callback: any) => {
-    
-    if(!value){
+
+    if (!value) {
         callback(new Error('Please input your password again'))
     } else if (value !== formData.password) {
         callback(new Error('The two passwords do not match'))
@@ -183,7 +184,7 @@ const formRules = reactive<FormRules>({
     countryCode: [{ required: true, message: 'Please input your country code', trigger: 'blur' }],
     phoneNum: [{ required: true, message: 'Please input your phone number', trigger: 'blur' }],
     category: [{ required: true, message: 'Please select a category', trigger: 'change' }],
-    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }] 
+    remitAccountLast5: [{ validator: validateRemitAccount, trigger: 'blur' }]
 })
 
 
@@ -198,7 +199,7 @@ const submit = async (formEl: FormInstance | undefined) => {
             })
 
             if (res.data.isLogin) {
-                localStorage.setItem(res.data.tokenName,'Bearer '+ res.data.tokenValue);
+                localStorage.setItem(res.data.tokenName, 'Bearer ' + res.data.tokenValue);
                 router.push('/member-center')
             }
 
@@ -210,10 +211,10 @@ const submit = async (formEl: FormInstance | undefined) => {
     })
 }
 
+
+
 /**---------------------- */
-onMounted(() => {
-    // router.push('/demo-register')
-})
+
 </script>
 <style lang="scss" scoped>
 .common-section {

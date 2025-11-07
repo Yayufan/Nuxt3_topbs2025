@@ -144,8 +144,6 @@ import { Lock, Message } from '@element-plus/icons-vue'
 import Banner from '@/components/layout/Banner.vue';
 
 import countriesJson from '@/assets/data/countries.json'
-import Category from '../education-surgery/[category].vue';
-import { id } from 'element-plus/es/locale/index.mjs';
 
 useSeoMeta({
     title: 'Registration Information - 9th IOPBS & TOPBS 2025 International Conference on Oncoplastic Breast Surgery ',
@@ -270,9 +268,7 @@ const captchaData = reactive({
 
 
 const getCaptcha = async () => {
-    console.log('getCaptcha')
     let res = await CSRrequest.get('/member/captcha')
-    console.log(res)
     Object.assign(captchaData, res.data)
     formData.verificationKey = captchaData.key
 }
@@ -534,13 +530,40 @@ const submit = async (formEl: FormInstance | undefined) => {
     })
 }
 
+const eventDays = ['2025-11-15', '2025-11-16', '2025-11-07'];
+
+const getLocalISODate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+const todayString = getLocalISODate(new Date());
+
+const deadline = ref(new Date());
+const fetchDeadline = async () => {
+    try {
+        const res = await CSRrequest.get('/setting');
+        deadline.value = new Date(res.data.lastRegistrationTime);
+
+        if (deadline.value < new Date() && !eventDays.includes(todayString)) {
+            alert('The registration deadline has passed.');
+            router.push('/registration-fee');
+        }
+
+
+    } catch (error) {
+        console.error('Error fetching deadline data:', error);
+    }
+}
 
 
 
 
 /**---------------------- */
 onMounted(() => {
-    // router.push('/demo-register')
+    fetchDeadline();
     getCaptcha()
 })
 </script>
