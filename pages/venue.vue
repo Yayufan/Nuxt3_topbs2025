@@ -5,8 +5,8 @@
             <Title title="Venue"></Title>
             <Breadcrumbs firstRoute="IOPBS & TOPBS" secoundRoute="Venue"></Breadcrumbs>
             <div class="content">
-                <img src="@/assets/img/250916-Venue.png" alt="">
-                <a href="/files/250916_Venue.pdf" target="_blank" class="download">Download Venue</a>
+                <img src="@/assets/img/venue.jpg" alt="">
+                <a href="/files/venue.pdf" target="_blank" class="download">Download Venue</a>
             </div>
 
         </main>
