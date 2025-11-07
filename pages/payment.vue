@@ -115,19 +115,22 @@ const form = ref<any>()
 
 const getOrders = async (ordersId: number, isPayable: boolean) => {
     console.log(!isPayable)
+    if (isOverDeadline.value) {
+        return;
+    }
+
+
     if (!isPayable) {
         // ElMessage.error('You are not allowed to pay for this item')
         return
     }
     let res = await CSRrequest.get(`/orders/owner/${ordersId}`)
-    console.log(res.data)
     res = await CSRrequest.get(`/orders/payment`, {
         params: {
             id: ordersId
         }
     })
 
-    console.log(res.data)
     form.value = res.data
 
     await nextTick();
@@ -174,7 +177,6 @@ const fetchDeadline = async () => {
         if (deadline.value < new Date() && !eventDays.includes(todayString)) {
             alert('The registration deadline has passed.');
             isOverDeadline.value = true;
-            // router.push('/registration-fee');
         }
 
 
