@@ -26,13 +26,9 @@
                     @click="selectRoomFunction('102')">102</el-button>
                 <el-button :class="selectRoom === '103' ? 'active' : ''" class="room3-btn"
                     @click="selectRoomFunction('103')">103</el-button>
-                <!-- <el-button :class="selectRoom === '103' ? 'active' : ''" class="room3-btn"
-                    @click="selectRoomFunction('103')">103</el-button> -->
             </div>
 
             <div class="img-section">
-                <!-- <img v-if="selectedDay === 'day1'" src="../assets/img/program-day1.jpg" alt="">
-                <img v-if="selectedDay === 'day2'" src="../assets/img/program-day2.jpg" alt=""> -->
                 <img :src="imageUrl" alt="">
             </div>
             <div class="warning">
@@ -70,14 +66,12 @@ const selectRoomFunction = (room: string) => {
 }
 
 // const type = ref('Day1-101');
-const agendaFile = ref<any>();
 let imageUrl = ref<string>('');
 const envMinio = useRuntimeConfig().public.minio
 
 
 
 const getProgramFile = async () => {
-    console.log('Fetching program file for:', `${selectedDay.value}-${selectRoom.value}`);
     try {
         let res = await CSRrequest.get('/publish-file/agenda', {
             params: {
@@ -88,7 +82,7 @@ const getProgramFile = async () => {
         console.log('Program file fetched successfully:', res);
         imageUrl.value = envMinio + res.data[0].path; // Assuming the response contains a 'path' field with the image URL
     } catch (error) {
-        console.error('Error fetching program file:', error);
+        ElMessage.error('Error fetching program file:' + error);
     }
 }
 onMounted(() => {
@@ -195,7 +189,8 @@ onMounted(() => {
             width: 80%;
             height: auto;
             border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);       }
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
     }
 
     .warning {

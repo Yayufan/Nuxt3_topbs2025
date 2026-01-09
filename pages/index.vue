@@ -75,7 +75,7 @@ const calculateCountdown = () => {
                             <div class="countdown-div"><span class="countdown-time">${minutes}</span>  <span class="countdown-word">Minutes</span></div>
                             <div class="countdown-div"> <span class="countdown-time">${seconds}</span>  <span class="countdown-word">Seconds</span></div>`;
     } else {
-        countdown.value = 'Countdown expired';
+        // countdown.value = 'Countdown expired';
     }
 };
 
