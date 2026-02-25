@@ -268,7 +268,7 @@ const submit = async (formEl: FormInstance | undefined) => {
             const { fileList, ...restData } = data;
             submitData.append('data', JSON.stringify(restData));
             data.fileList.forEach((file: any) => {
-                submitData.append('file', file.raw);
+                submitData.append('files', file.raw);
             })
             console.log(submitData.get('file'));
             console.log(submitData.get('data'));

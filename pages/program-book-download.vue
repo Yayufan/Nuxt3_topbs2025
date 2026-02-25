@@ -9,12 +9,12 @@
 
                 <div v-if="programBookFile && programBookFile.length > 0" class="content">
                     <el-card class="file-card">
-                        <div class="file-item">
-                            <p>{{ programBookFile[0].name }}</p>
+                        <div v-for="item in programBookFile" class="file-item">
+                            <p>{{ item.name }}</p>
                             <div class="image-box">
-                                <img :src="envMinio + programBookFile[0].coverThumbnailUrl" alt="">
+                                <img :src="envMinio + item.coverThumbnailUrl" alt="">
                             </div>
-                            <a class="download" :href="envMinio + programBookFile[0].path" target="_blank">Download</a>
+                            <a class="download" :href="envMinio + item.path" target="_blank">Download</a>
                         </div>
                     </el-card>
                 </div>
@@ -39,6 +39,7 @@ const getProgramBookFile = async () => {
             }
         })
         programBookFile.value = res.data;
+        console.log(programBookFile.value);
 
     } catch (error) {
     }
@@ -91,27 +92,24 @@ onMounted(() => {
         .file-item {
             display: flex;
             flex-direction: column;
-            width: calc(100% / 4 - 3rem);
+            width: 40%;
             aspect-ratio: 1 / 1;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             margin: 1rem 0;
             padding: 1rem;
             // border: 1px solid #ccc;
             border-radius: 8px;
             gap: 1rem;
 
-            @media screen and (max-width: 1024px) {
-                width: calc(100% / 3 - 3rem);
-            }
-
             @media screen and (max-width: 768px) {
-                width: calc(100% / 2 - 3rem);
+                width: 70%;
             }
 
-            @media screen and (max-width: 480px) {
-                width: calc(100% - 3rem);
+            @media screen and (max-width: 375px) {
+                width: 90%;
             }
+
 
             p {
                 font-size: 1.2rem;

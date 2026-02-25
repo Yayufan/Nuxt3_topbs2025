@@ -21,7 +21,7 @@
                             <td>{{ item.totalAmount }}</td>
                             <td :class="memberInfo.country === 'Taiwan' ? 'none' : 'last-col'">{{
                                 enums.payMentStatus[item.status]
-                                }}</td>
+                            }}</td>
                             <td v-if="memberInfo.country === 'Taiwan'" class="last-col">
                                 {{ memberInfo.remitAccountLast5 }}
                             </td>
@@ -115,6 +115,7 @@ const form = ref<any>()
 
 const getOrders = async (ordersId: number, isPayable: boolean) => {
     console.log(!isPayable)
+    // console.log('isOverDeadline:', isOverDeadline.value)
     if (isOverDeadline.value) {
         return;
     }
@@ -159,7 +160,7 @@ const isTaiwan = (country: string) => {
 
 const deadline = ref(new Date());
 const isOverDeadline = ref(false);
-const eventDays = ['2025-11-15', '2025-11-16'];
+const eventDays = ['2025-11-15', '2025-11-16', '2025-11-07'];
 
 const getLocalISODate = (date: Date) => {
     const year = date.getFullYear();

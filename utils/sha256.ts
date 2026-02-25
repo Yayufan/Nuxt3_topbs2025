@@ -202,6 +202,7 @@ export async function slideUpload(
                 console.log("data is null");
             }
             console.log("formData", formData.get("data"));
+
             await slideUploadApi(formData);
         };
 
@@ -261,7 +262,10 @@ export async function slideUpdateUpload(
                 console.log("data is null");
             }
             console.log("formData", formData.get("data"));
-            await slideUpdateUploadApi(formData);
+            //TODO 更新成正式API，目前為測試
+            await slideUploadTestApi(formData);
+            // await slideUpdateUploadApi(formData);
+
         };
 
         // 將 chunks 陣列中的每個 chunk 轉換為 Promise
@@ -285,6 +289,12 @@ export async function slideUpdateUpload(
 
 function slideUploadApi(data: any) {
     return CSRrequest.post("/paper/owner/second-stage", {
+        body: data,
+    });
+}
+
+function slideUploadTestApi(data: any) {
+    return CSRrequest.post("/ck/test/slideUpload", {
         body: data,
     });
 }
@@ -345,7 +355,7 @@ async function limitConcurrencyAlternative(
     percentage: Ref<number>
 ): Promise<void> {
     console.log(`使用替代方案执行 ${tasks.length} 个任务`);
-    
+
     let completedTasks = 0;
     const updateProgress = () => {
         completedTasks++;
@@ -353,12 +363,12 @@ async function limitConcurrencyAlternative(
         percentage.value = progress;
         console.log(`完成 ${completedTasks}/${tasks.length}，进度：${progress}%`);
     };
-    
+
     // 分批执行任务
     for (let i = 0; i < tasks.length; i += maxConcurrent) {
         const batch = tasks.slice(i, i + maxConcurrent);
-        console.log(`执行第 ${Math.floor(i/maxConcurrent) + 1} 批任务，包含 ${batch.length} 个任务`);
-        
+        console.log(`执行第 ${Math.floor(i / maxConcurrent) + 1} 批任务，包含 ${batch.length} 个任务`);
+
         try {
             await Promise.all(
                 batch.map(async (task) => {
@@ -367,10 +377,66 @@ async function limitConcurrencyAlternative(
                 })
             );
         } catch (error) {
-            console.error(`第 ${Math.floor(i/maxConcurrent) + 1} 批任务执行失败:`, error);
+            console.error(`第 ${Math.floor(i / maxConcurrent) + 1} 批任务执行失败:`, error);
             throw error;
         }
     }
-    
+
     console.log("所有批次完成");
+}
+
+
+
+
+// 測試用
+export async function slideTestUpload(
+    checkResult: any,
+    file: File,
+    hash: string,
+    chunks: Blob[],
+    percentage: Ref<number>
+) {
+    // ElMessage.success("開始上傳");
+    if (!checkResult.data.exist) {
+        console.log("文件不存在, 開始上傳");
+
+        const MAX_CONCURRENT = 5; // 設置最大併發數量
+        const uploadChunk = async (chunk: Blob, index: number) => {
+            // 設置要回傳的 chunk info
+            const data = {
+                fileName: file.name,
+                fileType: file.type,
+                fileSha256: hash,
+                chunkIndex: index,
+                totalChunks: chunks.length,
+            };
+
+            const formData = new FormData();
+            formData.append("file", chunk);
+            formData.append("data", JSON.stringify(data));
+            if (data == null) {
+                console.log(console.log(index));
+                console.log("data is null");
+            }
+            console.log("formData", formData.get("data"));
+            await slideUploadTestApi(formData);
+        };
+
+        // 將 chunks 陣列中的每個 chunk 轉換為 Promise
+        const uploadTasks = chunks.map(
+            (chunk, index) => () => uploadChunk(chunk, index)
+        );
+        await limitConcurrency(uploadTasks, MAX_CONCURRENT, percentage);
+        // await limitConcurrencyAlternative(uploadTasks, MAX_CONCURRENT, percentage);
+        console.log("上傳完成");
+        percentage.value = 100; // 上傳完成後設置為 100%
+        console.log(percentage.value);
+    } else {
+        console.log("文件已存在");
+        percentage.value = 100;
+        let baseUrl = useRuntimeConfig().public.minio;
+        console.log("baseUrl", baseUrl);
+        let url = `${baseUrl}/topbs2025/${checkResult.data.path}`;
+        window.open(url, "_blank");
+    }
 }

@@ -24,10 +24,6 @@
         </table>
 
         <div>
-            <!-- <el-upload ref="upload" class="upload-demo" :limit="1" :on-change="handleUpload" :auto-upload="false"
-                :on-exceed="handleExceed">
-                <el-button size="small" type="primary">Upload</el-button>
-            </el-upload> -->
 
             <el-upload v-if="!isUploadDialogVisiabled" ref="upload" class="upload" drag :limit="1"
                 :on-change="handleUpload" :auto-upload="false" :on-exceed="handleExceed">
@@ -132,7 +128,7 @@ const handleUpload: UploadProps['onChange'] = async (file: UploadUserFile, uploa
 
         }
 
-        await slideUpload(paperId, checkResult, res.file, res.hash, res.chunks, percentage)
+        await slideTestUpload(checkResult, res.file, res.hash, res.chunks, percentage)
         ElMessage.success('Upload completed');
         upload.value!.clearFiles()
         getPaperFileList();
